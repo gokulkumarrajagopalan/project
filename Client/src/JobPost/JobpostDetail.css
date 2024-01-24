@@ -1,0 +1,153 @@
+.job-post-detail-container {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px;
+  }
+  
+  .job-post-detail-left {
+    width: 50%;
+    padding-right: 20px;
+  }
+  
+  .job-post-detail-right {
+    flex: 1;
+    padding-left: 20px;
+  }
+  
+  .job-post-detail-right h2 {
+    margin-top: 0;
+  }
+  
+  .job-input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .job-textarea {
+    width: 100%;
+    height: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .job-file-input {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .preview-container {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 20px;
+  }
+  
+  .preview-container p {
+    margin: 5px 0;
+  }
+  .preview-image {
+    max-width: 200px;
+    max-height: 200px;
+  }
+  
+  .tags-input {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+  }
+  
+  .tag {
+    display: flex;
+    align-items: center;
+    background-color: #eaeaea;
+    color: #333;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+  
+  .tag-title {
+    margin-right: 5px;
+  }
+  
+  .tag-close-icon {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    color: #888;
+    transition: color 0.3s;
+  }
+  
+  .tag-close-icon:hover {
+    color: #e74c3c;
+  }
+  .tags-input {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+  }
+  
+  .tag {
+    display: flex;
+    align-items: center;
+    background-color: #eaeaea;
+    color: #333;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+  
+  .tag-title {
+    margin-right: 5px;
+  }
+  
+  .tag-close-icon {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    color: #888;
+    transition: color 0.3s;
+  }
+  
+  .tag-close-icon:hover {
+    color: #e74c3c;
+  }
+  
+  .suggestions {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .suggestions li {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .suggestions li:hover {
+    background-color: #f1f1f1;
+  }
+  
+  td_hover:hover {
+    background-color: #f1f1f1; 
+  }

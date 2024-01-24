@@ -1,0 +1,90 @@
+.jobScreenNavContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 55px;
+  left: 0px;
+  /* padding: 5px; */
+  background-color: rgb(0, 0, 0);
+  color: white;
+  width: 100%; 
+  position: fixed;
+  top: 0; 
+  z-index: 999; 
+}
+
+.brandLogo {
+  padding: 9px 70px;
+ 
+}
+
+.userIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+}
+
+/* src/JobPostScreen.css */
+.jobPostContainer {
+   width: 100%;
+}
+
+/* Add these styles to your existing CSS */
+
+/* Center part styles */
+.centerPart {
+  top: 55px; /* Height of the navigation bar */
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  overflow-y: scroll; /* Enable vertical scrolling */
+  max-height: calc(100vh - 55px); /* Set a maximum height, considering the height of the navigation bar */
+}
+
+/* Right side styles */
+.rightSide {
+  padding-left: 20px;
+  position: fixed;
+  top: 55px; /* Height of the navigation bar */
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  overflow-y: scroll; /* Enable vertical scrolling */
+  background-color: #f0f0f0; /* Background color for the right side */
+}
+
+/* Job card styles */
+.jobCard {
+  margin: 20px;
+  padding: 20px;
+  padding-right: 20px;
+  border: 1px solid gray;
+  background-color: rgb(255, 255, 255);
+}
+
+
+.Jobdescription {
+  max-height: 300px; /* Set a maximum height for the scrollable area */
+  overflow-y: scroll; /* Enable vertical scrolling if content exceeds the max height */
+  border: 1px solid #ccc; /* Add a border to the scrollable area */
+  padding: 10px; /* Add padding for a better appearance */
+}
+
+/* Increase the width of the scroll bar */
+.Jobdescription::-webkit-scrollbar {
+  width: 22px;
+}
+
+/* Style the scroll bar thumb */
+.Jobdescription::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 16px;
+}
+.Jobdescription.scrollable {
+  overflow-y: scroll;
+  max-height: 300px; /* Set a maximum height for the scrollable area */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
