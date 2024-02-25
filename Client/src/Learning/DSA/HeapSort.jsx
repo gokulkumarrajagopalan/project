@@ -1,18 +1,15 @@
-import React from 'react';
+import React from "react";
 import TshirtImg from "./tshirt.svg";
 import "./product.css";
 
-
-function HeapSort(){
-   
-
+function HeapSort() {
   const amount = 500;
   const currency = "INR";
   const receiptId = "qwsaq1";
 
   const paymentHandler = async (e) => {
     console.log("payment process on going..");
-    const response = await fetch("http://localhost:5000/order", {
+    const response = await fetch("https://localhost:5000/order", {
       method: "POST",
       body: JSON.stringify({
         amount,
@@ -38,7 +35,7 @@ function HeapSort(){
         const body = {
           ...response,
         };
- 
+
         const validateRes = await fetch(
           "http://localhost:5000/order/validate",
           {
@@ -47,7 +44,7 @@ function HeapSort(){
             headers: {
               "Content-Type": "application/json",
             },
-          }
+          },
         );
         const jsonRes = await validateRes.json();
         console.log(jsonRes);
@@ -70,7 +67,7 @@ function HeapSort(){
       alert(response.error.code);
       alert(response.error.description);
       alert(response.error.source);
-      alert(response.error.step); 
+      alert(response.error.step);
       alert(response.error.reason);
       alert(response.error.metadata.order_id);
       alert(response.error.metadata.payment_id);
@@ -90,8 +87,4 @@ function HeapSort(){
   );
 }
 
-
 export default HeapSort;
-
-
-

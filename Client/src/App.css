@@ -1,4 +1,8 @@
-.app {
-  background: rgb(255, 255, 255);
-  
+:root {
+  --clr-primary: #ffffff;
+  --clr-Secondary: #000000;
+
+  --btn-clr: rgb(30, 174, 97);
+  --logo-clr: rgb(30, 174, 97);
+  --light-black: rgb(105, 101, 101, 1);
 }

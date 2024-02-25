@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import axios from 'axios';
-import './SignUp.css'; 
+import axios from "axios";
+import NavBar from "../LandingPage/NavBar";
+import "./SignUp.css";
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -9,16 +10,15 @@ const SignIn = () => {
   const userRef = useRef();
   const errRef = useRef();
 
-  const [EmailID, setEmailID] = useState('');
+  const [EmailID, setEmailID] = useState("");
   const [validName, setValidName] = useState(false);
   const [EmailIDFocus, setEmailIDFocus] = useState(false);
 
-  const [pwd, setPwd] = useState('');
+  const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
 
-
-  const [errMsg, setErrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -29,8 +29,6 @@ const SignIn = () => {
     setValidName(EMAIL_REGEX.test(EmailID));
   }, [EmailID]);
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const v1 = EMAIL_REGEX.test(EmailID);
@@ -39,7 +37,7 @@ const SignIn = () => {
       setErrMsg("Invalid Entry");
       return;
     }
-    
+
     // try {
     //   const response = await axios.post(API_URL, { EmailID, pwd });
     //   console.log(response.data);
@@ -51,6 +49,7 @@ const SignIn = () => {
 
   return (
     <>
+      <NavBar />
       {success ? (
         <section>
           <h1>Success!</h1>
@@ -60,12 +59,16 @@ const SignIn = () => {
         </section>
       ) : (
         <section>
-          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-          <h1 className='Header_signup'>Sign In</h1>
+          <p
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
+          <h1 className="Header_signup">Sign In</h1>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="EmailID">
-              Email :
-            </label>
+            <label htmlFor="EmailID">Email :</label>
             <input
               type="text"
               id="txtemailID"
@@ -80,9 +83,7 @@ const SignIn = () => {
               onBlur={() => setEmailIDFocus(false)}
             />
 
-            <label htmlFor="password">
-              Password:
-            </label>
+            <label htmlFor="password">Password:</label>
             <input
               type="password"
               id="password"
@@ -94,10 +95,11 @@ const SignIn = () => {
               onFocus={() => setPwdFocus(true)}
               onBlur={() => setPwdFocus(false)}
             />
-            <button >Sign In</button>
+            <button>Sign In</button>
           </form>
           <p>
-            Forget Password?<br />
+            Forget Password?
+            <br />
             <span className="line">
               <a href="SignUp">Sign Up</a>
             </span>

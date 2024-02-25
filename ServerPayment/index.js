@@ -5,7 +5,7 @@ const crypto = require("crypto");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT 
+const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,7 +19,7 @@ const razorpay = new Razorpay({
 app.post("/order", async (req, res) => {
   try {
     const options = {
-      amount: 50000, // Amount in paise (100 paise = 1 INR)
+      amount: 500,
       currency: "INR",
       receipt: "order_rcptid_11",
       payment_capture: 1,
@@ -40,7 +40,8 @@ app.post("/order", async (req, res) => {
 
 app.post("/order/validate", async (req, res) => {
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+      req.body;
 
     const hmac = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
     hmac.update(`${razorpay_order_id}|${razorpay_payment_id}`);

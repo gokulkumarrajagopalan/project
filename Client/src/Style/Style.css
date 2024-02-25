@@ -1,0 +1,82 @@
+/*jobScreenNav styles */
+
+.jobScreenNavContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 55px;
+  left: 0px;
+  background-color: var(--clr-primary);
+  color: white;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid rgb(176, 176, 176, 1);
+}
+
+.userIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+}
+
+.brandLogo {
+  padding: 7px 30px;
+}
+
+/* JobPostScreen.css */
+
+.jobPostContainer {
+  width: 100%;
+  top: 50px;
+  left: 0;
+  padding-top: 20px;
+  position: relative;
+}
+
+.jobcontainer {
+  width: 50%;
+}
+
+.Selectedjob {
+  padding-left: 20px;
+  position: fixed;
+  top: 55px;
+  right: 0;
+  bottom: 0;
+  width: 47%;
+  background-color: #ffffff;
+}
+
+.jobCard {
+  margin: 20px;
+  padding: 20px;
+  padding-right: 20px;
+  border: 1px solid rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+}
+
+.Jobdescription {
+  max-height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.Jobdescription::-webkit-scrollbar {
+  width: 7px;
+}
+
+.Jobdescription::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 16px;
+}
+.Jobdescription.scrollable {
+  overflow-y: scroll;
+  max-height: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
