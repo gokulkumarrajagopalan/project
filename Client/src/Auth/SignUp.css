@@ -3,7 +3,7 @@ section {
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
-  margin-top: 70px;
+  margin-top: 50px;
   border-radius: 10px;
 }
 .Header_signup {
@@ -22,8 +22,8 @@ form label {
   font-weight: bold;
 }
 
-form input[type='text'],
-form input[type='password'] {
+form input[type="text"],
+form input[type="password"] {
   width: 90%;
   padding: 10px;
   margin-bottom: 15px;
