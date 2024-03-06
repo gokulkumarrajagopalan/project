@@ -10,6 +10,7 @@
   padding: 1rem;
   display: flex;
   align-items: center;
+  height: 45px;
 }
 
 .logo-container {

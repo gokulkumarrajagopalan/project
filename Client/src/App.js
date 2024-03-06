@@ -7,7 +7,6 @@ import SignIn from "./Auth/SignIn";
 import JobPostDetail from "./JobPost/JobpostDetail";
 import JobPostScreen from "./JobPost/JobPostScreen";
 import JobPostScreenSub from "./JobPost/JobPostScreenSub";
-import Compiler from "./Online_Compiler/FrontEnd_Compiler";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DSAHome from "./Learning/DSA/DSAHome";
 import ArrayPage from "./Learning/DSA/ArrayPage";
@@ -31,7 +30,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Signup" element={<SignUp />} />
           <Route path="/JobPostScreen" element={<JobPostScreen />} />
-          <Route path="/Compiler" element={<Compiler />} />
           <Route path="/JobpostDetail" element={<JobPostDetail />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/DSAHome" element={<DSAHome />} />
