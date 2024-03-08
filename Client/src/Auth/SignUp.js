@@ -5,75 +5,58 @@ import "./SignUp.css";
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const API_URL = "http://localhost:8090/saveData";
-const API_URL_Validate = "http://localhost:8090/getData";
+const API_URL = "http://localhost:3700/users/save_usersData";
+const API_URL_UserValidate = "http://localhost:3700/users/list_userdetail";
 
 const Register = () => {
   const userRef = useRef();
-  const errRef = useRef();
-
   const [EmailID, setEmailID] = useState("");
   const [validName, setValidName] = useState(false);
   const [EmailIDFocus, setEmailIDFocus] = useState(false);
-  const [MatchEmailIDFocus, setMatchEmailIDFocus] = useState(false);
-
-  const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
-
-  const [matchPwd, setMatchPwd] = useState("");
-  const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
-
-  const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [Pwd, setPwd] = useState("");
+  const [ValidPwd, setValidPwd] = useState(false);
+  const [PwdFocus, setPwdFocus] = useState(false);
+  const [MatchPwd, setMatchPwd] = useState("");
+  const [ValidMatch, setValidMatch] = useState(false);
+  const [MatchFocus, setMatchFocus] = useState(false);
+  const [ErrMsg, setErrMsg] = useState("");
+  const [Success, setSuccess] = useState(false);
+  const [ExistingEmails, setExistingEmails] = useState([]);
 
   useEffect(() => {
-    userRef.current.focus();
+    axios.get(API_URL_UserValidate)
+      .then(response => {
+        setExistingEmails(response.data.map(user => user.email));
+      })
+      .catch(error => {
+        console.error("Error fetching existing emails:", error);
+      });
   }, []);
-
-  useEffect(() => {
-    setValidName(EMAIL_REGEX.test(EmailID));
-  }, [EmailID]);
-
-  useEffect(() => {
-    setValidPwd(PWD_REGEX.test(pwd));
-    setValidMatch(pwd === matchPwd);
-  }, [pwd, matchPwd]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [EmailID, pwd, matchPwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const v1 = EMAIL_REGEX.test(EmailID);
-    const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
-      setErrMsg("Invalid Entry");
+
+    // Check if email already exists
+    if (ExistingEmails.includes(EmailID)) {
+      setErrMsg("Email already exists");
       return;
     }
 
-    // try {
-    //   console.log('API_URL_Validate'+ API_URL_Validate)
-    //   const response = await axios.post(API_URL_Validate, { EmailID });
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
-
+    // Save users
     try {
-      const response = await axios.post(API_URL, { EmailID, pwd });
+      const response = await axios.post(API_URL, { email: EmailID });
       console.log(response.data);
+      setSuccess(true);
     } catch (error) {
       console.error("Error:", error);
+      setErrMsg("Error occurred while saving data");
     }
   };
 
   return (
     <>
       <NavBar />
-      {success ? (
+      {Success ? (
         <section>
           <h1>Success!</h1>
           <p>
@@ -82,12 +65,8 @@ const Register = () => {
         </section>
       ) : (
         <section>
-          <p
-            ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
-            aria-live="assertive"
-          >
-            {errMsg}
+          <p className={ErrMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+            {ErrMsg}
           </p>
           <h1 className="Header_signup">Sign Up</h1>
           <form onSubmit={handleSubmit}>
@@ -101,26 +80,22 @@ const Register = () => {
               value={EmailID}
               required
               aria-invalid={validName ? "false" : "true"}
-              aria-describedby="uidnote"
               onFocus={() => setEmailIDFocus(true)}
               onBlur={() => setEmailIDFocus(false)}
             />
-
             <label htmlFor="password">Password:</label>
             <input
               type="password"
               id="password"
               onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
+              value={Pwd}
               required
-              aria-invalid={validPwd ? "false" : "true"}
-              aria-describedby="pwdnote"
+              aria-invalid={ValidPwd ? "false" : "true"}
               onFocus={() => setPwdFocus(true)}
               onBlur={() => setPwdFocus(false)}
             />
             <p
-              id="pwdnote"
-              className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
+              className={PwdFocus && !ValidPwd ? "instructions" : "offscreen"}
             >
               8 - 24 characters
               <br />
@@ -133,25 +108,21 @@ const Register = () => {
               type="password"
               id="confirm_pwd"
               onChange={(e) => setMatchPwd(e.target.value)}
-              value={matchPwd}
+              value={MatchPwd}
               required
-              aria-invalid={validMatch ? "false" : "true"}
-              aria-describedby="confirmnote"
+              aria-invalid={ValidMatch ? "false" : "true"}
               onFocus={() => setMatchFocus(true)}
               onBlur={() => setMatchFocus(false)}
             />
             <p
-              id="confirmnote"
               className={
-                matchFocus && !validMatch ? "instructions" : "offscreen"
+                MatchFocus && !ValidMatch ? "instructions" : "offscreen"
               }
             >
               Must match the password
             </p>
 
-            <button disabled={!validName || !validPwd || !validMatch}>
-              Sign Up
-            </button>
+            <button>Sign Up</button>
           </form>
           <p>
             Already registered?
