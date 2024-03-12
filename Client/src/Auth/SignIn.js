@@ -5,6 +5,7 @@ import "./SignUp.css";
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const API_URL = "http://localhost:3700/SignIn";
 
 const SignIn = () => {
   const userRef = useRef();
@@ -20,6 +21,7 @@ const SignIn = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const [userEmail, setUserEmail] = useState(""); // State to store user email
 
   useEffect(() => {
     userRef.current.focus();
@@ -29,22 +31,18 @@ const SignIn = () => {
     setValidName(EMAIL_REGEX.test(EmailID));
   }, [EmailID]);
 
+
+  axios.defaults.withCredentials = true ;
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const v1 = EMAIL_REGEX.test(EmailID);
-    const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
-      setErrMsg("Invalid Entry");
-      return;
+    
+    try {
+      const response = await axios.post(API_URL, { email: EmailID, password: pwd });
+      setUserEmail(response.data.user.email); // Store user email from response
+      setSuccess(true);
+    } catch (error) {
+      console.error('Error:', error);
     }
-
-    // try {
-    //   const response = await axios.post(API_URL, { EmailID, pwd });
-    //   console.log(response.data);
-    //   setSuccess(true);
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
   };
 
   return (
@@ -52,7 +50,8 @@ const SignIn = () => {
       <NavBar />
       {success ? (
         <section>
-          <h1>Success!</h1>
+          <h1>Success!...</h1>
+         <h3>Welcome {userEmail}</h3>
           <p>
             <a href="#">Sign In</a>
           </p>

@@ -11,7 +11,6 @@ const API_URL_UserValidate = "http://localhost:3700/users/list_userdetail";
 const Register = () => {
   const userRef = useRef();
   const [EmailID, setEmailID] = useState("");
-  const [validName, setValidName] = useState(false);
   const [EmailIDFocus, setEmailIDFocus] = useState(false);
   const [Pwd, setPwd] = useState("");
   const [ValidPwd, setValidPwd] = useState(false);
@@ -36,7 +35,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if email already exists
+    if (Pwd !== MatchPwd) {
+      setErrMsg("Passwords do not match");
+      return;
+    }
+
     if (ExistingEmails.includes(EmailID)) {
       setErrMsg("Email already exists");
       return;
@@ -44,7 +47,7 @@ const Register = () => {
 
     // Save users
     try {
-      const response = await axios.post(API_URL, { email: EmailID });
+      const response = await axios.post(API_URL, { email: EmailID ,pwd : Pwd });
       console.log(response.data);
       setSuccess(true);
     } catch (error) {
@@ -79,7 +82,7 @@ const Register = () => {
               onChange={(e) => setEmailID(e.target.value)}
               value={EmailID}
               required
-              aria-invalid={validName ? "false" : "true"}
+              aria-invalid={ValidPwd ? "false" : "true"}
               onFocus={() => setEmailIDFocus(true)}
               onBlur={() => setEmailIDFocus(false)}
             />
