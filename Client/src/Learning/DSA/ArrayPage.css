@@ -1,0 +1,11 @@
+/* ArrayPage.css */
+
+.codearea {
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-family: monospace;
+  overflow-x: auto;
+  max-width: 500px;
+}

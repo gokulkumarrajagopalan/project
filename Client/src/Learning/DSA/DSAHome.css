@@ -1,0 +1,26 @@
+.DSA_home {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.DSA_home h2 {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.DSA_home ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.DSA_home li {
+    margin-bottom: 8px;
+}
+
+.DSA_home p {
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
