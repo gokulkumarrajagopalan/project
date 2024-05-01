@@ -35,7 +35,7 @@ app.use(cookieParser());
 
 
 // JSON parser
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 // Session middleware
 app.use(
