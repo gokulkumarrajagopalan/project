@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 
 // Enable CORS
 const corsConfig = {
-  //origin : ["http://localhost:3000"],
-  origin: ["https://project-myor.vercel.app"],
+  origin : ["http://localhost:3000"],
+  //origin: ["https://project-myor.vercel.app"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
 };
