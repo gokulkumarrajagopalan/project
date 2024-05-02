@@ -7,7 +7,7 @@ const signOutRoutes = require("./Routes/signOutRoutes");
 const cors = require("cors");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
+//const bodyParser = require("body-parser");
 const app = express();
 
 // Connect to the database
@@ -15,7 +15,7 @@ connectToDatabase();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 // Enable CORS
 const corsConfig = {
@@ -45,8 +45,8 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: true, // Set to true if using HTTPS
-      httpOnly: true,
+      secure: false, // Set to true if using HTTPS
+      httpOnly: false,
       maxAge: 24 * 60 * 60 * 1000, 
     },
   }),
