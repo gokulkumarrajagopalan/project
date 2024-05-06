@@ -1,7 +1,7 @@
-.containerfour {
-  padding: 0px 0px 100px 0px;
-  max-width: 99%;
+/* .containerfour {
+   max-width: 100%; 
 }
+
 .row {
   position: relative;
   left: 10px;
@@ -85,10 +85,6 @@
     font-size: 60px;
   }
 
-  /* .section-4-heading {
-    display: inline-block;
-  } */
-
   .sec4-text {
     font-size: 15px;
   }
@@ -154,7 +150,7 @@
 }
 
 /* Divider */
-
+/* 
 .bold-line {
   border-bottom: 6px solid #454545;
   width: 60%;
@@ -180,9 +176,11 @@
     border-bottom: 2px solid #454545;
   }
 }
+/* 
+
 
 /* Animation */
-@keyframes moveAnimation {
+/* @keyframes moveAnimation {
   0% {
     transform: translateY(0);
   }
@@ -196,4 +194,4 @@
 
 .section-4-button:hover .sec4-btn {
   animation: moveAnimation 1s infinite;
-}
+}  */

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./SectionFour.css";
 import { Cursor } from "react-simple-typewriter";
 import webDesignicon from "../Asset/webdesign.png";
 import webDevelopementicon from "../Asset/WebDevelopmenticon.png";
