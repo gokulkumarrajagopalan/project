@@ -95,7 +95,7 @@ function Home() {
           }}
           transition={{ duration: 1.2, delay: 0.2 }}
         >
-          <span className="quoteText">
+          <div className="quoteText">
             <h3> Steps for Effective Job Pursuit </h3>
             <img
               src={JobSearchImg}
@@ -163,7 +163,7 @@ function Home() {
               Applications: Submit applications promptly, diligently follow up,
               and maintain a positive outlook.
             </motion.p>
-          </span>
+          </div>
         </motion.div>
       </div>
       <SectionFour />
