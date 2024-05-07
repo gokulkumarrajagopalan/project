@@ -6,3 +6,8 @@
   --logo-clr: rgb(30, 174, 97);
   --light-black: rgb(105, 101, 101, 1);
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}

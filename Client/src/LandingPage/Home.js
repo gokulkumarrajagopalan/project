@@ -104,6 +104,7 @@ function Home() {
             />
 
             <motion.p
+              className="quote-p"
               initial={{ opacity: 0, x: -100 }}
               animate={quoteContainerControls}
               variants={{
@@ -116,6 +117,7 @@ function Home() {
               with ideal job prospects.
             </motion.p>
             <motion.p
+              className="quote-p"
               initial={{ opacity: 0, x: -100 }}
               animate={quoteContainerControls}
               variants={{
@@ -128,6 +130,7 @@ function Home() {
               qualifications for prospective employers.
             </motion.p>
             <motion.p
+              className="quote-p"
               initial={{ opacity: 0, x: -100 }}
               animate={quoteContainerControls}
               variants={{
@@ -140,6 +143,7 @@ function Home() {
               across diverse industries.
             </motion.p>
             <motion.p
+              className="quote-p"
               initial={{ opacity: 0, x: -100 }}
               animate={quoteContainerControls}
               variants={{
@@ -152,6 +156,7 @@ function Home() {
               well-informed job pursuit.
             </motion.p>
             <motion.p
+              className="quote-p"
               initial={{ opacity: 0, x: -100 }}
               animate={quoteContainerControls}
               variants={{
