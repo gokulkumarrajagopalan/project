@@ -19,8 +19,7 @@ router.post("/", async (req, res) => {
       return res.status(200).json({ message: "Password Invalid", Login : false });
     }
      
-    res.cookie('userId', user._id, { secure: true, httpOnly: true });
-    res.cookie('email', user.email, { secure: true, httpOnly: true });
+  
 
     
     req.session.user = user;
