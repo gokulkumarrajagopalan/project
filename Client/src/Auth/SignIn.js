@@ -46,9 +46,6 @@ const SignIn = () => {
       });
 
       if (response.data.Login) {
-        // If login is successful, navigate to the Home_loggedIn page
-        localStorage.setItem("isAuthenticated", true);
-        localStorage.setItem("userEmail", response.data.user.email);
         navigate("/JobPostScreen");
       } else {
         setErrMsg("Invalid email or password");
@@ -70,7 +67,7 @@ const SignIn = () => {
           </p>
         </section>
       ) : (
-        <section>
+        <section className="section_card">
           <p
             ref={errRef}
             className={errMsg ? "errmsg" : "offscreen"}
@@ -82,6 +79,7 @@ const SignIn = () => {
           <form onSubmit={handleSubmit}>
             <label htmlFor="EmailID">Email :</label>
             <input
+              className="inputtxt"
               type="text"
               id="txtemailID"
               ref={userRef}
@@ -97,6 +95,7 @@ const SignIn = () => {
 
             <label htmlFor="password">Password:</label>
             <input
+              className="inputtxt"
               type="password"
               id="password"
               onChange={(e) => setPwd(e.target.value)}
@@ -107,7 +106,7 @@ const SignIn = () => {
               onFocus={() => setPwdFocus(true)}
               onBlur={() => setPwdFocus(false)}
             />
-            <button>Sign In</button>
+            <button className="submitbutton">Sign In</button>
           </form>
           <p>
             Forget Password?
