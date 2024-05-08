@@ -1,6 +1,5 @@
 import React from "react";
 import TshirtImg from "./tshirt.svg";
-import "./product.css";
 
 function HeapSort() {
   const amount = 500;

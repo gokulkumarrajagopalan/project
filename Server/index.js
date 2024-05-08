@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 
 // Enable CORS
 const corsConfig = {
-  origin : ["http://localhost:3000"],
-  //origin: ["https://project-myor.vercel.app"],
+  //origin : ["http://localhost:3000"],
+  origin: ["https://project-lerz.vercel.app"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
 };
@@ -33,17 +33,16 @@ app.options("*", cors(corsConfig));
 // Middleware for parsing cookies
 app.use(cookieParser());
 
-
 // JSON parser
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 // Session middleware
 app.use(
   session({
     name: "mySessionCookie",
-    secret: "MySecureSessionKey$2024#", 
-    resave: false,
-    saveUninitialized: false,
+    secret: "MySecureSessionKey$2024#",
+    resave: true,
+    saveUninitialized: true,
     cookie: {
       secure: false, // Set to true if using HTTPS
       //httpOnly: true,
