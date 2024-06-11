@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // Enable CORS
 const corsConfig = {
   //origin : ["http://localhost:3000"],
-  origin: ["https://project-lerz.vercel.app"],
+  origin: ["https://gdest.in"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
 };
