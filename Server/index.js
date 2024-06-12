@@ -41,6 +41,8 @@ app.use(
   session({
     name: "mySessionCookie",
     secret: "MySecureSessionKey$2024#",
+    resave: false,
+    saveUninitialized: false,
     cookie: {
       secure: true, // Set to true if using HTTPS
       httpOnly: true,
