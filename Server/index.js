@@ -40,7 +40,8 @@ app.use(cookieParser());
 app.use(
   session({
     name: "mySessionCookie",
-    secret: "MySecureSessionKey$2024#",
+    secret: process.env.SESSION_SECRET,
+    //secret: "MySecureSessionKey$2024#",
     resave: false,
     saveUninitialized: false,
     cookie: {
