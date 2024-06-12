@@ -41,14 +41,13 @@ app.use(
   session({
     name: "mySessionCookie",
     secret: "MySecureSessionKey$2024#",
-   // resave: true,
-    //saveUninitialized: true,
     cookie: {
       secure: true, // Set to true if using HTTPS
       httpOnly: true,
       maxAge: 3600 * 1000, // Session expiration time in milliseconds
+      sameSite: "lax", // Adjust based on your requirements
     },
-  }),
+  })
 );
 
 // Routes
