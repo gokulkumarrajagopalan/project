@@ -10,6 +10,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const app = express();
+require('dotenv').config();
 
 // Connect to the database
 connectToDatabase();
@@ -50,7 +51,7 @@ app.use(
       ttl:14*24*60*60
     }),
     cookie: {
-      secure: true, 
+      secure: process.env.NODE_ENV === 'production', 
       httpOnly: true,
       maxAge: 3600 * 1000, 
       sameSite: "lax", 
