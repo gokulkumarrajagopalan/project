@@ -19,6 +19,7 @@ const StateContext = ({ children }) => {
     const fetchSessionData = async () => {
       try {
         const res = await axios.get(API_URL_SESSION);
+         withCredentials: true,
         const valid = res.data.valid;
         const userType = res.data.TypeOfUser;
     
