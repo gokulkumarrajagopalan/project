@@ -53,6 +53,7 @@ function JobPostScreen() {
     const fetchSessionData = async () => {
       try {
         const res = await axios.get(API_URL_SESSION);
+         withCredentials: true,
        console.log(res.data.valid);
         if (res.data.valid) {
           setEmail(res.data.email);
