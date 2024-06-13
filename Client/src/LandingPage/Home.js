@@ -60,6 +60,18 @@ function Home() {
   }, [classbControls]);
 
   return (
+    <>
+    <Helmet>
+        <title>GDest</title>
+        <meta name="description" content="Welcome to GDest.In, your go-to platform for job searches and career opportunities. Explore our listings and find your dream job today." />
+        <meta name="keywords" content="GDest.In,GDest,gdest job search, careers, employment, job opportunities, home" />
+        <meta property="og:title" content="Home - dest.In" />
+        <meta property="og:description" content="Welcome to GDest.In, your go-to platform for job searches and career opportunities. Explore our listings and find your dream job today." />
+        <meta property="og:url" content="https://www.gdest.in/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.dest.in/path-to-home-image.jpg" />
+        <link rel="canonical" href="https://www.gdest.in/" />
+      </Helmet>
     <div className="homeContainer">
       <NavBar />
       <div className="headsec_1">
@@ -174,6 +186,7 @@ function Home() {
       <SectionFour />
       <Footer />
     </div>
+   </>
   );
 }
 
