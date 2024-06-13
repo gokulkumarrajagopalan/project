@@ -6,6 +6,7 @@ import Button from "../Components/button";
 import SectionFour from "./SectionFour";
 import NavBar from "./NavBar";
 import JobSearchImg from "../Asset/jobsearchimg.jpg";
+import { Helmet } from 'react-helmet';
 function Home() {
   const [jobSearch, setJobSearch] = useState("");
   const classbControls = useAnimation();
