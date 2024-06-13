@@ -5,6 +5,7 @@ const jobPostRoutes = require("./Routes/jobPostRouts");
 const signInRoutes = require("./Routes/signInRoutes");
 const signOutRoutes = require("./Routes/signOutRoutes");
 const cors = require("cors");
+const MongoStore =require('connect-mongo');
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -44,11 +45,15 @@ app.use(
     //secret: "MySecureSessionKey$2024#",
     resave: false,
     saveUninitialized: false,
+    store:MongoStore.create({
+      mongoUrl:"mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+      ttl:14*24*60*60
+    }),
     cookie: {
-      secure: true, // Set to true if using HTTPS
+      secure: true, 
       httpOnly: true,
-      maxAge: 3600 * 1000, // Session expiration time in milliseconds
-      sameSite: "lax", // Adjust based on your requirements
+      maxAge: 3600 * 1000, 
+      sameSite: "lax", 
     },
   })
 );
