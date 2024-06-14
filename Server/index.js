@@ -41,13 +41,13 @@ app.use(cookieParser());
 app.use(
   session({
     name: "mySessionCookie",
-    secret: process.env.SESSION_SECRET,
-    //secret: "MySecureSessionKey$2024#",
+    secret: process.env.SESSION_SECRET || "MySecureSessionKey$2024#",
     resave: false,
     saveUninitialized: false,
     store:MongoStore.create({
       mongoUrl:"mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
-      ttl:14*24*60*60
+      ttl:14*24*60*60,
+      autoRemove: 'native',
     }),
     cookie: {
       secure: process.env.NODE_ENV === 'production', 
