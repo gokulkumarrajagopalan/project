@@ -45,18 +45,20 @@ function JobPostScreen() {
     fetchJobData();
   }, []);
 
-  useEffect(() => {  
-    
+  useEffect(() => {
     axios.defaults.withCredentials = true;
-
 
     const fetchSessionData = async () => {
       try {
-        const res = await axios.get(API_URL_SESSION);
-       console.log(res.data.valid);
-        if (res.data.valid) {
-          setEmail(res.data.email);
-          console.log("email" + email);
+        const res = await axios.get(API_URL_SESSION, {
+          withCredentials: true, // Ensure this is within the config object
+        });
+        const valid = res.data.valid;
+        const userEmail = res.data.email; // use userEmail to avoid shadowing
+
+        if (valid) {
+          setEmail(userEmail);
+          console.log("email", userEmail);
         } else {
           // Handle invalid session
         }
@@ -67,7 +69,6 @@ function JobPostScreen() {
 
     fetchSessionData();
   }, []);
-
   const handleJobCardClick = (job) => {
     setSelectedJob(job);
     setShowSelectedJob(true);

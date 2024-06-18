@@ -6,7 +6,7 @@ import Button from "../Components/button";
 import SectionFour from "./SectionFour";
 import NavBar from "./NavBar";
 import JobSearchImg from "../Asset/jobsearchimg.jpg";
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 function Home() {
   const [jobSearch, setJobSearch] = useState("");
   const classbControls = useAnimation();
@@ -62,144 +62,132 @@ function Home() {
 
   return (
     <>
-      <Helmet>
+    <Helmet>
         <title>GDest</title>
-        <meta
-          name="description"
-          content="Welcome to GDest.In, your go-to platform for job searches and career opportunities. Explore our listings and find your dream job today."
-        />
-        <meta
-          name="keywords"
-          content="GDest.In,GDest,gdest job search, careers, employment, job opportunities, home"
-        />
-        <meta property="og:title" content="Home - GDest.In" />
-        <meta
-          property="og:description"
-          content="Welcome to GDest.In, your go-to platform for job searches and career opportunities. Explore our listings and find your dream job today."
-        />
+        <meta name="description" content="Welcome to GDest.In, your go-to platform for job searches and career opportunities. Explore our listings and find your dream job today." />
+        <meta name="keywords" content="GDest.In,GDest,gdest job search, careers, employment, job opportunities, home" />
+        <meta property="og:title" content="Home - dest.In" />
+        <meta property="og:description" content="Welcome to GDest.In, your go-to platform for job searches and career opportunities. Explore our listings and find your dream job today." />
         <meta property="og:url" content="https://www.gdest.in/" />
         <meta property="og:type" content="website" />
-        <meta
-          property="og:image"
-          content="https://www.gdest.in/Asset/Logo.png"
-        />
+        <meta property="og:image" content="https://www.dest.in/Asset/Logo.jpg" />
         <link rel="canonical" href="https://www.gdest.in/" />
       </Helmet>
-      <div className="homeContainer">
-        <NavBar />
-        <div className="headsec_1">
-          <motion.div
-            className="classb"
-            initial={{ opacity: 0, y: 40 }}
-            animate={classbControls}
-            variants={{
-              hidden: { opacity: 0, y: 40 },
-              show: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 1.2, delay: 0.4 }}
-            ref={classbRef}
-          >
-            <h1>REALIZE YOUR POTENTIAL, GET IN TOUCH WITH OUR SPECIALISTS</h1>
-            <h3>AND LOOK THROUGH HUNDREDS OF EMPLOYMENT POSSIBILITIES</h3>
-            <h4>FOR THE RIGHT JOB IF YOU WANT TO THRIVE IN YOUR PROFESSION</h4>
-            <Button
-              text="Apply Jobs"
-              onClick={handleApplyJob}
-              className="btn_applyJobs"
-            />
-          </motion.div>
-        </div>
-        <div className="headsec_2" ref={quoteContainerRef}>
-          <motion.div
-            className="quoteContainer"
-            initial={{ opacity: 0, x: -100 }}
-            animate={quoteContainerControls}
-            variants={{
-              hidden: { opacity: 0, x: -100 },
-              show: { opacity: 1, x: 0 },
-            }}
-            transition={{ duration: 1.2, delay: 0.2 }}
-          >
-            <div className="quoteText">
-              <h3> Steps for Effective Job Pursuit </h3>
-              <img
-                src={JobSearchImg}
-                alt="Job Search"
-                className="jobSearchImage"
-              />
-
-              <motion.p
-                className="quote-p"
-                initial={{ opacity: 0, x: -100 }}
-                animate={quoteContainerControls}
-                variants={{
-                  hidden: { opacity: 0, x: -100 },
-                  show: { opacity: 1, x: 0 },
-                }}
-                transition={{ duration: 1.2, delay: 0.2 }}
-              >
-                Thoroughly analyze your skills, interests, and values to align
-                with ideal job prospects.
-              </motion.p>
-              <motion.p
-                className="quote-p"
-                initial={{ opacity: 0, x: -100 }}
-                animate={quoteContainerControls}
-                variants={{
-                  hidden: { opacity: 0, x: -100 },
-                  show: { opacity: 1, x: 0 },
-                }}
-                transition={{ duration: 1.2, delay: 0.4 }}
-              >
-                Create a compelling CV, accentuating accomplishments, and
-                qualifications for prospective employers.
-              </motion.p>
-              <motion.p
-                className="quote-p"
-                initial={{ opacity: 0, x: -100 }}
-                animate={quoteContainerControls}
-                variants={{
-                  hidden: { opacity: 0, x: -100 },
-                  show: { opacity: 1, x: 0 },
-                }}
-                transition={{ duration: 1.2, delay: 0.6 }}
-              >
-                Explore our extensive databases showcasing premier job openings
-                across diverse industries.
-              </motion.p>
-              <motion.p
-                className="quote-p"
-                initial={{ opacity: 0, x: -100 }}
-                animate={quoteContainerControls}
-                variants={{
-                  hidden: { opacity: 0, x: -100 },
-                  show: { opacity: 1, x: 0 },
-                }}
-                transition={{ duration: 1.2, delay: 0.8 }}
-              >
-                Research: Gain insights into companies, roles, and trends for a
-                well-informed job pursuit.
-              </motion.p>
-              <motion.p
-                className="quote-p"
-                initial={{ opacity: 0, x: -100 }}
-                animate={quoteContainerControls}
-                variants={{
-                  hidden: { opacity: 0, x: -100 },
-                  show: { opacity: 1, x: 0 },
-                }}
-                transition={{ duration: 1.2, delay: 1.0 }}
-              >
-                Applications: Submit applications promptly, diligently follow
-                up, and maintain a positive outlook.
-              </motion.p>
-            </div>
-          </motion.div>
-        </div>
-        <SectionFour />
-        <Footer />
+    <div className="homeContainer">
+      <NavBar />
+      <div className="headsec_1">
+        <motion.div
+          className="classb"
+          initial={{ opacity: 0, y: 40 }}
+          animate={classbControls}
+          variants={{
+            hidden: { opacity: 0, y: 40 },
+            show: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+          ref={classbRef}
+        >
+          <h1>REALIZE YOUR POTENTIAL, GET IN TOUCH WITH OUR SPECIALISTS</h1>
+          <h3>AND LOOK THROUGH HUNDREDS OF EMPLOYMENT POSSIBILITIES</h3>
+          <h4>FOR THE RIGHT JOB IF YOU WANT TO THRIVE IN YOUR PROFESSION</h4>
+          <Button
+            text="Apply Jobs"
+            onClick={handleApplyJob}
+            className="btn_applyJobs"
+          />
+        </motion.div>
       </div>
-    </>
+      <div className="headsec_2" ref={quoteContainerRef}>
+        <motion.div
+          className="quoteContainer"
+          initial={{ opacity: 0, x: -100 }}
+          animate={quoteContainerControls}
+          variants={{
+            hidden: { opacity: 0, x: -100 },
+            show: { opacity: 1, x: 0 },
+          }}
+          transition={{ duration: 1.2, delay: 0.2 }}
+        >
+          <div className="quoteText">
+            <h3> Steps for Effective Job Pursuit </h3>
+            <img
+              src={JobSearchImg}
+              alt="Job Search"
+              className="jobSearchImage"
+            />
+
+            <motion.p
+              className="quote-p"
+              initial={{ opacity: 0, x: -100 }}
+              animate={quoteContainerControls}
+              variants={{
+                hidden: { opacity: 0, x: -100 },
+                show: { opacity: 1, x: 0 },
+              }}
+              transition={{ duration: 1.2, delay: 0.2 }}
+            >
+              Thoroughly analyze your skills, interests, and values to align
+              with ideal job prospects.
+            </motion.p>
+            <motion.p
+              className="quote-p"
+              initial={{ opacity: 0, x: -100 }}
+              animate={quoteContainerControls}
+              variants={{
+                hidden: { opacity: 0, x: -100 },
+                show: { opacity: 1, x: 0 },
+              }}
+              transition={{ duration: 1.2, delay: 0.4 }}
+            >
+              Create a compelling CV, accentuating accomplishments, and
+              qualifications for prospective employers.
+            </motion.p>
+            <motion.p
+              className="quote-p"
+              initial={{ opacity: 0, x: -100 }}
+              animate={quoteContainerControls}
+              variants={{
+                hidden: { opacity: 0, x: -100 },
+                show: { opacity: 1, x: 0 },
+              }}
+              transition={{ duration: 1.2, delay: 0.6 }}
+            >
+              Explore our extensive databases showcasing premier job openings
+              across diverse industries.
+            </motion.p>
+            <motion.p
+              className="quote-p"
+              initial={{ opacity: 0, x: -100 }}
+              animate={quoteContainerControls}
+              variants={{
+                hidden: { opacity: 0, x: -100 },
+                show: { opacity: 1, x: 0 },
+              }}
+              transition={{ duration: 1.2, delay: 0.8 }}
+            >
+              Research: Gain insights into companies, roles, and trends for a
+              well-informed job pursuit.
+            </motion.p>
+            <motion.p
+              className="quote-p"
+              initial={{ opacity: 0, x: -100 }}
+              animate={quoteContainerControls}
+              variants={{
+                hidden: { opacity: 0, x: -100 },
+                show: { opacity: 1, x: 0 },
+              }}
+              transition={{ duration: 1.2, delay: 1.0 }}
+            >
+              Applications: Submit applications promptly, diligently follow up,
+              and maintain a positive outlook.
+            </motion.p>
+          </div>
+        </motion.div>
+      </div>
+      <SectionFour />
+      <Footer />
+    </div>
+   </>
   );
 }
 
