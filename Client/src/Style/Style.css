@@ -327,6 +327,7 @@ a {
   position: relative;
   display: flex;
   align-items: center;
+  right: 40px;
 }
 
 .search-input {
@@ -490,6 +491,10 @@ a {
 
 .Notificationbutton {
   background-color: white;
+  border: none;
+  cursor: pointer;
+  left: 30px;
+  position: relative;
 }
 
 .userDetailsContainer {
