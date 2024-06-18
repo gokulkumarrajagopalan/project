@@ -1,23 +1,12 @@
-
 const API_URLS = {
-   // development: "http://localhost:3700",
-   // production : "http://localhost:3700"
-    
-    production: "https://server.gdest.in"
+  // development: "http://localhost:3700",
+  // production : "http://localhost:3700"
 
-    //production: "http://13.232.224.236:3700"
-  };
-  
-  export default API_URLS;
-  
+  // production: "https://server.gdest.in"
+
+ // production: "https://lw7j96-3800.csb.app",
+};
+
+export default API_URLS;
 
 
-// const API_URLS = {
-//    development: "http://localhost:3700",
-//    production : "http://localhost:3700"
-    
-//     //production: "https://project-seven-plum.vercel.app"
-//   };
-  
-//   export default API_URLS;
-  
