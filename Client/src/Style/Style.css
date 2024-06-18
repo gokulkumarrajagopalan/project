@@ -709,6 +709,9 @@ a {
   transform: translateY(0px);
 }
 
+.brandLogo {
+  padding: 0px 0px;
+}
 /* Divider */
 
 .bold-line {
