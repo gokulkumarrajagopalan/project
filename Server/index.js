@@ -43,7 +43,7 @@ app.use(
     name: "mySessionCookie",
     secret: process.env.SESSION_SECRET || "MySecureSessionKey$2024#",
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false ,
     store:MongoStore.create({
       mongoUrl:"mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
       ttl:14*24*60*60,
