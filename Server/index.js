@@ -42,16 +42,16 @@ app.use(
   session({
     name: "mySessionCookie",
     secret: process.env.SESSION_SECRET || "MySecureSessionKey$2024#",
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     store:MongoStore.create({
       mongoUrl:"mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
       ttl:14*24*60*60,
       autoRemove: 'native',
     }),
     cookie: {
-      secure: process.env.NODE_ENV === 'production', 
-      httpOnly: true,
+      secure: false', 
+      httpOnly: false,
       maxAge: 3600 * 1000, 
       sameSite: "lax", 
     },
