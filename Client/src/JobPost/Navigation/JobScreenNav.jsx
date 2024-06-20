@@ -6,7 +6,14 @@ import Filtericon from "../../Asset/filtericon.png";
 import NotificationIcon from "../../Asset/notificationicon.png";
 import { Link } from "react-router-dom";
 
-const JobScreenNav = ({ onSearch, toggleFilterDetails, toggleUserDetails ,toggleNotification }) => {
+const JobScreenNav = ({
+  onSearch,
+  toggleFilterDetails,
+  toggleUserDetails,
+  toggleNotification,
+  showSearch,
+  setShowSearch,
+}) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSearchInput = (e) => {
@@ -26,8 +33,8 @@ const JobScreenNav = ({ onSearch, toggleFilterDetails, toggleUserDetails ,toggle
     toggleFilterDetails();
   };
 
-  const togglNotificationPanel = () =>{
-        toggleNotification();
+  const toggleNotificationPanel = () => {
+    toggleNotification();
   };
 
   return (
@@ -38,22 +45,32 @@ const JobScreenNav = ({ onSearch, toggleFilterDetails, toggleUserDetails ,toggle
         </Link>
       </div>
       <div className="search-container">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search..."
-          value={searchValue}
-          onChange={handleSearchInput}
-        />
-        <button className="Searchbutton" onClick={handleSearch}>
-          <img src={searchicon} alt="Search Icon" className="iconStyle" />
-        </button>
-        
+        {showSearch && (
+          <>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search..."
+              value={searchValue}
+              onChange={handleSearchInput}
+            />
+            <button className="Searchbutton" onClick={handleSearch}>
+              <img src={searchicon} alt="Search Icon" className="iconStyle" />
+            </button>
+          </>
+        )}
         <button className="Filterbutton" onClick={toggleFilterPanel}>
           <img src={Filtericon} alt="Filtericon" className="iconStyle" />
         </button>
-        <button className="Notificationbutton" onClick={togglNotificationPanel}>
-          <img src={NotificationIcon} alt="Notificationicon" className="iconStyle" />
+        <button
+          className="Notificationbutton"
+          onClick={toggleNotificationPanel}
+        >
+          <img
+            src={NotificationIcon}
+            alt="Notificationicon"
+            className="iconStyle"
+          />
         </button>
       </div>
       <img
