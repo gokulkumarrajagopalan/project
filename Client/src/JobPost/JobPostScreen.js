@@ -12,7 +12,7 @@ import Notification from "../Components/notification";
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
 const API_URL_SIGNOUT = API_URLS[ENV] + "/signOut";
-const API_URL_SESSION = API_URLS[ENV] + "/signIn/sessioncheck"
+const API_URL_SESSION = API_URLS[ENV] + "/signIn/sessioncheck";
 
 function JobPostScreen() {
   const [jobData, setJobData] = useState([]);
@@ -24,7 +24,6 @@ function JobPostScreen() {
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [showSelectedJob, setShowSelectedJob] = useState(false);
-  const [showJobContainer, setShowJobContainer] = useState(true);
   const [showNotification, setShowNotification] = useState(false);
   const [sort, setSort] = useState("");
   const [workMode, setWorkMode] = useState("");
@@ -32,6 +31,9 @@ function JobPostScreen() {
   const [salary, setSalary] = useState("");
   const [experience, setExperience] = useState("");
   const [email, setEmail] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showSearch, setShowSearch] = useState(false);
+
   useEffect(() => {
     const fetchJobData = async () => {
       try {
@@ -51,7 +53,7 @@ function JobPostScreen() {
     const fetchSessionData = async () => {
       try {
         const res = await axios.get(API_URL_SESSION, {
-          withCredentials: true, // Ensure this is within the config object
+          withCredentials: true,
         });
         const valid = res.data.valid;
         const userEmail = res.data.email; // use userEmail to avoid shadowing
@@ -69,6 +71,24 @@ function JobPostScreen() {
 
     fetchSessionData();
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileView = window.innerWidth < 768;
+      setIsMobile(isMobileView);
+      if (!isMobileView) {
+        setShowSearch(true);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleJobCardClick = (job) => {
     setSelectedJob(job);
     setShowSelectedJob(true);
@@ -97,21 +117,17 @@ function JobPostScreen() {
     setEmploymentType(employmentType);
     setSalary(salary);
     setShowFilter(false);
-    setShowJobContainer(true);
-    setShowNotification(false);
   };
 
   const toggleUserDetails = () => {
     setShowUserDetails(!showUserDetails);
     setShowFilter(false);
-    setShowJobContainer(true);
     setShowNotification(false);
   };
 
   const toggleFilterDetails = () => {
     setShowFilter(!showFilter);
     setShowUserDetails(false);
-    setShowJobContainer(!showJobContainer);
     setShowNotification(false);
   };
 
@@ -125,10 +141,8 @@ function JobPostScreen() {
 
   const toggleNotification = () => {
     setShowNotification(!showNotification);
-    setShowJobContainer(!showJobContainer);
     setShowUserDetails(false);
     setShowFilter(false);
-    setShowUserDetails(false);
   };
 
   const handleSettings = () => {};
@@ -171,6 +185,8 @@ function JobPostScreen() {
     );
   });
 
+  const showJobContainer = !showUserDetails && !showNotification && !showFilter;
+
   return (
     <>
       <JobScreenNav
@@ -178,12 +194,13 @@ function JobPostScreen() {
         toggleFilterDetails={toggleFilterDetails}
         toggleUserDetails={toggleUserDetails}
         toggleNotification={toggleNotification}
+        showSearch={showSearch}
       />
 
       {showNotification && (
         <Notification
           showNotification={showNotification}
-          ontoggleNOtificaton={toggleNotification}
+          ontoggleNotification={toggleNotification}
         />
       )}
 
@@ -206,9 +223,10 @@ function JobPostScreen() {
         onSearch={handleSearch}
         toggleFilterDetails={toggleFilterDetails}
         toggleUserDetails={toggleUserDetails}
+        setShowSearch={setShowSearch}
       />
       <div className="jobPostContainer">
-      Hi,{email}
+        Hi, {email}
         {showJobContainer && (
           <div className="jobcontainer">
             {filteredJobs.map((job) => (

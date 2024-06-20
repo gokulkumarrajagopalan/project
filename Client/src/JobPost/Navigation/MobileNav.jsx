@@ -6,9 +6,13 @@ import FilterIcon from "../../Asset/filtericon.png";
 import UserIcon from "../../Asset/user.png";
 import LearningIcon from "../../Asset/learningicon.png";
 
-const MobileNav = ({ toggleFilterDetails }) => {
+const MobileNav = ({ toggleFilterDetails, setShowSearch }) => {
   const handleFilterClick = () => {
-    toggleFilterDetails(); 
+    toggleFilterDetails();
+  };
+
+  const handleSearchClick = () => {
+    setShowSearch((prev) => !prev); // Toggle the search visibility
   };
 
   return (
@@ -17,12 +21,17 @@ const MobileNav = ({ toggleFilterDetails }) => {
         <Link to="/">
           <img src={HomeIcon} alt="Home Icon" className="navIcon" />
         </Link>
-        <img src={SearchIcon} alt="Search Icon" className="navIcon" />
+        <img
+          src={SearchIcon}
+          alt="Search Icon"
+          className="navIcon"
+          onClick={handleSearchClick}
+        />
         <img
           src={FilterIcon}
           alt="Filter Icon"
           className="navIcon"
-          onClick={handleFilterClick} 
+          onClick={handleFilterClick}
         />
         <Link className="Linkk" to="/LearningDefault">
           <img src={LearningIcon} alt="Learning Icon" className="navIcon" />

@@ -750,3 +750,7 @@ a {
 .section-4-button:hover .sec4-btn {
   animation: moveAnimation 1s infinite;
 }
+
+.hide-search {
+  display: none;
+}
