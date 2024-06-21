@@ -99,9 +99,15 @@ function Home() {
             transition={{ duration: 1.2, delay: 0.4 }}
             ref={classbRef}
           >
-            <h1>REALIZE YOUR POTENTIAL, GET IN TOUCH WITH OUR SPECIALISTS</h1>
-            <h3>AND LOOK THROUGH HUNDREDS OF EMPLOYMENT POSSIBILITIES</h3>
-            <h4>FOR THE RIGHT JOB IF YOU WANT TO THRIVE IN YOUR PROFESSION</h4>
+            <h1 className="textgrade1">
+              REALIZE YOUR POTENTIAL, GET IN TOUCH WITH OUR SPECIALISTS
+            </h1>
+            <h3 className="textgrade3">
+              AND LOOK THROUGH HUNDREDS OF EMPLOYMENT POSSIBILITIES
+            </h3>
+            <h4 className="textgrade4">
+              FOR THE RIGHT JOB IF YOU WANT TO THRIVE IN YOUR PROFESSION
+            </h4>
             <Button
               text="Apply Jobs"
               onClick={handleApplyJob}
