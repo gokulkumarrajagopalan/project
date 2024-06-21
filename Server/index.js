@@ -50,7 +50,7 @@ app.use(
       autoRemove: 'native',
     }),
     cookie: {
-      secure: false', 
+      secure: true', 
       httpOnly: false,
       maxAge: 3600 * 1000, 
       sameSite: "lax", 
