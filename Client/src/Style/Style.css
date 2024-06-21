@@ -225,6 +225,7 @@ a {
 .classb {
   position: relative;
   top: 150px;
+  margin: 10px;
 }
 
 /* .header {
@@ -753,4 +754,20 @@ a {
 
 .hide-search {
   display: none;
+}
+
+@media (max-width: 480px) {
+  .textgrade1 {
+    font-size: 10px;
+    font-weight: bolder;
+  }
+  .textgrade3 {
+    font-size: 9px;
+    font-weight: bolder;
+  }
+
+  .textgrade4 {
+    font-size: 8px;
+    font-weight: bolder;
+  }
 }
