@@ -36,8 +36,12 @@ const UserDetails = ({
       <h3>User Details</h3>
       <ul>
         <li>Hi,{email}</li>
-        <button onClick={onLogout}>SignOut</button>
-        <button onClick={onSettings}>Settings</button>
+        <li>
+          <button onClick={onLogout}>SignOut</button>{" "}
+        </li>
+        <li>
+          <button onClick={onSettings}>Settings</button>{" "}
+        </li>
       </ul>
     </div>
   ) : null;

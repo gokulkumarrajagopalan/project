@@ -435,6 +435,7 @@ a {
 @media (min-width: 769px) {
   .navIcon {
     display: none;
+    cursor: pointer;
   }
 }
 
@@ -468,8 +469,9 @@ a {
     position: relative;
     display: flex;
     align-items: center;
-    width: 200%;
-    height: 10px;
+    width: 180px;
+    height: 8px;
+    left: 2px;
   }
 
   .jobcontainer {
@@ -494,7 +496,6 @@ a {
   background-color: white;
   border: none;
   cursor: pointer;
-  left: 30px;
   position: relative;
 }
 
@@ -684,6 +685,7 @@ a {
   position: relative;
   display: flex;
   top: 50px;
+  margin-left: 10px;
 }
 .sec4-btn {
   font-family: Roboto, sans-serif;
@@ -769,5 +771,11 @@ a {
   .textgrade4 {
     font-size: 8px;
     font-weight: bolder;
+  }
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    left: 1px;
   }
 }
