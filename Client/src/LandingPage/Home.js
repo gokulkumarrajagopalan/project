@@ -6,14 +6,55 @@ import Button from "../Components/button";
 import SectionFour from "./SectionFour";
 import NavBar from "./NavBar";
 import JobSearchImg from "../Asset/jobsearchimg.jpg";
+
 import { Helmet } from "react-helmet";
+
 function Home() {
   const [jobSearch, setJobSearch] = useState("");
+  const [location, setLocation] = useState("");
+  const [activeButton, setActiveButton] = useState("Job");
+  const [rentedHouseType, setRentedHouseType] = useState("");
+  const [sharingOption, setSharingOption] = useState("");
+  const [gender, setGender] = useState("");
+
   const classbControls = useAnimation();
   const quoteContainerControls = useAnimation();
+  const quoteContainerRef = useRef(null);
+  const classbRef = useRef(null);
 
   function handleJobSearch(event) {
     setJobSearch(event.target.value);
+  }
+
+  function handleLocationChange(event) {
+    setLocation(event.target.value);
+  }
+
+  function handleRentedHouseTypeChange(event) {
+    setRentedHouseType(event.target.value);
+    setSharingOption("");
+    setGender("");
+  }
+
+  function handleSharingOptionChange(event) {
+    setSharingOption(event.target.value);
+  }
+
+  function handleGenderChange(event) {
+    setGender(event.target.value);
+  }
+
+  function handleSearch() {
+    // Implement search functionality here
+    console.log(`Searching for ${jobSearch} in ${location}`);
+    if (activeButton === "Rented House") {
+      console.log(`Searching for ${rentedHouseType} in ${location}`);
+      if (rentedHouseType === "PG") {
+        console.log(`Gender: ${gender}, Sharing Option: ${sharingOption}`);
+      } else {
+        console.log(`Sharing Option: ${sharingOption}`);
+      }
+    }
   }
 
   function handleApplyJob() {
@@ -40,9 +81,6 @@ function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [quoteContainerControls]);
-
-  const quoteContainerRef = useRef(null);
-  const classbRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,6 +123,7 @@ function Home() {
         />
         <link rel="canonical" href="https://www.gdest.in/" />
       </Helmet>
+
       <div className="homeContainer">
         <NavBar />
         <div className="headsec_1">
@@ -99,20 +138,197 @@ function Home() {
             transition={{ duration: 1.2, delay: 0.4 }}
             ref={classbRef}
           >
-            <h1 className="textgrade1">
-              REALIZE YOUR POTENTIAL, GET IN TOUCH WITH OUR SPECIALISTS
-            </h1>
-            <h3 className="textgrade3">
-              AND LOOK THROUGH HUNDREDS OF EMPLOYMENT POSSIBILITIES
-            </h3>
-            <h4 className="textgrade4">
-              FOR THE RIGHT JOB IF YOU WANT TO THRIVE IN YOUR PROFESSION
-            </h4>
-            <Button
-              text="Apply Jobs"
-              onClick={handleApplyJob}
-              className="btn_applyJobs"
-            />
+            <div className="container1">
+              <div className="button-group">
+                <div
+                  className={`custom-button ${activeButton === "Job" ? "active" : ""}`}
+                  onClick={() => setActiveButton("Job")}
+                >
+                  Job
+                </div>
+                <div
+                  className={`custom-button ${activeButton === "Internship" ? "active" : ""}`}
+                  onClick={() => setActiveButton("Internship")}
+                >
+                  Internship
+                </div>
+                <div
+                  className={`custom-button ${activeButton === "Rented House" ? "active" : ""}`}
+                  onClick={() => setActiveButton("Rented House")}
+                >
+                  Rented House
+                </div>
+              </div>
+              {activeButton === "Job" && (
+                <div className="job-section">
+                  <input
+                    type="text"
+                    value={jobSearch}
+                    onChange={handleJobSearch}
+                    placeholder="Enter job title or keyword"
+                    className="textbox"
+                  />
+                  <input
+                    type="text"
+                    value={location}
+                    onChange={handleLocationChange}
+                    placeholder="Enter location"
+                    className="textbox"
+                  />
+                  <button onClick={handleSearch} className="search-button">
+                    Search
+                  </button>
+                </div>
+              )}
+              {activeButton === "Internship" && (
+                <div className="internship-section">
+                  <input
+                    type="text"
+                    value={jobSearch}
+                    onChange={handleJobSearch}
+                    placeholder="Enter job title or keyword"
+                    className="textbox"
+                  />
+                  <input
+                    type="text"
+                    value={location}
+                    onChange={handleLocationChange}
+                    placeholder="Enter location"
+                    className="textbox"
+                  />
+                  <button onClick={handleSearch} className="search-button">
+                    Search
+                  </button>
+                </div>
+              )}
+              {activeButton === "Rented House" && (
+                <div className="rented-house-section">
+                  <input
+                    type="text"
+                    value={location}
+                    onChange={handleLocationChange}
+                    placeholder="Enter location"
+                    className="textbox"
+                  />
+                  <div className="rented-house-options">
+                    <label>
+                      <input
+                        type="radio"
+                        value="Full House"
+                        checked={rentedHouseType === "Full House"}
+                        onChange={handleRentedHouseTypeChange}
+                      />
+                      Full House
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        value="PG"
+                        checked={rentedHouseType === "PG"}
+                        onChange={handleRentedHouseTypeChange}
+                      />
+                      PG
+                    </label>
+                  </div>
+                  {rentedHouseType === "Full House" && (
+                    <div className="sharing-options">
+                      <label>
+                        <input
+                          type="checkbox"
+                          value="1 BHK"
+                          checked={sharingOption === "1 BHK"}
+                          onChange={handleSharingOptionChange}
+                        />
+                        1 BHK
+                      </label>
+                      <label>
+                        <input
+                          type="checkbox"
+                          value="2 BHK"
+                          checked={sharingOption === "2 BHK"}
+                          onChange={handleSharingOptionChange}
+                        />
+                        2 BHK
+                      </label>
+                      <label>
+                        <input
+                          type="checkbox"
+                          value="3 BHK"
+                          checked={sharingOption === "3 BHK"}
+                          onChange={handleSharingOptionChange}
+                        />
+                        3 BHK
+                      </label>
+                    </div>
+                  )}
+                  {rentedHouseType === "PG" && (
+                    <div className="pg-options">
+                      <div className="gender-options">
+                        <label>
+                          <input
+                            type="radio"
+                            value="Male"
+                            checked={gender === "Male"}
+                            onChange={handleGenderChange}
+                          />
+                          Male
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            value="Female"
+                            checked={gender === "Female"}
+                            onChange={handleGenderChange}
+                          />
+                          Female
+                        </label>
+                      </div>
+                      <div className="sharing-options">
+                        <label>
+                          <input
+                            type="checkbox"
+                            value="1 Sharing"
+                            checked={sharingOption === "1 Sharing"}
+                            onChange={handleSharingOptionChange}
+                          />
+                          1 Sharing
+                        </label>
+                        <label>
+                          <input
+                            type="checkbox"
+                            value="2 Sharing"
+                            checked={sharingOption === "2 Sharing"}
+                            onChange={handleSharingOptionChange}
+                          />
+                          2 Sharing
+                        </label>
+                        <label>
+                          <input
+                            type="checkbox"
+                            value="3 Sharing"
+                            checked={sharingOption === "3 Sharing"}
+                            onChange={handleSharingOptionChange}
+                          />
+                          3 Sharing
+                        </label>
+                        <label>
+                          <input
+                            type="checkbox"
+                            value="3+ Sharing"
+                            checked={sharingOption === "3+ Sharing"}
+                            onChange={handleSharingOptionChange}
+                          />
+                          3+ Sharing
+                        </label>
+                      </div>
+                    </div>
+                  )}
+                  <button onClick={handleSearch} className="search-button">
+                    Search
+                  </button>
+                </div>
+              )}
+            </div>
           </motion.div>
         </div>
         <div className="headsec_2" ref={quoteContainerRef}>
@@ -133,7 +349,6 @@ function Home() {
                 alt="Job Search"
                 className="jobSearchImage"
               />
-
               <motion.p
                 className="quote-p"
                 initial={{ opacity: 0, x: -100 }}
@@ -196,8 +411,8 @@ function Home() {
                 }}
                 transition={{ duration: 1.2, delay: 1.0 }}
               >
-                Applications: Submit applications promptly, diligently follow
-                up, and maintain a positive outlook.
+                Networking: Cultivate connections with peers and professionals
+                for guidance and opportunities.
               </motion.p>
             </div>
           </motion.div>
