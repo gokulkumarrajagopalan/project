@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Asset/Logo.png";
+// import Logotext from "../Asset/Logotext.png";
 import Button from "../Components/button";
 
 function NavBar() {
@@ -55,7 +56,12 @@ function NavBar() {
                 <Link className="logo-link" to="/">
                   <div className="logo-container">
                     <img src={Logo} alt="Code Garbages" className="img_Logo" />
-                    <h1 className="logo-text">GDEST.IN</h1>
+                    {/* <img
+                      src={Logotext}
+                      alt="Code Garbages"
+                      className="logo-text"
+                    /> */}
+                    {/* <h1 className="logo-text">GDEST.IN</h1> */}
                   </div>
                 </Link>
               </div>
@@ -84,7 +90,12 @@ function NavBar() {
                 <Link className="logo-link" to="/">
                   <div className="logo-container">
                     <img src={Logo} alt="Code Garbages" className="img_Logo" />
-                    <h1 className="logo-text">CODE GARBAGES</h1>
+                    {/* <h1 className="logo-text">CODE GARBAGES</h1> */}
+                    {/* <img
+                      src={Logotext}
+                      alt="Code Garbages"
+                      className="logo-text"
+                    /> */}
                   </div>
                 </Link>
               </div>
