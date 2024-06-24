@@ -3,13 +3,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: 60%;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.4);
   border-radius: 45px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: 45vh;
-  left: 10%;
+  left: 18%;
   position: relative;
 }
 
@@ -288,7 +288,7 @@ a {
 
 .headsec_1 {
   background: linear-gradient(rgb(255 254 254 / 72%), rgb(121 121 121 / 50%)),
-    url("../Asset/HomeImage2.jpg");
+    url("../Asset/img41.jpg");
   backdrop-filter: blur(5px);
   background-size: cover;
   position: relative;
@@ -944,16 +944,16 @@ a {
   .custom-button {
     margin: 5px 0;
     padding: 10px;
-    width: 100%;
+    width: 50%;
   }
 
   .textbox {
-    width: 100%;
-    max-width: 100%;
+    width: 80%;
+    max-width: 80%;
   }
 
   .search-button {
-    width: 100%;
+    width: 50%;
     padding: 10px;
   }
 }

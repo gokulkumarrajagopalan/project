@@ -152,12 +152,12 @@ function Home() {
                 >
                   Internship
                 </div>
-                <div
+                {/* <div
                   className={`custom-button ${activeButton === "Rented House" ? "active" : ""}`}
                   onClick={() => setActiveButton("Rented House")}
                 >
                   Rented House
-                </div>
+                </div> */}
               </div>
               {activeButton === "Job" && (
                 <div className="job-section">
@@ -165,14 +165,14 @@ function Home() {
                     type="text"
                     value={jobSearch}
                     onChange={handleJobSearch}
-                    placeholder="Enter job title or keyword"
+                    placeholder="Enter Job Title "
                     className="textbox"
                   />
                   <input
                     type="text"
                     value={location}
                     onChange={handleLocationChange}
-                    placeholder="Enter location"
+                    placeholder="Enter Location"
                     className="textbox"
                   />
                   <button onClick={handleSearch} className="search-button">
@@ -201,7 +201,7 @@ function Home() {
                   </button>
                 </div>
               )}
-              {activeButton === "Rented House" && (
+              {/* {activeButton === "Rented House" && (
                 <div className="rented-house-section">
                   <input
                     type="text"
@@ -327,7 +327,7 @@ function Home() {
                     Search
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
           </motion.div>
         </div>
