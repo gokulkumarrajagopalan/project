@@ -21,7 +21,8 @@ app.use(bodyParser.json());
 // Enable CORS
 const corsConfig = {
   //origin : ["http://localhost:3000"],
-  origin: ["https://gdest.in"],
+  origin: ["https://lw7j96-3000.csb.app"],
+ // origin: ["https://gdest.in"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
 };
