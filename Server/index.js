@@ -5,7 +5,7 @@ const jobPostRoutes = require("./Routes/jobPostRouts");
 const signInRoutes = require("./Routes/signInRoutes");
 const signOutRoutes = require("./Routes/signOutRoutes");
 const cors = require("cors");
-const MongoStore =require('connect-mongo');
+const MongoStore = require('connect-mongo');
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -21,7 +21,8 @@ app.use(bodyParser.json());
 // Enable CORS
 const corsConfig = {
   //origin : ["http://localhost:3000"],
-  origin: ["https://gdest.in"],
+  origin: ["https://lw7j96-3000.csb.app"],
+ // origin: ["https://gdest.in"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
 };
@@ -44,16 +45,16 @@ app.use(
     secret: process.env.SESSION_SECRET || "MySecureSessionKey$2024#",
     resave: false,
     saveUninitialized: false,
-    store:MongoStore.create({
-      mongoUrl:"mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
-      ttl:14*24*60*60,
+    store: MongoStore.create({
+      mongoUrl: "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+      ttl: 14 * 24 * 60 * 60,
       autoRemove: 'native',
     }),
     cookie: {
-      secure: process.env.NODE_ENV === 'production', 
+      secure: true, 
       httpOnly: true,
       maxAge: 3600 * 1000, 
-      sameSite: "lax", 
+      sameSite: "lax",
     },
   })
 );
