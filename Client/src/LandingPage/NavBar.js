@@ -74,10 +74,17 @@ function NavBar() {
                   </Link>
                 </div>
                 <div>
-                  <Button text="Sign In" onClick={handleSignIn} className="" />
+                  <label onClick={handleSignIn} className="">
+                    Sign In
+                  </label>
+                  {/* <Button text="Sign In" onClick={handleSignIn} className="" /> */}
                 </div>
                 <div>
-                  <Button text="Sign Up" onClick={handleSignUp} className="" />
+                  <label onClick={handleSignUp} className="">
+                    Sign Up
+                  </label>
+
+                  {/* <Button text="Sign Up" onClick={handleSignUp} className="" /> */}
                 </div>
               </div>
             </nav>

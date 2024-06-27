@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import JobCard from "./JobCard";
 import JobScreenNav from "./Navigation/JobScreenNav";
@@ -8,6 +9,7 @@ import Filter from "../Components/Filter";
 import API_URLS from "../config";
 import MobileNav from "./Navigation/MobileNav";
 import Notification from "../Components/notification";
+import Loader from "../Loader";
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
@@ -33,14 +35,21 @@ function JobPostScreen() {
   const [email, setEmail] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showSearch, setShowSearch] = useState(false);
+  const jobPostContainerRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+
+  const location = useLocation();
 
   useEffect(() => {
     const fetchJobData = async () => {
+      setLoading(true); // Start loading
       try {
         const response = await axios.get(API_URL);
         setJobData(response.data);
+        setLoading(false); // Stop loading
       } catch (error) {
         console.error("Error fetching job data:", error);
+        setLoading(false); // Stop loading on error
       }
     };
 
@@ -51,12 +60,13 @@ function JobPostScreen() {
     axios.defaults.withCredentials = true;
 
     const fetchSessionData = async () => {
+      setLoading(true);
       try {
         const res = await axios.get(API_URL_SESSION, {
           withCredentials: true,
         });
         const valid = res.data.valid;
-        const userEmail = res.data.email; // use userEmail to avoid shadowing
+        const userEmail = res.data.email;
 
         if (valid) {
           setEmail(userEmail);
@@ -64,8 +74,10 @@ function JobPostScreen() {
         } else {
           // Handle invalid session
         }
+        setLoading(false); // Stop loading
       } catch (err) {
         console.log(err);
+        setLoading(false); // Stop loading on error
       }
     };
 
@@ -92,6 +104,7 @@ function JobPostScreen() {
   const handleJobCardClick = (job) => {
     setSelectedJob(job);
     setShowSelectedJob(true);
+    document.body.classList.add("no-scroll"); // Prevent background scroll
   };
 
   const handleSearch = (searchValue) => {
@@ -187,6 +200,10 @@ function JobPostScreen() {
 
   const showJobContainer = !showUserDetails && !showNotification && !showFilter;
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <JobScreenNav
@@ -225,7 +242,7 @@ function JobPostScreen() {
         toggleUserDetails={toggleUserDetails}
         setShowSearch={setShowSearch}
       />
-      <div className="jobPostContainer">
+      <div className="jobPostContainer" ref={jobPostContainerRef}>
         Hi, {email}
         {showJobContainer && (
           <div className="jobcontainer">
@@ -236,15 +253,19 @@ function JobPostScreen() {
             ))}
           </div>
         )}
-        {showSelectedJob && (
-          <div className="Selectedjob">
-            <JobPostScreenSub
-              job={selectedJob}
-              onClose={() => setShowSelectedJob(false)}
-            />
-          </div>
-        )}
       </div>
+
+      {showSelectedJob && (
+        <div className="Selectedjob">
+          <JobPostScreenSub
+            job={selectedJob}
+            onClose={() => {
+              setShowSelectedJob(false);
+              document.body.classList.remove("no-scroll"); // Allow background scroll
+            }}
+          />
+        </div>
+      )}
     </>
   );
 }

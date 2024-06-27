@@ -1,15 +1,66 @@
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+  z-index: 1000; /* Ensures the loader is above other content */
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 1000ms ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  /* 25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  } */
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.cross-button {
+  align-self: flex-end; /* Align button to the end of the container */
+  margin-left: auto; /* Push the button to the right */
+  /* Additional styling */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
 .container1 {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 60%;
-  padding: 20px;
+
+  /* padding: 20px; */
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 45px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: 45vh;
-  left: 18%;
+  left: 20%;
   position: relative;
 }
 
@@ -287,7 +338,7 @@ a {
 } */
 
 .headsec_1 {
-  background: linear-gradient(rgb(255 254 254 / 72%), rgb(121 121 121 / 50%)),
+  background: linear-gradient(rgb(255 254 254 / 20%), rgb(121 121 121 / 30%)),
     url("../Asset/img41.jpg");
   backdrop-filter: blur(5px);
   background-size: cover;
@@ -485,12 +536,12 @@ a {
   background-color: rgb(255, 255, 255);
 }
 
-.Jobdescription {
+/* .Jobdescription {
   max-height: 300px;
   overflow-y: scroll;
   border: 1px solid #ccc;
   padding: 10px;
-}
+} */
 
 .Jobdescription::-webkit-scrollbar {
   width: 7px;
@@ -915,6 +966,9 @@ a {
 
 /* Media query for screen width 768px and below */
 @media (max-width: 768px) {
+  .no-scroll {
+    overflow: hidden;
+  }
   .container1 {
     padding: 15px;
   }
@@ -937,8 +991,13 @@ a {
 
 /* Media query for screen width 480px and below */
 @media (max-width: 480px) {
+  .no-scroll {
+    overflow: hidden;
+  }
   .container1 {
-    padding: 10px;
+    /* padding: 10px; */
+    width: 80%;
+    left: 5%;
   }
 
   .custom-button {

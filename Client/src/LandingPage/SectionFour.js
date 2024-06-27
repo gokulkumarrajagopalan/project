@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Cursor } from "react-simple-typewriter";
 import webDesignicon from "../Asset/webdesign.png";
 import webDevelopementicon from "../Asset/WebDevelopmenticon.png";
@@ -8,11 +8,43 @@ import maintenanceicon from "../Asset/maintenanceicon.png";
 import hostingicon from "../Asset/hostingicon.png";
 import supporticon from "../Asset/supporticon.png";
 import mobileappicon from "../Asset/mobileappicon.png";
+import { motion, useAnimation } from "framer-motion";
 
 function SectionFour() {
   const [index, setIndex] = useState(0);
   const [text, setText] = useState("");
-  const words = ["Websites"];
+  const quoteContainerRef = useRef(null);
+  const classbRef = useRef(null);
+  const quoteContainerControls = useAnimation();
+  const classbControls = useAnimation();
+
+  const words = ["Websites", "Carrier"];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (quoteContainerRef.current) {
+        const { top: quoteTop, bottom: quoteBottom } =
+          quoteContainerRef.current.getBoundingClientRect();
+        const quoteIsVisible =
+          quoteTop < window.innerHeight && quoteBottom >= 0;
+        quoteContainerControls.start(quoteIsVisible ? "show" : "hidden");
+      }
+
+      if (classbRef.current) {
+        const { top: classbTop, bottom: classbBottom } =
+          classbRef.current.getBoundingClientRect();
+        const classbIsVisible =
+          classbTop < window.innerHeight && classbBottom >= 0;
+        classbControls.start(classbIsVisible ? "show" : "hidden");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [quoteContainerControls, classbControls]);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -24,7 +56,7 @@ function SectionFour() {
       } else {
         setText((prevText) => prevText + words[index][prevText.length]);
       }
-    }, 250);
+    }, 280);
 
     return () => clearTimeout(timer);
   }, [index, text]);
@@ -57,23 +89,50 @@ function SectionFour() {
                 our websites and discover the possibilities today.
               </div>
 
-              <div className="skills-container">
-                <h2 className="title ">OUR SERVICES</h2>
+              <div className="skills-container" ref={quoteContainerRef}>
+                <h2 className="title">OUR SERVICES</h2>
 
                 <div className="technology-section">
                   <div className="skills-list">
-                    <div className="skill">
+                    <motion.div
+                      className="skill"
+                      initial={{ opacity: 0, x: -80 }}
+                      animate={quoteContainerControls}
+                      variants={{
+                        hidden: { opacity: 0, x: -80 },
+                        show: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                    >
                       <img src={webDesignicon} alt="Web Design" />
                       <span>Web Design</span>
-                    </div>
-                    <div className="skill">
+                    </motion.div>
+                    <motion.div
+                      className="skill"
+                      initial={{ opacity: 0, y: 80 }}
+                      animate={quoteContainerControls}
+                      variants={{
+                        hidden: { opacity: 0, y: 80 },
+                        show: { opacity: 1, y: 0 },
+                      }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
                       <img src={SEOicon} alt="SEO Optimization" />
                       <span>SEO Optimization</span>
-                    </div>
-                    <div className="skill">
+                    </motion.div>
+                    <motion.div
+                      className="skill"
+                      initial={{ opacity: 0, x: 80 }}
+                      animate={quoteContainerControls}
+                      variants={{
+                        hidden: { opacity: 0, x: 80 },
+                        show: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
+                    >
                       <img src={ecommerceicon} alt="E-Commerce" />
                       <span>E-Commerce</span>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
 
@@ -81,36 +140,81 @@ function SectionFour() {
                 <div className="technology-section">
                   <h3>Development</h3>
                   <div className="skills-list">
-                    <div className="skill">
+                    <motion.div
+                      className="skill"
+                      initial={{ opacity: 0, x: 80 }}
+                      animate={quoteContainerControls}
+                      variants={{
+                        hidden: { opacity: 0, x: 80 },
+                        show: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ duration: 0.5, delay: 0.4 }}
+                    >
                       <img
                         src={webDevelopementicon}
                         alt="Website Development"
                       />
                       <span>Website Development</span>
-                    </div>
-                    <div className="skill">
+                    </motion.div>
+                    <motion.div
+                      className="skill"
+                      initial={{ opacity: 0, x: -80 }}
+                      animate={quoteContainerControls}
+                      variants={{
+                        hidden: { opacity: 0, x: -80 },
+                        show: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >
                       <img src={mobileappicon} alt="Mobile App" />
                       <span>Mobile App Development</span>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
 
                 {/* Backend/Frameworks Section */}
-                <div className="technology-section">
+                <div className="technology-section" ref={classbRef}>
                   <h3>Back-end Support</h3>
                   <div className="skills-list">
-                    <div className="skill">
+                    <motion.div
+                      className="skill"
+                      initial={{ opacity: 0, x: 80 }}
+                      animate={classbControls}
+                      variants={{
+                        hidden: { opacity: 0, x: 80 },
+                        show: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ duration: 0.5, delay: 0.6 }}
+                    >
                       <img src={supporticon} alt="Support" />
                       <span>24*7 Free Support</span>
-                    </div>
-                    <div className="skill">
+                    </motion.div>
+                    <motion.div
+                      className="skill"
+                      initial={{ opacity: 0, y: -80 }}
+                      animate={classbControls}
+                      variants={{
+                        hidden: { opacity: 0, y: -80 },
+                        show: { opacity: 1, y: 0 },
+                      }}
+                      transition={{ duration: 0.5, delay: 0.7 }}
+                    >
                       <img src={maintenanceicon} alt="Maintanance" />
                       <span>Maintanance</span>
-                    </div>
-                    <div className="skill">
+                    </motion.div>
+                    <motion.div
+                      className="skill"
+                      initial={{ opacity: 0, x: -80 }}
+                      animate={classbControls}
+                      variants={{
+                        hidden: { opacity: 0, x: -80 },
+                        show: { opacity: 1, x: 0 },
+                      }}
+                      transition={{ duration: 0.5, delay: 0.8 }}
+                    >
                       <img src={hostingicon} alt="Hosting" />
                       <span>Hosting</span>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
