@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Asset/Logo.png";
-// import Logotext from "../Asset/Logotext.png";
+import Logotext from "../Asset/LOgoGdest.jpg";
 import Button from "../Components/button";
 
 function NavBar() {
@@ -56,11 +56,7 @@ function NavBar() {
                 <Link className="logo-link" to="/">
                   <div className="logo-container">
                     <img src={Logo} alt="Code Garbages" className="img_Logo" />
-                    {/* <img
-                      src={Logotext}
-                      alt="Code Garbages"
-                      className="logo-text"
-                    /> */}
+                    <img src={Logotext} alt="GDEST.in" className="logo-text" />
                     {/* <h1 className="logo-text">GDEST.IN</h1> */}
                   </div>
                 </Link>
@@ -69,18 +65,22 @@ function NavBar() {
             <nav>
               <div className={`MobileNavList ${isMenuOpen ? "Open" : ""}`}>
                 <div>
-                  <Link to="/LearningDefault" onClick={toggleMobileMenu}>
+                  <Link
+                    to="/LearningDefault"
+                    onClick={toggleMobileMenu}
+                    className="learninglabel"
+                  >
                     Learning
                   </Link>
                 </div>
                 <div>
-                  <label onClick={handleSignIn} className="">
+                  <label onClick={handleSignIn} className="Signinlabel">
                     Sign In
                   </label>
                   {/* <Button text="Sign In" onClick={handleSignIn} className="" /> */}
                 </div>
                 <div>
-                  <label onClick={handleSignUp} className="">
+                  <label onClick={handleSignUp} className="Signuplabel">
                     Sign Up
                   </label>
 
@@ -98,11 +98,7 @@ function NavBar() {
                   <div className="logo-container">
                     <img src={Logo} alt="Code Garbages" className="img_Logo" />
                     {/* <h1 className="logo-text">CODE GARBAGES</h1> */}
-                    {/* <img
-                      src={Logotext}
-                      alt="Code Garbages"
-                      className="logo-text"
-                    /> */}
+                    <img src={Logotext} alt="Gdest.in" className="logo-text" />
                   </div>
                 </Link>
               </div>

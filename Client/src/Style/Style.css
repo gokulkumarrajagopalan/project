@@ -38,16 +38,9 @@
   }
 }
 
-.cross-button {
-  align-self: flex-end; /* Align button to the end of the container */
-  margin-left: auto; /* Push the button to the right */
-  /* Additional styling */
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #333;
-}
+/* .cross-button {
+  display: none;
+} */
 .container1 {
   display: flex;
   flex-direction: column;
@@ -386,12 +379,14 @@ a {
   width: 40px;
   height: 40px;
   margin-left: 10px;
+  top: 7px;
+  position: relative;
 }
 
 .logo-text {
-  margin-left: 0px;
-  font-size: 1.7rem;
-  color: var(--btn-clr);
+  width: 130px;
+  top: 7px;
+  position: relative;
 }
 
 .nav_Link_home {
@@ -525,7 +520,7 @@ a {
   right: 0;
   bottom: 0;
   width: 47%;
-  background-color: #ffffff;
+  background-color: #f3f3f3;
 }
 
 .jobCard {
@@ -907,6 +902,16 @@ a {
 }
 
 @media (max-width: 480px) {
+  .img_Logo {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    top: 3px;
+  }
+  .logo-text {
+    width: 130px;
+    top: 3px;
+  }
   .textgrade1 {
     font-size: 10px;
     font-weight: bolder;
@@ -966,6 +971,18 @@ a {
 
 /* Media query for screen width 768px and below */
 @media (max-width: 768px) {
+  .crossbutton {
+    align-self: flex-end; /* Align button to the end of the container */
+    margin-left: auto; /* Push the button to the right */
+    /* Additional styling */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    left: 90%;
+    color: #333;
+  }
   .no-scroll {
     overflow: hidden;
   }
@@ -991,6 +1008,19 @@ a {
 
 /* Media query for screen width 480px and below */
 @media (max-width: 480px) {
+  .crossbutton {
+    align-self: flex-end; /* Align button to the end of the container */
+    margin-left: auto; /* Push the button to the right */
+    /* Additional styling */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    left: 90%;
+    color: #333;
+  }
+
   .no-scroll {
     overflow: hidden;
   }
@@ -1015,4 +1045,13 @@ a {
     width: 50%;
     padding: 10px;
   }
+}
+.Signinlabel {
+  color: black;
+}
+.Signuplabel {
+  color: black;
+}
+.learninglabel {
+  display: none;
 }

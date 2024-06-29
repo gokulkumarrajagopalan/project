@@ -62,9 +62,7 @@ function JobPostScreen() {
     const fetchSessionData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(API_URL_SESSION, {
-          withCredentials: true,
-        });
+        const res = await axios.get(API_URL_SESSION, {});
         const valid = res.data.valid;
         const userEmail = res.data.email;
 
@@ -72,12 +70,11 @@ function JobPostScreen() {
           setEmail(userEmail);
           console.log("email", userEmail);
         } else {
-          // Handle invalid session
         }
-        setLoading(false); // Stop loading
+        setLoading(false);
       } catch (err) {
         console.log(err);
-        setLoading(false); // Stop loading on error
+        setLoading(false);
       }
     };
 
@@ -261,7 +258,7 @@ function JobPostScreen() {
             job={selectedJob}
             onClose={() => {
               setShowSelectedJob(false);
-              document.body.classList.remove("no-scroll"); // Allow background scroll
+              document.body.classList.remove("no-scroll");
             }}
           />
         </div>

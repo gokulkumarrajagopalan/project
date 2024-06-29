@@ -35,7 +35,7 @@ function JobPostScreenSub({ job, onClose }) {
 
   return (
     <div>
-      <button onClick={onClose} className="cross-button">
+      <button onClick={onClose} className="crossbutton">
         x
       </button>
       <h2>Job Details</h2>
