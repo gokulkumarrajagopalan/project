@@ -240,7 +240,6 @@ function JobPostScreen() {
         setShowSearch={setShowSearch}
       />
       <div className="jobPostContainer" ref={jobPostContainerRef}>
-        Hi, {email}
         {showJobContainer && (
           <div className="jobcontainer">
             {filteredJobs.map((job) => (
