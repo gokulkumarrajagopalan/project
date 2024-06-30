@@ -34,7 +34,7 @@ app.use(
       autoRemove: "native",
     }),
     cookie: {
-      secure: true,
+      secure: false,
       httpOnly: false,
       maxAge: 3600 * 1000,
       sameSite: "lax",
