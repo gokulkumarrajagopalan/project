@@ -39,6 +39,7 @@ app.use(cookieParser());
 //app.use(bodyParser.json());
 
 // Session middleware
+
 app.use(
   session({
     name: "mySessionCookie",
@@ -46,18 +47,17 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+      mongoUrl: "mongodb+srv://<username>:<password>@cluster-name.mongodb.net/CodeGarbagesServer",
       ttl: 14 * 24 * 60 * 60,
       autoRemove: "native",
     }),
     cookie: {
-      secure: true,
+      secure: process.env.NODE_ENV === 'production', 
       httpOnly: true,
       maxAge: 3600 * 1000,
       sameSite: "lax",
     },
-  }),
+  })
 );
 
 // Routes
