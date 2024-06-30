@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../Asset/Logo.png";
 import Logotext from "../Asset/LOgoGdest.jpg";
 import Button from "../Components/button";
+import Job from "../Asset/job.png";
 
 function NavBar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -14,6 +15,10 @@ function NavBar() {
 
   const handleSignUp = () => {
     window.location.href = "/SignUp";
+  };
+
+  const handleJobspostcreen = () => {
+    window.location.href = "/jobPostScreen";
   };
 
   const toggleMobileMenu = () => {
@@ -104,10 +109,22 @@ function NavBar() {
               </div>
               <div className="TopRightItems">
                 <div>
-                  <Link to="/LearningDefault" onClick={toggleMobileMenu}>
+                  <img
+                    src={Job}
+                    alt="Job"
+                    className="labellearn"
+                    onClick={handleJobspostcreen}
+                  />
+                </div>
+                {/* <div>
+                  <Link
+                    to="/LearningDefault"
+                    onClick={toggleMobileMenu}
+                    className="labellearn"
+                  >
                     Learning
                   </Link>
-                </div>
+                </div> */}
                 <div>
                   <Button
                     text="Sign In"

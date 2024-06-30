@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import JobCard from "./JobCard";
 import JobScreenNav from "./Navigation/JobScreenNav";
@@ -39,6 +39,7 @@ function JobPostScreen() {
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchJobData = async () => {
@@ -70,6 +71,7 @@ function JobPostScreen() {
           setEmail(userEmail);
           console.log("email", userEmail);
         } else {
+          // navigate("/login"); // Redirect to login if session is not valid
         }
         setLoading(false);
       } catch (err) {
@@ -79,7 +81,7 @@ function JobPostScreen() {
     };
 
     fetchSessionData();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -196,6 +198,12 @@ function JobPostScreen() {
   });
 
   const showJobContainer = !showUserDetails && !showNotification && !showFilter;
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove("no-scroll"); // Cleanup: remove the no-scroll class when the component unmounts
+    };
+  }, []);
 
   if (loading) {
     return <Loader />;
