@@ -47,7 +47,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: "mongodb+srv://<username>:<password>@cluster-name.mongodb.net/CodeGarbagesServer",
+      "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
       ttl: 14 * 24 * 60 * 60,
       autoRemove: "native",
     }),
