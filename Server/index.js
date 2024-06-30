@@ -47,12 +47,12 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+     "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
       ttl: 14 * 24 * 60 * 60,
       autoRemove: "native",
     }),
     cookie: {
-      secure: process.env.NODE_ENV === 'production', 
+      secure: true, 
       httpOnly: true,
       maxAge: 3600 * 1000,
       sameSite: "lax",
