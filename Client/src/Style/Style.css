@@ -198,7 +198,7 @@ section {
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
-  margin-top: 50px;
+  margin-top: 90px;
   border-radius: 10px;
 }
 .Header_signup {
@@ -405,6 +405,9 @@ a {
   color: white;
   border: 2px solid white;
   padding: 0.5rem 1rem;
+  position: relative;
+  top: 8px;
+  cursor: pointer;
 }
 
 .signUp_btn {
@@ -415,6 +418,15 @@ a {
   border: 2px solid white;
   padding: 0.5rem 0.5rem;
   margin-right: 1rem;
+  position: relative;
+  top: 8px;
+  cursor: pointer;
+}
+.labellearn {
+  width: 30px;
+  position: relative;
+  top: 8px;
+  cursor: pointer;
 }
 
 .navbar_home {
