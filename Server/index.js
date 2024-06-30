@@ -14,29 +14,12 @@ const app = express();
 // Connect to the database
 connectToDatabase();
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-app.use(bodyParser.json());
-
-// Enable CORS
-const corsConfig = {
-  //origin : ["http://localhost:3000"],
-  // origin: ["https://lw7j96-3000.csb.app"],
-  origin: ["https://gdest.in"],
-  methods: ["POST", "GET", "PUT", "DELETE"],
-  credentials: true,
-};
-
-app.use(cors(corsConfig));
-
-// Handle preflight requests
-app.options("*", cors(corsConfig));
-
 // Middleware for parsing cookies
 app.use(cookieParser());
 
-// JSON parser
-//app.use(bodyParser.json());
+// Middleware to parse JSON bodies
+app.use(express.json());
+app.use(bodyParser.json());
 
 // Session middleware
 app.use(
@@ -45,20 +28,31 @@ app.use(
     secret: "MySecureSessionKey$2024#",
     resave: false,
     saveUninitialized: false,
-    // store: MongoStore.create({
-    //   mongoUrl:
-    //     "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
-    //   ttl: 14 * 24 * 60 * 60,
-    //   autoRemove: "native",
-    // }),
+    store: MongoStore.create({
+      mongoUrl: "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+      ttl: 14 * 24 * 60 * 60,
+      autoRemove: "native",
+    }),
     cookie: {
       secure: true,
       httpOnly: true,
       maxAge: 3600 * 1000,
       sameSite: "lax",
     },
-  }),
+  })
 );
+
+// Enable CORS
+const corsConfig = {
+  origin: ["https://gdest.in"], // Replace with your production client URL
+  methods: ["POST", "GET", "PUT", "DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
+
+// Handle preflight requests
+app.options("*", cors(corsConfig));
 
 // Routes
 app.use("/users", userRoutes);
@@ -69,5 +63,5 @@ app.use("/signOut", signOutRoutes);
 // Start the server
 const PORT = process.env.PORT || 3700;
 app.listen(PORT, () => {
-  console.log(Server is running on port ${PORT});
+  console.log(`Server is running on port ${PORT}`);
 });
