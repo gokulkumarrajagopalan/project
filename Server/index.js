@@ -39,25 +39,25 @@ app.use(cookieParser());
 //app.use(bodyParser.json());
 
 // Session middleware
-
 app.use(
   session({
-    name: "mySessionCookie",
-    secret: process.env.SESSION_SECRET || "MySecureSessionKey$2024#",
+    name: "GdestCookies",
+    secret: "MySecureSessionKey$2024#",
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-     "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
-      ttl: 14 * 24 * 60 * 60,
-      autoRemove: "native",
-    }),
+    // store: MongoStore.create({
+    //   mongoUrl:
+    //     "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+    //   ttl: 14 * 24 * 60 * 60,
+    //   autoRemove: "native",
+    // }),
     cookie: {
-      secure: true, 
+      secure: true,
       httpOnly: true,
       maxAge: 3600 * 1000,
       sameSite: "lax",
     },
-  })
+  }),
 );
 
 // Routes
@@ -69,5 +69,5 @@ app.use("/signOut", signOutRoutes);
 // Start the server
 const PORT = process.env.PORT || 3700;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(Server is running on port ${PORT});
 });
