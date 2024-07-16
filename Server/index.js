@@ -4,6 +4,7 @@ const userRoutes = require("./Routes/userRoutes");
 const jobPostRoutes = require("./Routes/jobPostRouts");
 const signInRoutes = require("./Routes/signInRoutes");
 const signOutRoutes = require("./Routes/signOutRoutes");
+const documentRoutes = require("./Routes/documentRoutes");
 const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const session = require("express-session");
@@ -42,23 +43,42 @@ app.use(
   })
 );
 
-// Enable CORS
-const corsConfig = {
-  origin: ["https://gdest.in"], // Replace with your production client URL
+// CORS configuration
+const corsOptions = {
+  origin: "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev", // Replace with your frontend URL
   methods: ["POST", "GET", "PUT", "DELETE"],
-  credentials: true,
+  credentials: true, // Allow cookies and authorization headers
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-app.use(cors(corsConfig));
+// Enable CORS for all routes
+app.use(cors(corsOptions));
 
 // Handle preflight requests
-app.options("*", cors(corsConfig));
+app.options("*", cors(corsOptions));
+
+// Middleware to add CORS headers to every response
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
+});
 
 // Routes
 app.use("/users", userRoutes);
 app.use("/signIn", signInRoutes);
 app.use("/addJobPost", jobPostRoutes);
 app.use("/signOut", signOutRoutes);
+app.use('/documents', documentRoutes); 
+
+// Error handling middleware
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 // Start the server
 const PORT = process.env.PORT || 3700;
