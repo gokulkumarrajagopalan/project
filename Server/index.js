@@ -45,7 +45,8 @@ app.use(
 
 // CORS configuration
 const corsOptions = {
-  origin: "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev", // Replace with your frontend URL
+  //origin: "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev", // Replace with your frontend URL
+  origin:"https://gdest.in/",
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true, // Allow cookies and authorization headers
   allowedHeaders: ["Content-Type", "Authorization"],
