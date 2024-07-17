@@ -96,7 +96,7 @@ function Home() {
         />
         <meta
           name="keywords"
-          content="GDest.In,GDest,gdest job search, careers, employment, job opportunities, home"
+          content="GDest.In,GDest,gdest job search, careers, employment, job opportunities, home,LinkedIn,Naukri,freshersworld,indeed,fiver,workday,"
         />
         <meta property="og:title" content="Home - dest.In" />
         <meta
