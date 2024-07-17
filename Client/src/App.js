@@ -24,8 +24,7 @@ import RadixSort from "./Learning/DSA/RadixSort";
 import CountingSort from "./Learning/DSA/CountingSort";
 import {StateContext} from "./context";
 import NotAuthorize from "./Components/NotAuthorize" ;
-
-
+import ViewJobs from "./JobPost/ViewJobs";
 
 
 function App() {
@@ -37,6 +36,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Signup" element={<SignUp />} />
             <Route path="/JobPostScreen" element={<JobPostScreen />} />
+            <Route path="/ViewJobs" element={<ViewJobs />} />
+            <Route path="/ViewJobs/:jobid" element={<ViewJobs />} />
             <Route path="/JobpostDetail" element={<JobPostDetail />} />
             <Route path="/SignIn" element={<SignIn />} />
             <Route path="/DSAHome" element={<DSAHome />} />

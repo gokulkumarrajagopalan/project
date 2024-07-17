@@ -88,7 +88,10 @@ function SectionFour() {
                 collaborate and elevate your online presence together. Explore
                 our websites and discover the possibilities today.
               </div>
-
+            </div>
+            </div>
+          </div>
+          </div>
               <div className="skills-container" ref={quoteContainerRef}>
                 <h2 className="title">OUR SERVICES</h2>
 
@@ -224,10 +227,9 @@ function SectionFour() {
                   Build a Website
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+           
+        
+      
 
       <div className="bold-line sec4"></div>
     </div>

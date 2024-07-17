@@ -1,6 +1,6 @@
 import React from "react";
 
-function JobPostScreenSub({ job, onClose }) {
+function JobPostScreenSub({ job, onClose, onShare }) {
   if (!job) {
     return <div>Select a job to view details.</div>;
   }
@@ -41,10 +41,11 @@ function JobPostScreenSub({ job, onClose }) {
       <h2>Job Details</h2>
       <p>Role: {role}</p>
       <p>Company: {companyName}</p>
-      <p>Salary: {salary} </p>
-      <p>Experience: {experience} </p>
+      <p>Salary: {salary}</p>
+      <p>Experience: {experience}</p>
       <p>Skills: {skills}</p>
       <button onClick={handleApplyJob}>Apply Job</button>
+      <button onClick={() => onShare(jobID)}>Share Job</button>
       <button>Save</button>
       <div className="Jobdescription">
         <h3>Description</h3>

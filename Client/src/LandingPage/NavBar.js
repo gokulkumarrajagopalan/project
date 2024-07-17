@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Asset/Logo.png";
-import Logotext from "../Asset/LOgoGdest.jpg";
+import Logotext from "../Asset/LOgoGdest.png";
 import Button from "../Components/button";
 import Job from "../Asset/job.png";
 

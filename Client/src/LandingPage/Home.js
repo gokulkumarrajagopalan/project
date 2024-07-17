@@ -208,7 +208,7 @@ function Home() {
               hidden: { opacity: 0, x: -100 },
               show: { opacity: 1, x: 0 },
             }}
-            transition={{ duration: 1.2, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             <div className="quoteText">
               <h3> Steps for Effective Job Pursuit </h3>
@@ -225,7 +225,7 @@ function Home() {
                   hidden: { opacity: 0, x: -100 },
                   show: { opacity: 1, x: 0 },
                 }}
-                transition={{ duration: 1.2, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
                 Thoroughly analyze your skills, interests, and values to align
                 with ideal job prospects.
@@ -238,7 +238,7 @@ function Home() {
                   hidden: { opacity: 0, x: -100 },
                   show: { opacity: 1, x: 0 },
                 }}
-                transition={{ duration: 1.2, delay: 0.4 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
                 Create a compelling CV, accentuating accomplishments, and
                 qualifications for prospective employers.
@@ -251,7 +251,7 @@ function Home() {
                   hidden: { opacity: 0, x: -100 },
                   show: { opacity: 1, x: 0 },
                 }}
-                transition={{ duration: 1.2, delay: 0.6 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
                 Explore our extensive databases showcasing premier job openings
                 across diverse industries.
@@ -264,7 +264,7 @@ function Home() {
                   hidden: { opacity: 0, x: -100 },
                   show: { opacity: 1, x: 0 },
                 }}
-                transition={{ duration: 1.2, delay: 0.8 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
                 Research: Gain insights into targeted organizations, including
                 their culture and potential roles.

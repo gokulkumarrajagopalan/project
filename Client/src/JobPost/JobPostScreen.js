@@ -9,7 +9,6 @@ import Filter from "../Components/Filter";
 import API_URLS from "../config";
 import MobileNav from "./Navigation/MobileNav";
 import Notification from "../Components/notification";
-import Loader from "../Loader";
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
@@ -43,14 +42,14 @@ function JobPostScreen() {
 
   useEffect(() => {
     const fetchJobData = async () => {
-      setLoading(true); // Start loading
+      setLoading(true); 
       try {
         const response = await axios.get(API_URL);
         setJobData(response.data);
-        setLoading(false); // Stop loading
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching job data:", error);
-        setLoading(false); // Stop loading on error
+        setLoading(false); 
       }
     };
 
@@ -71,7 +70,7 @@ function JobPostScreen() {
           setEmail(userEmail);
           console.log("email", userEmail);
         } else {
-          // navigate("/login"); // Redirect to login if session is not valid
+        
         }
         setLoading(false);
       } catch (err) {
@@ -100,15 +99,44 @@ function JobPostScreen() {
     };
   }, []);
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const jobID = queryParams.get("jobid");
+
+    if (jobID && jobData.length > 0) {
+      const selectedJob = jobData.find((job) => job.jobID === jobID);
+      
+      if (selectedJob) {
+        setSelectedJob(selectedJob);
+        setShowSelectedJob(true);
+        document.body.classList.add("no-scroll"); // Prevent background scroll
+      } else {
+        // Fetch job details if not present in the current jobData
+        const fetchJobDetails = async () => {
+          try {
+            const response = await axios.get(`${API_URLS[ENV]}/addJobPost/${jobID}`);
+            setSelectedJob(response.data);
+            setShowSelectedJob(true);
+            document.body.classList.add("no-scroll");
+          } catch (error) {
+            console.error("Error fetching job details:", error);
+          }
+        };
+        fetchJobDetails();
+      }
+    }
+  }, [location.search, jobData]);
+
   const handleJobCardClick = (job) => {
     setSelectedJob(job);
     setShowSelectedJob(true);
-    document.body.classList.add("no-scroll"); // Prevent background scroll
+    navigate(`/jobPostScreen?jobid=${job.jobID}`);
+    document.body.classList.add("no-scroll"); 
   };
 
   const handleSearch = (searchValue) => {
     setSearchQuery(searchValue);
-  };
+};
 
   const handleFilter = (
     location,
@@ -118,7 +146,7 @@ function JobPostScreen() {
     workMode,
     experience,
     employmentType,
-    salary,
+    salary
   ) => {
     setSearchLocation(location);
     setSkills(skills);
@@ -146,6 +174,7 @@ function JobPostScreen() {
   const handleLogout = async () => {
     try {
       await axios.get(API_URL_SIGNOUT);
+      navigate("/SignIn"); 
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -159,23 +188,30 @@ function JobPostScreen() {
 
   const handleSettings = () => {};
 
+  const handleShareJob = (jobID) => {
+    const shareLink = `${window.location.origin}/viewjobs/${jobID}`;
+    navigator.clipboard.writeText(shareLink)
+     .then(() => alert("Job link copied to clipboard!"))
+     .catch(err => console.error("Error copying job link:", err));
+  };
+
   const filteredJobs = jobData.filter((job) => {
     const postedDate = new Date(job.Posted_Date);
     const currentDate = new Date();
     const differenceInDays = Math.floor(
-      (currentDate - postedDate) / (1000 * 60 * 60 * 24),
+      (currentDate - postedDate) / (1000 * 60 * 60 * 24)
     );
 
     return (
       job.role.toLowerCase().includes(searchQuery.toLowerCase()) &&
       (searchLocation
-        ? job.location.toLowerCase().includes(searchLocation.toLowerCase())
+       ? job.location.toLowerCase().includes(searchLocation.toLowerCase())
         : true) &&
       (skills
-        ? job.skills.toLowerCase().includes(skills.toLowerCase())
+       ? job.skills.toLowerCase().includes(skills.toLowerCase())
         : true) &&
       (company
-        ? job.companyName.toLowerCase().includes(company.toLowerCase())
+       ? job.companyName.toLowerCase().includes(company.toLowerCase())
         : true) &&
       (!workMode ||
         workMode.length === 0 ||
@@ -183,13 +219,13 @@ function JobPostScreen() {
       (!employmentType ||
         employmentType.length === 0 ||
         employmentType.some(
-          (type) => job.employmentType && job.employmentType.includes(type),
+          (type) => job.employmentType && job.employmentType.includes(type)
         )) &&
       (experience
-        ? job.experience.toLowerCase().includes(experience.toLowerCase())
+       ? job.experience.toLowerCase().includes(experience.toLowerCase())
         : true) &&
       (salary
-        ? job.salary.toLowerCase().includes(salary.toLowerCase())
+       ? job.salary.toLowerCase().includes(salary.toLowerCase())
         : true) &&
       (sort === "" ||
         parseInt(sort) === 0 ||
@@ -197,17 +233,9 @@ function JobPostScreen() {
     );
   });
 
-  const showJobContainer = !showUserDetails && !showNotification && !showFilter;
+  const showJobContainer =!showUserDetails &&!showNotification &&!showFilter;
 
-  useEffect(() => {
-    return () => {
-      document.body.classList.remove("no-scroll"); // Cleanup: remove the no-scroll class when the component unmounts
-    };
-  }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <>
@@ -259,14 +287,16 @@ function JobPostScreen() {
         )}
       </div>
 
-      {showSelectedJob && (
+      {showSelectedJob && selectedJob && (
         <div className="Selectedjob">
           <JobPostScreenSub
             job={selectedJob}
             onClose={() => {
               setShowSelectedJob(false);
               document.body.classList.remove("no-scroll");
+              navigate("/jobPostScreen");
             }}
+            onShare={handleShareJob}
           />
         </div>
       )}
