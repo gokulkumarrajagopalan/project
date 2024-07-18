@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Shared/Footer";
-import Button from "../Components/button";
 import SectionFour from "./SectionFour";
 import NavBar from "./NavBar";
 import JobSearchImg from "../Asset/jobsearchimg.jpg";
@@ -96,9 +95,9 @@ function Home() {
         />
         <meta
           name="keywords"
-          content="GDest.In,GDest,gdest job search, careers, employment, job opportunities, home"
+          content="GDest.In,GDest,gdest job search, careers, employment, job opportunities, home,LinkedIn,Naukri,freshersworld,indeed,fiver,workday,"
         />
-        <meta property="og:title" content="Home - dest.In" />
+        <meta property="og:title" content="Home - GDest.In" />
         <meta
           property="og:description"
           content="Welcome to GDest.In, your go-to platform for job searches and career opportunities. Explore our listings and find your dream job today."
@@ -107,7 +106,7 @@ function Home() {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://www.dest.in/Asset/Logo.jpg"
+          content="https://www.gdest.in/Asset/Logo.jpg"
         />
         <link rel="canonical" href="https://www.gdest.in/" />
       </Helmet>
