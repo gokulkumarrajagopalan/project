@@ -12,17 +12,13 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const app = express();
 
-// Connect to the database
 connectToDatabase();
 
-// Middleware for parsing cookies
 app.use(cookieParser());
 
-// Middleware to parse JSON bodies
 app.use(express.json());
 app.use(bodyParser.json());
 
-// Session middleware
 app.use(
   session({
     name: "GdestCookies",
@@ -43,23 +39,17 @@ app.use(
   })
 );
 
-// CORS configuration
-const corsOptions = {
-  //origin: "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev", // Replace with your frontend URL
-  origin:"https://gdest.in/",
+const corsConfig = {
+  origin: ["https://gdest.in"],
   methods: ["POST", "GET", "PUT", "DELETE"],
-  credentials: true, // Allow cookies and authorization headers
-  allowedHeaders: ["Content-Type", "Authorization"],
-  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
 };
 
-// Enable CORS for all routes
-app.use(cors(corsOptions));
+app.use(cors(corsConfig));
 
-// Handle preflight requests
-app.options("*", cors(corsOptions));
+app.options("*", cors(corsConfig));
 
-// Middleware to add CORS headers to every response
+
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev");
   res.header("Access-Control-Allow-Credentials", "true");
@@ -68,20 +58,17 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
 app.use("/users", userRoutes);
 app.use("/signIn", signInRoutes);
 app.use("/addJobPost", jobPostRoutes);
 app.use("/signOut", signOutRoutes);
 app.use('/documents', documentRoutes); 
 
-// Error handling middleware
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 
-// Start the server
 const PORT = process.env.PORT || 3700;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
