@@ -50,14 +50,6 @@ app.use(cors(corsConfig));
 app.options("*", cors(corsConfig));
 
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
-
 app.use("/users", userRoutes);
 app.use("/signIn", signInRoutes);
 app.use("/addJobPost", jobPostRoutes);
