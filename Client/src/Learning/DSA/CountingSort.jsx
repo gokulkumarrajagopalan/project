@@ -1,14 +1,26 @@
-import React from 'react';
-import ButtonGroup from "../buttonGroup";
+import React, { useState } from 'react';
+import Textbox from "../../Components/Textbox";
 
+function CountingSort() {
+  const [inputValue, setInputValue] = useState('');
 
-function CountingSort(){
-    return(
-        <div className="CountingSort-container">
-            <h2>Counting Sort</h2>
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
-        </div>
-    );
+  return (
+    <div className="CountingSort-container">
+      <h2>Counting Sort</h2>
+      <Textbox
+        label="Enter a programming language:"
+        value={inputValue}
+        onChange={handleInputChange}
+        placeholder="Type here..."
+        style={{ width: '300px', padding: '10px', margin: '10px 0' }}
+        className="textbox"
+      />
+    </div>
+  );
 }
 
 export default CountingSort;

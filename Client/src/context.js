@@ -11,6 +11,7 @@ const StateContext = ({ children }) => {
   const [userType, setUserType] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true); 
+  const [userId, setUserId] = useState('');
 
 useEffect(() => {
     axios.defaults.withCredentials = true;
@@ -18,17 +19,18 @@ useEffect(() => {
     const fetchSessionData = async () => {
       try {
         const res = await axios.get(API_URL_SESSION, {
-          withCredentials: true, // Ensure this is within the config object
+          withCredentials: true, 
         });
-
+        const userId = res.data.userid;
         const valid = res.data.valid;
         const userType = res.data.TypeOfUser;
 
         setUserType(userType);
+        setUserId(userId);
         setIsValid(valid);
         setIsLoading(false);
-        console.log("isValid", valid);
-        console.log("userType", userType);
+        //console.log("isValid", valid);
+        //console.log("userType", userType);
       } catch (error) {
         console.log(error);
         setIsLoading(false);

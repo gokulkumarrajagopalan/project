@@ -188,6 +188,10 @@ function JobPostScreen() {
 
   const handleSettings = () => {};
 
+  const handleProfile= () =>{
+    navigate("/Profile"); 
+  };
+
   const handleShareJob = (jobID) => {
     const shareLink = `${window.location.origin}/viewjobs/${jobID}`;
     navigator.clipboard.writeText(shareLink)
@@ -260,6 +264,7 @@ function JobPostScreen() {
           onToggleUserDetails={toggleUserDetails}
           onLogout={handleLogout}
           onSettings={handleSettings}
+          onProfile={handleProfile}
         />
       )}
       {showFilter && (

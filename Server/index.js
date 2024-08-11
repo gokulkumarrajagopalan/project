@@ -5,12 +5,15 @@ const jobPostRoutes = require("./Routes/jobPostRouts");
 const signInRoutes = require("./Routes/signInRoutes");
 const signOutRoutes = require("./Routes/signOutRoutes");
 const documentRoutes = require("./Routes/documentRoutes");
+const addProfile = require("./Routes/ProfileRoutes");
 const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+
 const app = express();
+
 
 connectToDatabase();
 
@@ -40,6 +43,7 @@ app.use(
 );
 
 const corsConfig = {
+  //origin: ["https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev"],
   origin: ["https://gdest.in"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
@@ -54,7 +58,8 @@ app.use("/users", userRoutes);
 app.use("/signIn", signInRoutes);
 app.use("/addJobPost", jobPostRoutes);
 app.use("/signOut", signOutRoutes);
-app.use('/documents', documentRoutes); 
+app.use("/documents", documentRoutes); 
+app.use("/addProfile", addProfile);
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);

@@ -617,7 +617,8 @@ a {
 
   .jobcontainer {
     width: 100%;
-  }
+    margin-bottom: 20%;
+}
 
   .Selectedjob {
     padding-left: 20px;
@@ -1265,3 +1266,218 @@ a {
   bottom: 0;
   width: 47%;
 }
+
+
+.textbox-container {
+  position: relative;
+  width: 300px;
+}
+
+.textbox-label {
+  font-weight: normal;
+  margin-bottom: 5px;
+  display: block;
+  font-size: 14px;
+  color: #333;
+}
+
+.textbox-input-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  background-color: #f9f9f9;
+}
+
+.textbox-input {
+  border: none;
+  flex: 1;
+  padding: 4px;
+  margin: 2px 0;
+  font-size: 14px;
+  color: #555;
+  outline: none;
+  background-color: #f9f9f9;
+}
+
+.textbox-input::placeholder {
+  color: #999;
+}
+
+.textbox-selected-option {
+  background-color: #d4d4d4;
+  color: #333;
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin: 2px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.textbox-selected-option span {
+  margin-left: 5px;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.textbox-suggestions {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #aaa;
+  border-top: none;
+  border-radius: 0 0 2px 2px;
+  max-height: 120px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
+}
+
+.textbox-suggestion {
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.textbox-suggestion:hover {
+  background-color: #e6e6e6;
+}
+
+/* General Styles */
+/* General Styles */
+.profile-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-picture-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+}
+
+.empty-profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #ccc;
+  border: 3px solid #007bff;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+.profile-section {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.profile-section h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.profile-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.profile-input-file {
+  margin-bottom: 10px;
+}
+
+.profile-button {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 10px;
+}
+
+.profile-button:hover {
+  background-color: #0056b3;
+}
+
+.edit-button {
+  background-color: #28a745;
+}
+
+.edit-button:hover {
+  background-color: #218838;
+}
+
+.save-button {
+  background-color: #007bff;
+}
+
+.save-button:hover {
+  background-color: #0056b3;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .profile-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .profile-picture,
+  .empty-profile-picture {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .profile-button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 769px) {
+  .profile-container {
+    width: 70%;
+  }
+
+  .profile-input {
+    font-size: 1.1rem;
+  }
+
+  .profile-button {
+    font-size: 1.1rem;
+  }
+}
+
