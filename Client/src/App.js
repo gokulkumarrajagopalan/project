@@ -25,7 +25,7 @@ import CountingSort from "./Learning/DSA/CountingSort";
 import {StateContext} from "./context";
 import NotAuthorize from "./Components/NotAuthorize" ;
 import ViewJobs from "./JobPost/ViewJobs";
-
+import Profile from "./Components/Profile";
 
 function App() {
   return (
@@ -43,6 +43,9 @@ function App() {
             <Route path="/DSAHome" element={<DSAHome />} />
             <Route path="/Homelogin" element={<Homelogin />} />
             <Route path="/NotAuthorize" element ={ <NotAuthorize/>} />
+            <Route path="/Profile" element ={ <Profile/>} />
+
+            
             
             {/* <Route path="/JobPostScreenSub/:jobID" element={<JobPostScreenSub />} /> */}
             {/* ---------------- Learning ------------------------*/} 
@@ -67,5 +70,4 @@ function App() {
 
   );
 }
-
 export default App;

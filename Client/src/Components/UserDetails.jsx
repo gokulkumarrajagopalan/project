@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import API_URLS from "../config";
 
+
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/signIn/sessioncheck";
 
@@ -11,6 +12,7 @@ const UserDetails = ({
     onToggleUserDetails,
     onLogout,
     onSettings,
+    onProfile,
 }) => {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
@@ -36,6 +38,9 @@ const UserDetails = ({
             <h3>User Details</h3>
             <ul>
                 <li>Hi, {email}</li>
+                <li>
+                    <button onClick={onProfile}>Profile</button>{" "}
+                </li>
                 <li>
                     <button onClick={onLogout}>Sign Out</button>{" "}
                 </li>
