@@ -5,7 +5,7 @@ const API_URLS = {
 
   production: "https://server.gdest.in",
 
- // production: "https://3700-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev"
+  //production: "https://3700-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev"
 
   // production: "https://lw7j96-3800.csb.app",
 };
