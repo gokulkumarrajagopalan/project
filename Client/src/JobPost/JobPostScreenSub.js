@@ -38,15 +38,17 @@ function JobPostScreenSub({ job, onClose, onShare }) {
       <button onClick={onClose} className="crossbutton">
         x
       </button>
-      <h2>Job Details</h2>
+      <h2>Role criteria</h2>
       <p>Role: {role}</p>
       <p>Company: {companyName}</p>
       <p>Salary: {salary}</p>
       <p>Experience: {experience}</p>
       <p>Skills: {skills}</p>
+      <div className="btn-ssa">
       <button onClick={handleApplyJob}>Apply Job</button>
       <button onClick={() => onShare(jobID)}>Share Job</button>
       <button>Save</button>
+      </div>
       <div className="Jobdescription">
         <h3>Description</h3>
         <p> Work Mode : {workMode}</p>
