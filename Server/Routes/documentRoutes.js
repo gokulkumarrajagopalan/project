@@ -6,69 +6,80 @@ const PizZip = require('pizzip');
 const Docxtemplater = require('docxtemplater');
 const libre = require('libreoffice-convert');
 
-// Route to handle document processing
 router.post('/process', async (req, res) => {
-      console.log("im running cecking that !")
-  // Static value for candidateName (for testing)
-  const candidateName = 'John Doe'; // Replace with any static name for testing
+  console.log("Processing document...");
 
-  const templatePath = path.join(__dirname, '../../templates/template.docx'); // Adjust this path accordingly
-  const outputPdfPath = path.join(__dirname, '../../uploads/output_resume.pdf'); // Path to save the output PDF
+  const candidateName = 'John Doe';
+  const templatePath = path.join(__dirname, '../templates/template.docx');
+  const outputPdfPath = path.join(__dirname, '../templates/output_resume.pdf');
 
-  // Data to populate the template
-  const data = {
-    CandidateName: candidateName,
-    // Add more placeholders and data here as needed
-  };
+  if (!fs.existsSync(templatePath)) {
+    console.error('Template file not found:', templatePath);
+    return res.status(500).send(`Template file not found at path: ${templatePath}`);
+  }
+
+  const data = { CandidateName: candidateName };
 
   try {
-    // Read the template file
+    console.log("Reading template file...");
     const content = fs.readFileSync(templatePath, 'binary');
     const zip = new PizZip(content);
     const doc = new Docxtemplater(zip);
 
-    // Set data for template rendering
+    console.log("Data to be set:", data);
     doc.setData(data);
 
-    // Render the document
-    doc.render();
+    try {
+      console.log("Setting data and rendering...");
+      doc.render();
+    } catch (renderError) {
+      console.error("Error during document rendering:", renderError);
+      return res.status(500).send(`Error during document rendering: ${renderError.message}`);
+    }
 
-    // Generate output buffer
     const buffer = doc.getZip().generate({ type: 'nodebuffer' });
 
-    // Convert to PDF
-    const convertToPdf = async () => {
-      return new Promise((resolve, reject) => {
-        const extend = '.pdf';
+    console.log("Saving DOCX buffer for inspection...");
+    fs.writeFileSync('temp_output.docx', buffer);
 
-        libre.convert(buffer, extend, undefined, async (err, done) => {
-          if (err) {
-            console.log(`Error converting file: ${err}`);
-            reject(err);
-          }
-          console.log(`Converted file: ${done}`);
+    console.log("Converting to PDF...");
+    const pdfPath = await convertToPdf(buffer, outputPdfPath);
 
-          // Write the PDF to the server
-          fs.writeFileSync(outputPdfPath, done);
-
-          resolve(outputPdfPath);
-        });
-      });
-    };
-
-    const pdfPath = await convertToPdf();
-
-    // Send the PDF for download
+    console.log("Sending PDF for download...");
     res.download(pdfPath, 'output_resume.pdf', (err) => {
-      if (err) throw err;
+      if (err) {
+        console.error('Error sending file:', err);
+        return res.status(500).send(`Error sending file: ${err.message}`);
+      }
 
-      // Optionally, clean up temporary files
       fs.unlinkSync(pdfPath);
     });
+
   } catch (error) {
     console.error('Error processing document:', error);
-    res.status(500).send('Error processing document');
+    res.status(500).send(`Error processing document: ${error.message}`);
   }
 });
+
+const convertToPdf = (buffer, outputPdfPath) => {
+  return new Promise((resolve, reject) => {
+    const extend = '.pdf';
+
+    libre.convert(buffer, extend, undefined, (err, done) => {
+      if (err) {
+        console.error(`Error converting file: ${err}`);
+        return reject(err);
+      }
+
+      try {
+        fs.writeFileSync(outputPdfPath, done);
+        resolve(outputPdfPath);
+      } catch (fsErr) {
+        console.error('Error writing PDF file:', fsErr);
+        reject(fsErr);
+      }
+    });
+  });
+};
 
 module.exports = router;
