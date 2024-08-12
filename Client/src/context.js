@@ -10,16 +10,16 @@ const API_URL_SESSION = API_URLS[ENV] + "/signIn/sessioncheck"
 const StateContext = ({ children }) => {
   const [userType, setUserType] = useState('');
   const [isValid, setIsValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState('');
 
-useEffect(() => {
+  useEffect(() => {
     axios.defaults.withCredentials = true;
 
     const fetchSessionData = async () => {
       try {
         const res = await axios.get(API_URL_SESSION, {
-          withCredentials: true, 
+          withCredentials: true,
         });
         const userId = res.data.userid;
         const valid = res.data.valid;
@@ -29,8 +29,9 @@ useEffect(() => {
         setUserId(userId);
         setIsValid(valid);
         setIsLoading(false);
-        //console.log("isValid", valid);
-        //console.log("userType", userType);
+        console.log("isValid", valid);
+        console.log("userType", userType);
+        console.log("userId", userId);
       } catch (error) {
         console.log(error);
         setIsLoading(false);
@@ -38,7 +39,7 @@ useEffect(() => {
     };
 
     fetchSessionData();
-  }, [isValid]); 
+  }, [isValid]);
 
   if (isLoading) {
     return null;

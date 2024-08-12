@@ -4,7 +4,9 @@ const API_URLS = {
 
   production: "https://server.gdest.in",
 
-  // production: "https://6m894k-3700.csb.app",
+
+  //production: "https://537ghd-3700.csb.app"
+
 };
 
 export default API_URLS;

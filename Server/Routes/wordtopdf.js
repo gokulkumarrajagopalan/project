@@ -1,53 +1,55 @@
-const express = require('express');
+require('dotenv').config();
+const express = require("express");
 const router = express.Router();
+const AWS = require('aws-sdk');
 const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
-const libre = require('libreoffice-convert');
 
-// Create uploads directory if it doesn't exist
-const uploadDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
+// Configure AWS S3 with credentials from environment variables
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION
+});
+
+// Set up multer for in-memory storage
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+async function uploadFileToS3(fileBuffer, fileName, folder) {
+    const params = {
+        Bucket: process.env.S3_BUCKET_NAME,
+        Key: `${folder}/${fileName}`,
+        Body: fileBuffer
+    };
+
+    try {
+        const data = await s3.upload(params).promise();
+        console.log(`File uploaded successfully at ${data.Location}`);
+        return data.Location;
+    } catch (err) {
+        console.error('Error uploading file:', err);
+        throw err;
+    }
 }
-
-// Set up multer for file uploads
-const upload = multer({ dest: uploadDir });
 
 router.post('/', upload.single('file'), async (req, res) => {
     if (!req.file) {
+        console.error('No file uploaded.');
         return res.status(400).send('No file uploaded.');
     }
 
-    const inputPath = req.file.path;
-    const outputPdfPath = path.join(uploadDir, `${req.file.filename}.pdf`);
+    const inputFileName = req.file.originalname;
 
     try {
-        const buffer = fs.readFileSync(inputPath);
+        console.log('Uploading the DOCX file to S3...');
+        const fileUrl = await uploadFileToS3(req.file.buffer, inputFileName, 'upload');
 
-        await new Promise((resolve, reject) => {
-            libre.convert(buffer, '.pdf', undefined, (err, done) => {
-                if (err) {
-                    return reject(err);
-                }
-                fs.writeFileSync(outputPdfPath, done);
-                resolve();
-            });
-        });
-
-        res.download(outputPdfPath, 'converted_document.pdf', (err) => {
-            if (err) {
-                console.error('Error sending file:', err);
-                return res.status(500).send('Error sending file.');
-            }
-
-            fs.unlinkSync(outputPdfPath);
-            fs.unlinkSync(inputPath);
-        });
+        console.log('File uploaded successfully.');
+        res.status(200).json({ message: 'File uploaded successfully', fileUrl });
 
     } catch (error) {
-        console.error('Error converting file:', error);
-        res.status(500).send('Error converting file.');
+        console.error('Error uploading file:', error);
+        res.status(500).send('Error uploading file.');
     }
 });
 

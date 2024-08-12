@@ -4,6 +4,7 @@ const userProfileSchema = new mongoose.Schema({
   userid: {
     type: Number,
     unique: true,
+    required: true,
   },
   firstName: {
     type: String,
@@ -13,45 +14,19 @@ const userProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  phone: {
-    type: String,
-  },
-  address: {
-    type: String,
-  },
-  city: {
-    type: String,
-  },
-  state: {
-    type: String,
-  },
-  country: {
-    type: String,
-  },
-  zipCode: {
-    type: String,
-  },
-  jobTitle: {
-    type: String,
-  },
-  company: {
-    type: String,
-  },
-  experienceYears: {
-    type: Number,
-  },
-  education: {
-    type: String,
-  },
-  skills: {
-    type: [String],
-  },
-  resume: {
-    type: String, 
-  },
-  profilePicture: {
-    type: String, 
-  },
+  phone: String,
+  address: String,
+  city: String,
+  state: String,
+  country: String,
+  zipCode: String,
+  jobTitle: String,
+  company: String,
+  experienceYears: Number,
+  education: String,
+  skills: [String],
+  resume: String,
+  profilePicture: String,
 });
 
 const UserProfile = mongoose.model('UserProfile', userProfileSchema);

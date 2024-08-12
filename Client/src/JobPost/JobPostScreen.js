@@ -42,14 +42,14 @@ function JobPostScreen() {
 
   useEffect(() => {
     const fetchJobData = async () => {
-      setLoading(true); 
+      setLoading(true);
       try {
         const response = await axios.get(API_URL);
         setJobData(response.data);
-        setLoading(false); 
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching job data:", error);
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
@@ -70,7 +70,7 @@ function JobPostScreen() {
           setEmail(userEmail);
           console.log("email", userEmail);
         } else {
-        
+
         }
         setLoading(false);
       } catch (err) {
@@ -105,7 +105,7 @@ function JobPostScreen() {
 
     if (jobID && jobData.length > 0) {
       const selectedJob = jobData.find((job) => job.jobID === jobID);
-      
+
       if (selectedJob) {
         setSelectedJob(selectedJob);
         setShowSelectedJob(true);
@@ -131,12 +131,12 @@ function JobPostScreen() {
     setSelectedJob(job);
     setShowSelectedJob(true);
     navigate(`/jobPostScreen?jobid=${job.jobID}`);
-    document.body.classList.add("no-scroll"); 
+    document.body.classList.add("no-scroll");
   };
 
   const handleSearch = (searchValue) => {
     setSearchQuery(searchValue);
-};
+  };
 
   const handleFilter = (
     location,
@@ -174,7 +174,7 @@ function JobPostScreen() {
   const handleLogout = async () => {
     try {
       await axios.get(API_URL_SIGNOUT);
-      navigate("/SignIn"); 
+      navigate("/SignIn");
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -186,17 +186,22 @@ function JobPostScreen() {
     setShowFilter(false);
   };
 
-  const handleSettings = () => {};
-
-  const handleProfile= () =>{
-    navigate("/Profile"); 
+  const handleSettings = () => {
+    navigate("/Setting");
   };
 
+  const handleProfile = () => {
+    navigate("/Profile");
+  };
+
+  const handleOnSaved = () => {
+    navigate("/Saved");
+  };
   const handleShareJob = (jobID) => {
     const shareLink = `${window.location.origin}/viewjobs/${jobID}`;
     navigator.clipboard.writeText(shareLink)
-     .then(() => alert("Job link copied to clipboard!"))
-     .catch(err => console.error("Error copying job link:", err));
+      .then(() => alert("Job link copied to clipboard!"))
+      .catch(err => console.error("Error copying job link:", err));
   };
 
   const filteredJobs = jobData.filter((job) => {
@@ -209,13 +214,13 @@ function JobPostScreen() {
     return (
       job.role.toLowerCase().includes(searchQuery.toLowerCase()) &&
       (searchLocation
-       ? job.location.toLowerCase().includes(searchLocation.toLowerCase())
+        ? job.location.toLowerCase().includes(searchLocation.toLowerCase())
         : true) &&
       (skills
-       ? job.skills.toLowerCase().includes(skills.toLowerCase())
+        ? job.skills.toLowerCase().includes(skills.toLowerCase())
         : true) &&
       (company
-       ? job.companyName.toLowerCase().includes(company.toLowerCase())
+        ? job.companyName.toLowerCase().includes(company.toLowerCase())
         : true) &&
       (!workMode ||
         workMode.length === 0 ||
@@ -226,10 +231,10 @@ function JobPostScreen() {
           (type) => job.employmentType && job.employmentType.includes(type)
         )) &&
       (experience
-       ? job.experience.toLowerCase().includes(experience.toLowerCase())
+        ? job.experience.toLowerCase().includes(experience.toLowerCase())
         : true) &&
       (salary
-       ? job.salary.toLowerCase().includes(salary.toLowerCase())
+        ? job.salary.toLowerCase().includes(salary.toLowerCase())
         : true) &&
       (sort === "" ||
         parseInt(sort) === 0 ||
@@ -237,7 +242,7 @@ function JobPostScreen() {
     );
   });
 
-  const showJobContainer =!showUserDetails &&!showNotification &&!showFilter;
+  const showJobContainer = !showUserDetails && !showNotification && !showFilter;
 
 
 
@@ -265,6 +270,7 @@ function JobPostScreen() {
           onLogout={handleLogout}
           onSettings={handleSettings}
           onProfile={handleProfile}
+          onSaved={handleOnSaved}
         />
       )}
       {showFilter && (

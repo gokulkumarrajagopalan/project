@@ -13,6 +13,7 @@ const UserDetails = ({
     onLogout,
     onSettings,
     onProfile,
+    onSaved,
 }) => {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const UserDetails = ({
                 if (res.data.valid) {
                     setEmail(res.data.email);
                 } else {
-                    
+
                 }
             })
             .catch((err) => console.log(err));
@@ -35,7 +36,7 @@ const UserDetails = ({
 
     return showUserDetails ? (
         <div className="userDetailsContainer">
-            <h3>User Details</h3>
+
             <ul>
                 <li>Hi, {email}</li>
                 <li>
@@ -45,8 +46,12 @@ const UserDetails = ({
                     <button onClick={onLogout}>Sign Out</button>{" "}
                 </li>
                 <li>
+                    <button onClick={onSaved}>Saved</button>{" "}
+                </li>
+                <li>
                     <button onClick={onSettings}>Settings</button>{" "}
                 </li>
+
             </ul>
         </div>
     ) : null;

@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Textbox from "./Textbox";
+import API_URLS from "../config";
 
+const ENV = process.env.REACT_APP_ENV || "production";
+const API_URL = API_URLS[ENV] + "/addProfile/getProfile/"
 function Profile() {
   const [profile, setProfile] = useState({
     firstName: '',
@@ -21,6 +24,23 @@ function Profile() {
   });
 
   const [isEditing, setIsEditing] = useState(true);
+
+  const fetchProfile = async () => {
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      if (data.profile) {
+        setProfile(data.profile);
+      }
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,11 +68,42 @@ function Profile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
-    console.log(profile);
+    saveProfile(profile);
   };
 
   const handleEditClick = () => {
     setIsEditing(true);
+  };
+
+  useEffect(() => {
+    if (!isEditing) {
+      saveProfile(profile);
+    }
+  }, [profile, isEditing]);
+
+  const saveProfile = async (profileData) => {
+    try {
+      const formData = new FormData();
+      Object.keys(profileData).forEach(key => {
+        if (profileData[key] !== null) {
+          formData.append(key, profileData[key]);
+        }
+      });
+
+      const response = await fetch('https://537ghd-3700.csb.app/addProfile/createProfile/', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save profile');
+      }
+
+      const result = await response.json();
+      console.log('Profile saved successfully:', result);
+    } catch (error) {
+      console.error('Error saving profile:', error);
+    }
   };
 
   const renderButton = (field) => {
@@ -72,7 +123,7 @@ function Profile() {
       <div className="profile-picture-container">
         {profile.profilePicture ? (
           <img
-            src={URL.createObjectURL(profile.profilePicture)}
+            src={profile.profilePicture}
             alt="Profile"
             className="profile-picture"
           />
@@ -107,7 +158,7 @@ function Profile() {
               onChange={handleChange}
               className="profile-input"
             />
-            
+
             <input
               type="tel"
               name="phone"
