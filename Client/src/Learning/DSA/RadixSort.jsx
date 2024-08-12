@@ -4,7 +4,7 @@ import axios from 'axios';
 function RadixSort() {
   const handleDownload = async () => {
     try {
-      const response = await axios.post('https://3700-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev/documents/process', {
+      const response = await axios.post('https://6m894k-3700.csb.app/documents/process', {
         // No data sent from frontend
       }, {
         responseType: 'blob',
