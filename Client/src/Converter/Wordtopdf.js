@@ -31,7 +31,7 @@ function DocumentConverter() {
             const endpoint = conversionType === 'wordToPdf' ? '/wordtopdf' : '/pdftoword';
             const fileExtension = conversionType === 'wordToPdf' ? 'pdf' : 'docx';
 
-            const response = await axios.post(`https://6m894k-3700.csb.app${endpoint}`, formData, {
+            const response = await axios.post(`https://gdest.in${endpoint}`, formData, {
                 responseType: 'blob',
             });
 
