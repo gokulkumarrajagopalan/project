@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-ses": "^3.609.0",
+    "axios": "^1.7.3",
+    "axois": "^0.0.1-security",
     "body-parser": "^1.20.2",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",
@@ -19,7 +21,7 @@
     "docxtemplater": "^3.48.0",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
-    "libreoffice-convert": "^1.5.1",
+    "libreoffice-convert": "^1.6.0",
     "mongoose": "^8.5.0",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.4",
