@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Setting = () => {
+const Saved = () => {
     return (
         <>
-            SETTINGS
+            Saved Jobs
         </>
 
     );
 };
 
 
-export default Setting;
+export default Saved;

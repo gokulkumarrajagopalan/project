@@ -26,7 +26,10 @@ import { StateContext } from "./context";
 import NotAuthorize from "./Components/NotAuthorize";
 import ViewJobs from "./JobPost/ViewJobs";
 import Profile from "./Components/Profile";
+import Setting from "./Components/setting";
+import Saved from "./Components/Saved";
 import Wordtopdf from "./Converter/Wordtopdf";
+
 
 function App() {
   return (
@@ -45,8 +48,8 @@ function App() {
             <Route path="/Homelogin" element={<Homelogin />} />
             <Route path="/NotAuthorize" element={<NotAuthorize />} />
             <Route path="/Profile" element={<Profile />} />
-
-
+            <Route path="/setting" element={<Setting />} />
+            <Route path="/Saved" element={<Saved />} />
 
             {/* <Route path="/JobPostScreenSub/:jobID" element={<JobPostScreenSub />} /> */}
             {/* ---------------- Learning ------------------------*/}

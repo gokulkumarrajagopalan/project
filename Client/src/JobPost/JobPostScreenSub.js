@@ -1,9 +1,26 @@
 import React from "react";
-
+import axios from "axios";
+import API_URLS from "../config";
+const ENV = process.env.REACT_APP_ENV || "production";
+const API_URL_SAVE = API_URLS[ENV] + "/addJobPost/saveJob";
 function JobPostScreenSub({ job, onClose, onShare }) {
   if (!job) {
     return <div>Select a job to view details.</div>;
   }
+  const userId = 1;
+  const handleSaveJob = async () => {
+    try {
+      const response = await axios.post(API_URL_SAVE, {
+        userId, // Assuming this is already a string
+        jobId: job.jobID.toString(), // Convert jobID to a string
+      });
+      console.log(job.jobID.toString());
+      console.log("Job saved successfully:", response.data);
+    } catch (error) {
+      console.error("Error saving job:", error);
+    }
+  };
+
 
   const {
     jobID,
@@ -45,9 +62,9 @@ function JobPostScreenSub({ job, onClose, onShare }) {
       <p>Experience: {experience}</p>
       <p>Skills: {skills}</p>
       <div className="btn-ssa">
-      <button onClick={handleApplyJob}>Apply Job</button>
-      <button onClick={() => onShare(jobID)}>Share Job</button>
-      <button>Save</button>
+        <button onClick={handleApplyJob}>Apply Job</button>
+        <button onClick={() => onShare(jobID)}>Share Job</button>
+        <button onClick={handleSaveJob}>Save</button>
       </div>
       <div className="Jobdescription">
         <h3>Description</h3>

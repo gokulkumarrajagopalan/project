@@ -44,7 +44,7 @@ app.use(
 );
 
 const corsConfig = {
-  //origin: ["https://6m894k-3000.csb.app"],
+  //origin: ["https://537ghd-3000.csb.app"],
   origin: ["https://gdest.in"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,

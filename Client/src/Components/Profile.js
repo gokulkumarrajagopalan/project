@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Textbox from "./Textbox";
+import API_URLS from "../config";
 
+const ENV = process.env.REACT_APP_ENV || "production";
+const API_URL = API_URLS[ENV] + "/addProfile/getProfile/"
 function Profile() {
   const [profile, setProfile] = useState({
     firstName: '',
@@ -24,7 +27,7 @@ function Profile() {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch('https://537ghd-3700.csb.app/addProfile/getProfile/');
+      const response = await fetch(API_URL);
       const data = await response.json();
       if (data.profile) {
         setProfile(data.profile);
@@ -65,14 +68,13 @@ function Profile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
-    saveProfile(profile); // Save when submitting
+    saveProfile(profile);
   };
 
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  // useEffect to save data whenever the profile changes
   useEffect(() => {
     if (!isEditing) {
       saveProfile(profile);

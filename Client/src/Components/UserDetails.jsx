@@ -13,6 +13,7 @@ const UserDetails = ({
     onLogout,
     onSettings,
     onProfile,
+    onSaved,
 }) => {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
@@ -45,8 +46,12 @@ const UserDetails = ({
                     <button onClick={onLogout}>Sign Out</button>{" "}
                 </li>
                 <li>
+                    <button onClick={onSaved}>Saved</button>{" "}
+                </li>
+                <li>
                     <button onClick={onSettings}>Settings</button>{" "}
                 </li>
+
             </ul>
         </div>
     ) : null;
