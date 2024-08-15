@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import API_URLS from "../config";
+const ENV = process.env.REACT_APP_ENV || "production";
+const API_URL = API_URLS[ENV] + "/wordToPdf";
 
 function DocumentConverter() {
     const [file, setFile] = useState(null);
@@ -31,7 +34,7 @@ function DocumentConverter() {
             const endpoint = conversionType === 'wordToPdf' ? '/wordtopdf' : '/pdftoword';
             const fileExtension = conversionType === 'wordToPdf' ? 'pdf' : 'docx';
 
-            const response = await axios.post(`https://server.gdest.in${endpoint}`, formData, {
+            const response = await axios.post(API_URL, formData, {
                 responseType: 'blob',
             });
 

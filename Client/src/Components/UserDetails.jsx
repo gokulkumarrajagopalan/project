@@ -27,7 +27,7 @@ const UserDetails = ({
                 if (res.data.valid) {
                     setEmail(res.data.email);
                 } else {
-                    
+
                 }
             })
             .catch((err) => console.log(err));
@@ -35,7 +35,7 @@ const UserDetails = ({
 
     return showUserDetails ? (
         <div className="userDetailsContainer">
-            <h3>User Details</h3>
+
             <ul>
                 <li>Hi, {email}</li>
                 <li>

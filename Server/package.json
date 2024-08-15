@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-ses": "^3.609.0",
+    "aws-sdk": "^2.1675.0",
     "axios": "^1.7.3",
     "axois": "^0.0.1-security",
     "body-parser": "^1.20.2",
@@ -19,6 +20,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "docxtemplater": "^3.48.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "libreoffice-convert": "^1.6.0",
