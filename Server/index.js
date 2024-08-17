@@ -7,7 +7,7 @@ const signOutRoutes = require("./Routes/signOutRoutes");
 const documentRoutes = require("./Routes/documentRoutes");
 const addProfile = require("./Routes/ProfileRoutes");
 const wordtopdf = require("./Routes/wordtopdf");
-const pdftoword = require('./Routes/pdftoword');
+// const pdftoword = require('./Routes/pdftoword');
 const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const session = require("express-session");
@@ -62,7 +62,7 @@ app.use("/signOut", signOutRoutes);
 app.use("/documents", documentRoutes);
 app.use("/addProfile", addProfile);
 app.use("/wordtopdf", wordtopdf);
-app.use("/pdftoword", pdftoword);
+// app.use("/pdftoword", pdftoword);
 
 app.use(function (err, req, res, next) {
   console.error(err.stack);

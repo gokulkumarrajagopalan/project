@@ -6,13 +6,13 @@ const path = require('path');
 const { exec } = require('child_process');
 
 // Create uploads directory if it doesn't exist
-const uploadDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-}
+// const uploadDir = path.join(__dirname, '../uploads');
+// if (!fs.existsSync(uploadDir)) {
+//     fs.mkdirSync(uploadDir);
+// }
 
 // Set up multer for file uploads
-const upload = multer({ dest: uploadDir });
+// const upload = multer({ dest: uploadDir });
 
 router.post('/', upload.single('file'), async (req, res) => {
     console.log("File received:", req.file);
