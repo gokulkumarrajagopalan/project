@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Textbox from "./Textbox";
 import API_URLS from "../config";
 
 const ENV = process.env.REACT_APP_ENV || "production";
-const API_URL = API_URLS[ENV] + "/addProfile/getProfile/"
+const API_URL = API_URLS[ENV] + "/addProfile/getProfile/";
+const API_URL_CREATE = API_URLS[ENV] + "/addProfile/createProfile/";
 function Profile() {
   const [profile, setProfile] = useState({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    address: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-    jobTitle: '',
-    company: '',
-    experienceYears: '',
-    education: '',
+    firstName: "",
+    lastName: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    country: "",
+    zipCode: "",
+    jobTitle: "",
+    company: "",
+    experienceYears: "",
+    education: "",
     skills: [],
     resume: null,
     profilePicture: null,
@@ -33,14 +34,13 @@ function Profile() {
         setProfile(data.profile);
       }
     } catch (error) {
-      console.error('Error fetching profile:', error);
+      console.error("Error fetching profile:", error);
     }
   };
 
   useEffect(() => {
     fetchProfile();
   }, []);
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,25 +84,25 @@ function Profile() {
   const saveProfile = async (profileData) => {
     try {
       const formData = new FormData();
-      Object.keys(profileData).forEach(key => {
+      Object.keys(profileData).forEach((key) => {
         if (profileData[key] !== null) {
           formData.append(key, profileData[key]);
         }
       });
 
-      const response = await fetch('https://537ghd-3700.csb.app/addProfile/createProfile/', {
-        method: 'POST',
+      const response = await fetch(API_URL_CREATE, {
+        method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error('Failed to save profile');
+        throw new Error("Failed to save profile");
       }
 
       const result = await response.json();
-      console.log('Profile saved successfully:', result);
+      console.log("Profile saved successfully:", result);
     } catch (error) {
-      console.error('Error saving profile:', error);
+      console.error("Error saving profile:", error);
     }
   };
 
@@ -113,7 +113,7 @@ function Profile() {
         onClick={handleEditClick}
         className="profile-button edit-button"
       >
-        {profile[field] ? 'Edit' : 'Add'}
+        {profile[field] ? "Edit" : "Add"}
       </button>
     );
   };
@@ -132,7 +132,10 @@ function Profile() {
         )}
       </div>
       {!isEditing ? (
-        <button onClick={handleEditClick} className="profile-button edit-button">
+        <button
+          onClick={handleEditClick}
+          className="profile-button edit-button"
+        >
           Edit Profile
         </button>
       ) : (
@@ -141,7 +144,7 @@ function Profile() {
 
           <div className="profile-section">
             <h3>Personal Information</h3>
-            {renderButton('firstName')}
+            {renderButton("firstName")}
             <input
               type="text"
               name="firstName"
@@ -171,7 +174,7 @@ function Profile() {
 
           <div className="profile-section">
             <h3>Professional Information</h3>
-            {renderButton('jobTitle')}
+            {renderButton("jobTitle")}
             <input
               type="text"
               name="jobTitle"
@@ -200,7 +203,7 @@ function Profile() {
 
           <div className="profile-section">
             <h3>Education</h3>
-            {renderButton('education')}
+            {renderButton("education")}
             <input
               type="text"
               name="education"
@@ -213,7 +216,7 @@ function Profile() {
 
           <div className="profile-section">
             <h3>Skills</h3>
-            {renderButton('skills')}
+            {renderButton("skills")}
             <Textbox
               label="Add Your Skills"
               placeholder="Type and select skills"

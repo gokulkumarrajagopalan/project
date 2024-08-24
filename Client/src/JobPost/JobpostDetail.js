@@ -1,29 +1,28 @@
-import React, { useContext,useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
-import axios from 'axios';
+import axios from "axios";
 import API_URLS from "../config";
-import { useNavigate } from 'react-router-dom';
-const ENV = process.env.REACT_APP_ENV || "production"; 
+import { useNavigate } from "react-router-dom";
+const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/savejobpost";
 
 function JobPostDetail() {
   const { userType, isValid } = useContext(MyContext);
-  const [jobRole, setJobRole] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [skills, setSkills] = useState('');
-  const [qualification, setQualification] = useState('');
-  const [location, setLocation] = useState('');
-  const [salary, setSalary] = useState('');
+  const [jobRole, setJobRole] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [skills, setSkills] = useState("");
+  const [qualification, setQualification] = useState("");
+  const [location, setLocation] = useState("");
+  const [salary, setSalary] = useState("");
   const [workMode, setWorkMode] = useState([]);
   const [employmentType, setEmploymentType] = useState([]);
-  const [experience, setExperience] = useState('');
+  const [experience, setExperience] = useState("");
   const [companyImage, setCompanyImage] = useState(null);
-  const [description, setDescription] = useState('');
-  const [expireon, setExpireon] = useState('');
-  const [externalLink, setExternalLink] = useState(false); 
-  const [jobLink, setJobLink] = useState('');
-  const navigate = useNavigate('');
-
+  const [description, setDescription] = useState("");
+  const [expireon, setExpireon] = useState("");
+  const [externalLink, setExternalLink] = useState(false);
+  const [jobLink, setJobLink] = useState("");
+  const navigate = useNavigate("");
 
   const handleSalaryChange = (e) => {
     setSalary(e.target.value);
@@ -31,7 +30,7 @@ function JobPostDetail() {
 
   const handleWorkModeChange = (mode) => {
     if (workMode.includes(mode)) {
-      setWorkMode(workMode.filter(item => item !== mode));
+      setWorkMode(workMode.filter((item) => item !== mode));
     } else {
       setWorkMode([...workMode, mode]);
     }
@@ -39,7 +38,7 @@ function JobPostDetail() {
 
   const handleEmploymentTypeChange = (type) => {
     if (employmentType.includes(type)) {
-      setEmploymentType(employmentType.filter(item => item !== type));
+      setEmploymentType(employmentType.filter((item) => item !== type));
     } else {
       setEmploymentType([...employmentType, type]);
     }
@@ -49,17 +48,13 @@ function JobPostDetail() {
     setExperience(e.target.value);
     console.log(experience);
   };
-  useEffect (()=>{
-
+  useEffect(() => {
     const fetchSessionData = async () => {
       try {
-       
         if (!isValid) {
           navigate("/SignIn");
         } else {
-         
-
-          if (userType !== 'A') {
+          if (userType !== "A") {
             navigate("/Homelogin");
           }
         }
@@ -67,18 +62,15 @@ function JobPostDetail() {
         console.log(e);
       }
     };
-    
+
     fetchSessionData();
-  },[]);
-  
-
-
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3700/addJobPost/savejobpost", {
+      const response = await axios.post(API_URL, {
         role: jobRole,
         companyName,
         skills,
@@ -91,18 +83,18 @@ function JobPostDetail() {
         companyImage,
         description,
         expireon,
-        externalLink, 
-        jobLink: externalLink ? jobLink : '',
+        externalLink,
+        jobLink: externalLink ? jobLink : "",
       });
 
       if (response.status === 201) {
-        alert('Data Saved Successfully');
+        alert("Data Saved Successfully");
       } else {
-        throw new Error('Failed to save data');
+        throw new Error("Failed to save data");
       }
     } catch (error) {
-      console.error('Error saving data:', error);
-      alert('Failed to save data');
+      console.error("Error saving data:", error);
+      alert("Failed to save data");
     }
   };
 
@@ -124,7 +116,7 @@ function JobPostDetail() {
                     type="text"
                     className="job-input"
                     name="role"
-                    value={jobRole}      
+                    value={jobRole}
                     onChange={(e) => setJobRole(e.target.value)}
                   />
                 </td>
@@ -136,7 +128,7 @@ function JobPostDetail() {
                     type="text"
                     className="job-input"
                     name="companyName"
-                    value={companyName}      
+                    value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                   />
                 </td>
@@ -148,7 +140,7 @@ function JobPostDetail() {
                     type="text"
                     className="job-input"
                     name="skills"
-                    value={skills}      
+                    value={skills}
                     onChange={(e) => setSkills(e.target.value)}
                   />
                 </td>
@@ -160,7 +152,7 @@ function JobPostDetail() {
                     type="text"
                     className="job-input"
                     name="qualification"
-                    value={qualification}      
+                    value={qualification}
                     onChange={(e) => setQualification(e.target.value)}
                   />
                 </td>
@@ -172,7 +164,7 @@ function JobPostDetail() {
                     type="text"
                     className="job-input"
                     name="location"
-                    value={location}      
+                    value={location}
                     onChange={(e) => setLocation(e.target.value)}
                   />
                 </td>
@@ -194,41 +186,71 @@ function JobPostDetail() {
                 </td>
               </tr>
               <tr className="td_hover">
-                <td><label>Work Mode:</label></td>
+                <td>
+                  <label>Work Mode:</label>
+                </td>
                 <td>
                   <div>
-                    <input type="checkbox" checked={workMode.includes('office')} onChange={() => handleWorkModeChange('office')} />
+                    <input
+                      type="checkbox"
+                      checked={workMode.includes("office")}
+                      onChange={() => handleWorkModeChange("office")}
+                    />
                     <label>Work from Office</label>
                   </div>
                   <div>
-                    <input type="checkbox" checked={workMode.includes('hybrid')} onChange={() => handleWorkModeChange('hybrid')} />
+                    <input
+                      type="checkbox"
+                      checked={workMode.includes("hybrid")}
+                      onChange={() => handleWorkModeChange("hybrid")}
+                    />
                     <label>Hybrid</label>
                   </div>
                   <div>
-                    <input type="checkbox" checked={workMode.includes('remote')} onChange={() => handleWorkModeChange('remote')} />
+                    <input
+                      type="checkbox"
+                      checked={workMode.includes("remote")}
+                      onChange={() => handleWorkModeChange("remote")}
+                    />
                     <label>Remote</label>
                   </div>
                 </td>
               </tr>
               <tr className="td_hover">
-                <td><label>Employment Type:</label></td>
+                <td>
+                  <label>Employment Type:</label>
+                </td>
                 <td>
                   <div>
-                    <input type="checkbox" checked={employmentType.includes('part-time')} onChange={() => handleEmploymentTypeChange('part-time')} />
+                    <input
+                      type="checkbox"
+                      checked={employmentType.includes("part-time")}
+                      onChange={() => handleEmploymentTypeChange("part-time")}
+                    />
                     <label>Part-time</label>
                   </div>
                   <div>
-                    <input type="checkbox" checked={employmentType.includes('full-time')} onChange={() => handleEmploymentTypeChange('full-time')} />
+                    <input
+                      type="checkbox"
+                      checked={employmentType.includes("full-time")}
+                      onChange={() => handleEmploymentTypeChange("full-time")}
+                    />
                     <label>Full-time</label>
                   </div>
                   <div>
-                    <input type="checkbox" checked={employmentType.includes('contract')} onChange={() => handleEmploymentTypeChange('contract')} />
+                    <input
+                      type="checkbox"
+                      checked={employmentType.includes("contract")}
+                      onChange={() => handleEmploymentTypeChange("contract")}
+                    />
                     <label>Contract</label>
                   </div>
                 </td>
               </tr>
               <tr className="td_hover">
-                <td><label>Experience:</label></td>
+                <td>
+                  <label>Experience:</label>
+                </td>
                 <td>
                   <select value={experience} onChange={handleExperienceChange}>
                     <option value="">Select Experience</option>
@@ -258,7 +280,7 @@ function JobPostDetail() {
                   <textarea
                     className="job-input-desc"
                     name="description"
-                    value={description}      
+                    value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </td>
@@ -270,7 +292,7 @@ function JobPostDetail() {
                     type="text"
                     className="job-input"
                     name="expireon"
-                    value={expireon}      
+                    value={expireon}
                     onChange={(e) => setExpireon(e.target.value)}
                   />
                 </td>
@@ -312,7 +334,7 @@ function JobPostDetail() {
                   </td>
                 </tr>
               )}
-              <tr className="td_hover"> 
+              <tr className="td_hover">
                 <td>
                   <button type="submit">Submit</button>
                 </td>

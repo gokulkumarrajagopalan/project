@@ -29,7 +29,8 @@ import Profile from "./Components/Profile";
 import Setting from "./Components/setting";
 import Saved from "./Components/Saved";
 import Wordtopdf from "./Converter/Wordtopdf";
-
+import AddJobRoles from "./JobPost/Masters/AddJobRoles";
+import MasterAddSkills from "./JobPost/Masters/MasterAddSkills";
 
 function App() {
   return (
@@ -50,6 +51,8 @@ function App() {
             <Route path="/Profile" element={<Profile />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/Saved" element={<Saved />} />
+            <Route path="/AddJobRoles" element={<AddJobRoles />} />
+            <Route path="/MasterAddSkills" element={<MasterAddSkills />} />
 
             {/* <Route path="/JobPostScreenSub/:jobID" element={<JobPostScreenSub />} /> */}
             {/* ---------------- Learning ------------------------*/}
@@ -68,15 +71,11 @@ function App() {
             <Route path="/RadixSort" element={<RadixSort />} />
             <Route path="/CountingSort" element={<CountingSort />} />
 
-
             <Route path="/Wordtopdf" element={<Wordtopdf />} />
-
-
           </Routes>
         </Router>
       </div>
     </StateContext>
-
   );
 }
 export default App;

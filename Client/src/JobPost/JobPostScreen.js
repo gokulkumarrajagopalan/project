@@ -70,7 +70,6 @@ function JobPostScreen() {
           setEmail(userEmail);
           console.log("email", userEmail);
         } else {
-
         }
         setLoading(false);
       } catch (err) {
@@ -109,12 +108,13 @@ function JobPostScreen() {
       if (selectedJob) {
         setSelectedJob(selectedJob);
         setShowSelectedJob(true);
-        document.body.classList.add("no-scroll"); // Prevent background scroll
+        document.body.classList.add("no-scroll");
       } else {
-        // Fetch job details if not present in the current jobData
         const fetchJobDetails = async () => {
           try {
-            const response = await axios.get(`${API_URLS[ENV]}/addJobPost/${jobID}`);
+            const response = await axios.get(
+              `${API_URLS[ENV]}/addJobPost/${jobID}`,
+            );
             setSelectedJob(response.data);
             setShowSelectedJob(true);
             document.body.classList.add("no-scroll");
@@ -146,7 +146,7 @@ function JobPostScreen() {
     workMode,
     experience,
     employmentType,
-    salary
+    salary,
   ) => {
     setSearchLocation(location);
     setSkills(skills);
@@ -163,12 +163,14 @@ function JobPostScreen() {
     setShowUserDetails(!showUserDetails);
     setShowFilter(false);
     setShowNotification(false);
+    setShowSelectedJob(false);
   };
 
   const toggleFilterDetails = () => {
     setShowFilter(!showFilter);
     setShowUserDetails(false);
     setShowNotification(false);
+    setShowSelectedJob(false);
   };
 
   const handleLogout = async () => {
@@ -182,6 +184,7 @@ function JobPostScreen() {
 
   const toggleNotification = () => {
     setShowNotification(!showNotification);
+    setShowSelectedJob(false);
     setShowUserDetails(false);
     setShowFilter(false);
   };
@@ -199,16 +202,17 @@ function JobPostScreen() {
   };
   const handleShareJob = (jobID) => {
     const shareLink = `${window.location.origin}/viewjobs/${jobID}`;
-    navigator.clipboard.writeText(shareLink)
+    navigator.clipboard
+      .writeText(shareLink)
       .then(() => alert("Job link copied to clipboard!"))
-      .catch(err => console.error("Error copying job link:", err));
+      .catch((err) => console.error("Error copying job link:", err));
   };
 
   const filteredJobs = jobData.filter((job) => {
     const postedDate = new Date(job.Posted_Date);
     const currentDate = new Date();
     const differenceInDays = Math.floor(
-      (currentDate - postedDate) / (1000 * 60 * 60 * 24)
+      (currentDate - postedDate) / (1000 * 60 * 60 * 24),
     );
 
     return (
@@ -228,7 +232,7 @@ function JobPostScreen() {
       (!employmentType ||
         employmentType.length === 0 ||
         employmentType.some(
-          (type) => job.employmentType && job.employmentType.includes(type)
+          (type) => job.employmentType && job.employmentType.includes(type),
         )) &&
       (experience
         ? job.experience.toLowerCase().includes(experience.toLowerCase())
@@ -243,8 +247,6 @@ function JobPostScreen() {
   });
 
   const showJobContainer = !showUserDetails && !showNotification && !showFilter;
-
-
 
   return (
     <>
