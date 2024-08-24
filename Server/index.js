@@ -63,6 +63,7 @@ app.use("/signOut", signOutRoutes);
 app.use("/documents", documentRoutes);
 app.use("/addProfile", addProfile);
 app.use("/wordtopdf", wordtopdf);
+// app.use("/pdftoword", pdftoword);
 app.use("/pdftoword", pdftoword);
 app.use("/masterAddJobRoles", MasterAddJobRoles);
 
