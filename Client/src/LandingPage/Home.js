@@ -63,10 +63,6 @@ function Home() {
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, [quoteContainerControls]);
 
   useEffect(() => {
@@ -76,12 +72,6 @@ function Home() {
         const isVisible = top < window.innerHeight && bottom >= 0;
         classbControls.start(isVisible ? "show" : "hidden");
       }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
     };
   }, [classbControls]);
 

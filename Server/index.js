@@ -7,13 +7,13 @@ const signOutRoutes = require("./Routes/signOutRoutes");
 const documentRoutes = require("./Routes/documentRoutes");
 const addProfile = require("./Routes/ProfileRoutes");
 const wordtopdf = require("./Routes/wordtopdf");
-// const pdftoword = require('./Routes/pdftoword');
-const pdftoword = require('./Routes/pdftoword');
+const pdftoword = require("./Routes/pdftoword");
 const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const MasterAddJobRoles = require("./Routes/MasterAddJobRoles");
 
 const app = express();
 
@@ -31,7 +31,8 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+      mongoUrl:
+        "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
       ttl: 14 * 24 * 60 * 60,
       autoRemove: "native",
     }),
@@ -41,12 +42,12 @@ app.use(
       maxAge: 30 * 24 * 60 * 60 * 1000,
       sameSite: "lax",
     },
-  })
+  }),
 );
 
 const corsConfig = {
-  //origin: ["https://537ghd-3000.csb.app"],
-  origin: ["https://gdest.in"],
+  origin: ["https://ty376c-3000.csb.app"],
+  //origin: ["https://gdest.in"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
 };
@@ -54,7 +55,6 @@ const corsConfig = {
 app.use(cors(corsConfig));
 
 app.options("*", cors(corsConfig));
-
 
 app.use("/users", userRoutes);
 app.use("/signIn", signInRoutes);
@@ -65,10 +65,11 @@ app.use("/addProfile", addProfile);
 app.use("/wordtopdf", wordtopdf);
 // app.use("/pdftoword", pdftoword);
 app.use("/pdftoword", pdftoword);
+app.use("/masterAddJobRoles", MasterAddJobRoles);
 
 app.use(function (err, req, res, next) {
   console.error(err.stack);
-  res.status(500).send('Something broke!');
+  res.status(500).send("Something broke!");
 });
 
 const PORT = process.env.PORT || 3700;
