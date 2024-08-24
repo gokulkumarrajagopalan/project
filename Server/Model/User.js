@@ -21,11 +21,11 @@ const userSchema = new mongoose.Schema({
   pwd: String,
   TypeOfUser: String,
   RoleType: String,
-  Active : Number,
+  Active: Number,
 });
 
 // Pre-save hook to generate and assign a unique number to each new user
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
   if (!this.isNew) {
     return next();
   }
