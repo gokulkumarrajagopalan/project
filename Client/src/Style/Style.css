@@ -1001,6 +1001,7 @@ a {
 /* Media query for screen width 768px and below */
 @media (max-width: 768px) {
   .crossbutton {
+
     display: initial;
     align-self: flex-end;
     margin-left: auto;
