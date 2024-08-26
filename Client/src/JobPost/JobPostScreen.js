@@ -82,6 +82,27 @@ function JobPostScreen() {
   }, [navigate]);
 
   useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const jobRoleFromURL = queryParams.get("jobSearch");
+    const locationFromURL = queryParams.get("location");
+
+    if (jobRoleFromURL) {
+      setSearchQuery(jobRoleFromURL);
+    } else if (location.state?.jobSearch) {
+      setSearchQuery(location.state.jobSearch);
+    }
+
+    if (locationFromURL) {
+      setSearchLocation(locationFromURL);
+    } else if (location.state?.location) {
+      setSearchLocation(location.state.location);
+    }
+
+    console.log("location", location);
+  }, [location.search, location.state]);
+
+
+  useEffect(() => {
     const handleResize = () => {
       const isMobileView = window.innerWidth < 768;
       setIsMobile(isMobileView);

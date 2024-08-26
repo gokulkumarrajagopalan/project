@@ -20,6 +20,10 @@
   animation: spin 1000ms ease infinite;
 }
 
+.crossbutton{
+  display: none;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -584,6 +588,10 @@ a {
 }
 
 @media (max-width: 768px) {
+
+  .jobPostContainer {
+    overflow-y: hidden;
+  }
   .mobileNavContainer {
     position: fixed;
     bottom: 0;
@@ -633,7 +641,8 @@ a {
     bottom: 0;
     background-color: white;
     z-index: 998;
-    overflow-y: auto;
+    overflow-y: auto;        
+    margin-bottom: 10%;
   }
 }
 
@@ -917,6 +926,11 @@ a {
 }
 
 @media (max-width: 480px) {
+
+   .jobPostContainer {
+    overflow-y: hidden;
+  }
+
   .img_Logo {
     width: 40px;
     height: 40px;
@@ -987,6 +1001,7 @@ a {
 /* Media query for screen width 768px and below */
 @media (max-width: 768px) {
   .crossbutton {
+    display: initial;
     align-self: flex-end;
     margin-left: auto;
     background-color: transparent;
@@ -1022,13 +1037,15 @@ a {
 
 @media (max-width: 480px) {
   .crossbutton {
+    display: initial;
     align-self: flex-end;
     margin-left: auto;
 
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 25px;
+    
     position: relative;
     left: 90%;
     color: #333;
@@ -1514,4 +1531,80 @@ h3 {
 .btn-ssa button:hover {
   background-color: white;
   color: rgb(0, 0, 0);
+}
+@media (max-width: 480px) {
+
+  .jobPostContainer {
+   overflow-y: hidden;
+ }
+
+ .img_Logo {
+   width: 40px;
+   height: 40px;
+   margin-left: 10px;
+   top: 3px;
+ }
+ .logo-text {
+   width: 130px;
+   top: 3px;
+ }
+ .textgrade1 {
+   font-size: 10px;
+   font-weight: bolder;
+ }
+ .textgrade3 {
+   font-size: 9px;
+   font-weight: bolder;
+ }
+
+ .textgrade4 {
+   font-size: 8px;
+   font-weight: bolder;
+ }
+ .search-container {
+   position: relative;
+   display: flex;
+   align-items: center;
+   left: 1px;
+ }
+
+  .crossbutton {
+    display: initial;
+    align-self: flex-end;
+    margin-left: auto;
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    
+    position: relative;
+    left: 90%;
+    color: #333;
+  }
+
+  .no-scroll {
+    overflow: hidden;
+  }
+  .container1 {
+    /* padding: 10px; */
+    width: 80%;
+    left: 5%;
+  }
+
+  .custom-button {
+    margin: 5px 0;
+    padding: 10px;
+    width: 50%;
+  }
+
+  .textbox {
+    width: 80%;
+    max-width: 80%;
+  }
+
+  .search-button {
+    width: 50%;
+    padding: 10px;
+  }
 }

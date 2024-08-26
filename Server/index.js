@@ -46,7 +46,7 @@ app.use(
 );
 
 const corsConfig = {
-  origin: ["https://ty376c-3000.csb.app"],
+  origin: ["https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev/"],
   //origin: ["https://gdest.in"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
@@ -64,7 +64,6 @@ app.use("/documents", documentRoutes);
 app.use("/addProfile", addProfile);
 app.use("/wordtopdf", wordtopdf);
 // app.use("/pdftoword", pdftoword);
-app.use("/pdftoword", pdftoword);
 app.use("/masterAddJobRoles", MasterAddJobRoles);
 
 app.use(function (err, req, res, next) {

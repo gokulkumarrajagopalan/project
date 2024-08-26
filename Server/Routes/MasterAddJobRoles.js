@@ -6,14 +6,11 @@ const Schema_Skills = require("../Model/Schema_Skills");
 router.post("/", async (req, res) => {
   try {
     const { JobRole } = req.body;
-
     const newJobRole = new Schema_JobRoles({ JobRole });
-
     await newJobRole.save();
-
-    res.status(201).json({ message: "Job Roles Inserted Sucessfully" });
+    res.status(201).json({ message: "Job Roles Inserted Successfully" });
   } catch (e) {
-    console.log("Error : While inserting Job Roles", e);
+    console.log("Error: While inserting Job Roles", e);
     res.status(400).json({ message: "Internal server error" });
   }
 });
@@ -21,13 +18,12 @@ router.post("/", async (req, res) => {
 router.post("/AddMasterSkills", async (req, res) => {
   try {
     const { Skills } = req.body;
-
     const newSkills = new Schema_Skills({ Skills });
-
     await newSkills.save();
+    res.status(201).json({ message: "Skills Inserted Successfully" });
   } catch (e) {
     console.log("Failed to save the data", e);
-    res.status(400).json({ message: "Failed to save the data " });
+    res.status(400).json({ message: "Failed to save the data" });
   }
 });
 
