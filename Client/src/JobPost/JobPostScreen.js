@@ -184,7 +184,7 @@ function JobPostScreen() {
     setShowUserDetails(!showUserDetails);
     setShowFilter(false);
     setShowNotification(false);
-    setShowSelectedJob(false);
+    // setShowSelectedJob(false);
   };
 
   const toggleFilterDetails = () => {
@@ -267,7 +267,7 @@ function JobPostScreen() {
     );
   });
 
-  const showJobContainer = !showUserDetails && !showNotification && !showFilter;
+  const showJobContainer =  !showNotification && !showFilter;
 
   return (
     <>
