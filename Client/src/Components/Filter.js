@@ -67,11 +67,16 @@ const Filter = ({ showFilter, onToggleFilter, onFilter }) => {
 
     return showFilter ? (
         <div className="filter-container">
-            <label className="filter-label">Location:</label>
-            <input type="text" className="filter-input" value={location} onChange={handleLocationChange} />
-
-            <label className="filter-label">Skills:</label>
-            <input type="text" className="filter-input" value={skills} onChange={handleSkillsChange} />
+            <div className="filter-row">
+                <div>
+                    <label className="filter-label">Location:</label>
+                    <input type="text" className="filter-input" value={location} onChange={handleLocationChange} />
+                </div>
+                <div>
+                    <label className="filter-label">Skills:</label>
+                    <input type="text" className="filter-input" value={skills} onChange={handleSkillsChange} />
+                </div>
+            </div>
 
             <label className="filter-label">Company:</label>
             <input type="text" className="filter-input" value={company} onChange={handleCompanyChange} />

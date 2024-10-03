@@ -52,10 +52,10 @@ function JobPostDetail() {
     const fetchSessionData = async () => {
       try {
         if (!isValid) {
-          navigate("/SignIn");
+          //navigate("/SignIn");
         } else {
           if (userType !== "A") {
-            navigate("/Homelogin");
+            //navigate("/Homelogin");
           }
         }
       } catch (e) {
