@@ -52,6 +52,7 @@ const UserDetails = ({
             </ul>
         </div>
     ) : null;
+    
 };
 
 export default UserDetails;
