@@ -31,6 +31,11 @@ import Saved from "./Components/Saved";
 import Wordtopdf from "./Converter/Wordtopdf";
 import AddJobRoles from "./JobPost/Masters/AddJobRoles";
 import MasterAddSkills from "./JobPost/Masters/MasterAddSkills";
+import JAVA_Preparation from "./Learning/InterviewQA/JAVA_Preparation";
+import JavaMiscellaneous from "./Learning/InterviewQA/JavaMiscellaneous";
+import DBMS_Preparation from "./Learning/InterviewQA/DBMS_Preparation";
+
+
 
 function App() {
   return (
@@ -70,6 +75,14 @@ function App() {
             <Route path="/HeapSort" element={<HeapSort />} />
             <Route path="/RadixSort" element={<RadixSort />} />
             <Route path="/CountingSort" element={<CountingSort />} />
+            <Route path="/JAVA_Preparation" element={<JAVA_Preparation />} />
+            <Route path="/JavaMiscellaneous" element={<JavaMiscellaneous />} />
+            <Route path="/DBMS_Preparation" element={<DBMS_Preparation />} />
+
+            
+
+            
+            
 
             <Route path="/Wordtopdf" element={<Wordtopdf />} />
           </Routes>

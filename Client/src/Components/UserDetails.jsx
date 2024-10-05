@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import API_URLS from "../config";
 
-
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/signIn/sessioncheck";
 
@@ -36,25 +35,25 @@ const UserDetails = ({
 
     return showUserDetails ? (
         <div className="userDetailsContainer">
-
             <ul>
                 <li>Hi, {email}</li>
                 <li>
-                    <button onClick={onProfile}>Profile</button>{" "}
+                    <button className="user-link profile-link" onClick={onProfile}>Profile</button>
                 </li>
                 <li>
-                    <button onClick={onLogout}>Sign Out</button>{" "}
+                    <button className="user-link logout-link" onClick={onLogout}>Sign Out</button>
                 </li>
                 <li>
-                    <button onClick={onSaved}>Saved</button>{" "}
+                    <button className="user-link saved-link" onClick={onSaved}>Saved</button>
                 </li>
                 <li>
-                    <button onClick={onSettings}>Settings</button>{" "}
+                    <button className="user-link settings-link" onClick={onSettings}>Settings</button>
                 </li>
-
             </ul>
         </div>
     ) : null;
+    
+
 };
 
 export default UserDetails;
