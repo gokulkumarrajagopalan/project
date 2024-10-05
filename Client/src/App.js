@@ -33,6 +33,7 @@ import AddJobRoles from "./JobPost/Masters/AddJobRoles";
 import MasterAddSkills from "./JobPost/Masters/MasterAddSkills";
 import JAVA_Preparation from "./Learning/InterviewQA/JAVA_Preparation";
 import JavaMiscellaneous from "./Learning/InterviewQA/JavaMiscellaneous";
+import DBMS_Preparation from "./Learning/InterviewQA/DBMS_Preparation";
 
 
 
@@ -76,6 +77,9 @@ function App() {
             <Route path="/CountingSort" element={<CountingSort />} />
             <Route path="/JAVA_Preparation" element={<JAVA_Preparation />} />
             <Route path="/JavaMiscellaneous" element={<JavaMiscellaneous />} />
+            <Route path="/DBMS_Preparation" element={<DBMS_Preparation />} />
+
+            
 
             
             

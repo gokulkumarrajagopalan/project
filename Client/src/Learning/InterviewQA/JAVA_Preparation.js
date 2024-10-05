@@ -1,8 +1,35 @@
 import React from 'react';
+import { Helmet } from "react-helmet";
 
 const JAVA_Preparation = () => {
   return (
     <div>
+
+<Helmet>
+      <title>Java Interview Preparation - GDest</title>
+      <meta
+        name="description"
+        content="Prepare for your Java interview with key concepts, platform independence, features of Java, and more."
+      />
+      <meta
+        name="keywords"
+        content="Java interview preparation,Java interview questions , Java interview questions for fresher , Java interview questions in javapoint ,Java interview questions in w3school , Java interview questions in tutorialspoint, Java interview questions in geeksforgeeks,object-oriented programming, multithreading , oops interview question "
+      />
+      <meta property="og:title" content="Java Interview Preparation - GDest" />
+      <meta
+        property="og:description"
+        content="Explore essential Java concepts, platform independence, and features for your interview preparation."
+      />
+      <meta property="og:url" content="https://www.gdest.in/JAVA_Preparation" />
+      <meta property="og:type" content="website" />
+      <meta
+        property="og:image"
+        content="https://www.gdest.in/Asset/Logo.jpg"
+      />
+      <link rel="canonical" href="https://www.gdest.in/JAVA_Preparation" />
+    </Helmet>
+
+
       <h1>Java Interview Preparation</h1>
 
       <h2>1. Is Java Platform Independent? If yes, how?</h2>
