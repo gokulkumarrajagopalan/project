@@ -6,14 +6,14 @@ const JAVA_Preparation = () => {
     <div>
 
 <Helmet>
-      <title>Java Interview Preparation - GDest</title>
+      <title>50 Important Java Interview Questions - GDest</title>
       <meta
         name="description"
         content="Prepare for your Java interview with key concepts, platform independence, features of Java, and more."
       />
       <meta
         name="keywords"
-        content="Java interview preparation,Java interview questions , Java interview questions for fresher , Java interview questions in javapoint ,Java interview questions in w3school , Java interview questions in tutorialspoint, Java interview questions in geeksforgeeks,object-oriented programming, multithreading , oops interview question "
+        content="Java interview preparation,Java interview questions ,Java interview questions in Gdest,Java interview questions in Gdestin, Java interview questions for fresher , Java interview questions in javapoint ,Java interview questions in w3school , Java interview questions in tutorialspoint, Java interview questions in geeksforgeeks,object-oriented programming, multithreading , oops interview question "
       />
       <meta property="og:title" content="Java Interview Preparation - GDest" />
       <meta
