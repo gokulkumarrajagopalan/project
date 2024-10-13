@@ -20,7 +20,7 @@ router.post("/save_usersData", async (req, res) => {
   try {
 
     const uniqueId = uuidv4();
-    const TypeOfUser = 'A';
+    const TypeOfUser = 'C';
     const Active = 1 ; 
 
     //console.log("Unique ID:", uniqueId);

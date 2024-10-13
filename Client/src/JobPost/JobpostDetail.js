@@ -54,6 +54,8 @@ function JobPostDetail() {
         if (!isValid) {
           //navigate("/SignIn");
         } else {
+          if (userType !== "A" && userType !== "R" ) {
+            navigate("/JobPostScreen");
           if (userType !== "A") {
             //navigate("/Homelogin");
           }
