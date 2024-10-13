@@ -53,10 +53,6 @@ const UserDetails = ({
         </div>
     ) : null;
     
-<<<<<<< HEAD
-
-=======
->>>>>>> d166936e (commit)
 };
 
 export default UserDetails;

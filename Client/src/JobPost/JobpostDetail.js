@@ -56,6 +56,8 @@ function JobPostDetail() {
         } else {
           if (userType !== "A" && userType !== "R" ) {
             navigate("/JobPostScreen");
+          if (userType !== "A") {
+            //navigate("/Homelogin");
           }
         }}
       } catch (e) {
