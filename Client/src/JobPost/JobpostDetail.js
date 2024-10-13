@@ -57,7 +57,7 @@ function JobPostDetail() {
           if (userType !== "A" && userType !== "R" ) {
             navigate("/JobPostScreen");
           }
-        }
+        }}
       } catch (e) {
         console.log(e);
       }
