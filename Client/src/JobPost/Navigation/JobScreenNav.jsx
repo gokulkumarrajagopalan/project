@@ -5,6 +5,7 @@ import searchicon from "../../Asset/search_icon.png";
 import Filtericon from "../../Asset/filtericon.png";
 import NotificationIcon from "../../Asset/notificationicon.png";
 import { Link } from "react-router-dom";
+import Logotext from "../../Asset/LOgoGdest.png";
 
 const JobScreenNav = ({
   onSearch,
@@ -45,7 +46,10 @@ const JobScreenNav = ({
         </Link>
       </div>
       <div className="search-container">
-        {showSearch && (
+        {!showSearch && ( // Only show the logo text when search is hidden
+          <img src={Logotext} alt="GDEST.in" className="logo-text" />
+        )}
+        {showSearch && ( // Only show the search input when search is enabled
           <>
             <input
               type="text"

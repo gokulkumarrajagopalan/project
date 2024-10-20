@@ -3,6 +3,7 @@ import { MyContext } from "../context";
 import axios from "axios";
 import API_URLS from "../config";
 import { useNavigate } from "react-router-dom";
+
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/savejobpost";
 
@@ -22,71 +23,87 @@ function JobPostDetail() {
   const [expireon, setExpireon] = useState("");
   const [externalLink, setExternalLink] = useState(false);
   const [jobLink, setJobLink] = useState("");
-  const navigate = useNavigate("");
+  const navigate = useNavigate();
 
+  // Handle salary change
   const handleSalaryChange = (e) => {
     setSalary(e.target.value);
   };
 
+  // Handle work mode change
   const handleWorkModeChange = (mode) => {
-    if (workMode.includes(mode)) {
-      setWorkMode(workMode.filter((item) => item !== mode));
-    } else {
-      setWorkMode([...workMode, mode]);
-    }
+    setWorkMode((prev) =>
+      prev.includes(mode) ? prev.filter((item) => item !== mode) : [...prev, mode]
+    );
   };
 
+  // Handle employment type change
   const handleEmploymentTypeChange = (type) => {
-    if (employmentType.includes(type)) {
-      setEmploymentType(employmentType.filter((item) => item !== type));
-    } else {
-      setEmploymentType([...employmentType, type]);
-    }
+    setEmploymentType((prev) =>
+      prev.includes(type) ? prev.filter((item) => item !== type) : [...prev, type]
+    );
   };
 
+  // Handle experience change
   const handleExperienceChange = (e) => {
     setExperience(e.target.value);
-    console.log(experience);
   };
+
   useEffect(() => {
     const fetchSessionData = async () => {
       try {
         if (!isValid) {
-          navigate("/SignIn");
+          //navigate("/SignIn");
         } else {
+<<<<<<< HEAD
           if (userType !== "A" && userType !== "R" ) {
             navigate("/JobPostScreen");
           if (userType !== "A") {
             //navigate("/Homelogin");
+=======
+          if (userType !== "A" && userType !== "R") {
+            //navigate("/JobPostScreen");
+>>>>>>> 21c169d2 (commit)
           }
-        }}
+        }
       } catch (e) {
         console.log(e);
       }
     };
 
     fetchSessionData();
-  }, []);
+  }, [isValid, userType, navigate]); // Update dependencies here
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Simple validation
+    if (!jobRole || !companyName || !location || !description) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("role", jobRole);
+    formData.append("companyName", companyName);
+    formData.append("skills", skills);
+    formData.append("qualification", qualification);
+    formData.append("location", location);
+    formData.append("salary", salary);
+    formData.append("workMode", JSON.stringify(workMode));
+    formData.append("employmentType", JSON.stringify(employmentType));
+    formData.append("experience", experience);
+    formData.append("companyImage", companyImage);
+    formData.append("description", description);
+    formData.append("expireon", expireon);
+    formData.append("externalLink", externalLink);
+    formData.append("jobLink", externalLink ? jobLink : "");
+
     try {
-      const response = await axios.post(API_URL, {
-        role: jobRole,
-        companyName,
-        skills,
-        qualification,
-        location,
-        salary,
-        workMode,
-        employmentType,
-        experience,
-        companyImage,
-        description,
-        expireon,
-        externalLink,
-        jobLink: externalLink ? jobLink : "",
+      const response = await axios.post(API_URL, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       if (response.status === 201) {
@@ -250,19 +267,14 @@ function JobPostDetail() {
                 </td>
               </tr>
               <tr className="td_hover">
+                <td>Experience</td>
                 <td>
-                  <label>Experience:</label>
-                </td>
-                <td>
-                  <select value={experience} onChange={handleExperienceChange}>
-                    <option value="">Select Experience</option>
-                    <option value="Freshers">Freshers</option>
-                    <option value="1-2 years">1-2 years</option>
-                    <option value="3-5 years">3-5 years</option>
-                    <option value="6-9 years">6-9 years</option>
-                    <option value="10-15 years">10-15 years</option>
-                    <option value="15+ years">15+ years</option>
-                  </select>
+                  <input
+                    type="text"
+                    className="job-input"
+                    value={experience}
+                    onChange={handleExperienceChange}
+                  />
                 </td>
               </tr>
               <tr className="td_hover">
@@ -270,8 +282,7 @@ function JobPostDetail() {
                 <td>
                   <input
                     type="file"
-                    className="job-input"
-                    name="companyImage"
+                    accept="image/*"
                     onChange={(e) => setCompanyImage(e.target.files[0])}
                   />
                 </td>
@@ -280,20 +291,17 @@ function JobPostDetail() {
                 <td>Description</td>
                 <td>
                   <textarea
-                    className="job-input-desc"
-                    name="description"
+                    rows={5}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </td>
               </tr>
               <tr className="td_hover">
-                <td>Expires On</td>
+                <td>Expire On</td>
                 <td>
                   <input
-                    type="text"
-                    className="job-input"
-                    name="expireon"
+                    type="date"
                     value={expireon}
                     onChange={(e) => setExpireon(e.target.value)}
                   />
@@ -303,42 +311,27 @@ function JobPostDetail() {
                 <td>External Link</td>
                 <td>
                   <input
-                    type="radio"
-                    id="externalLinkYes"
-                    name="linkType"
-                    value="1"
+                    type="checkbox"
                     checked={externalLink}
-                    onChange={() => setExternalLink(true)}
+                    onChange={(e) => setExternalLink(e.target.checked)}
                   />
-                  <label htmlFor="externalLinkYes">Yes</label>
-                  <input
-                    type="radio"
-                    id="externalLinkNo"
-                    name="linkType"
-                    value="0"
-                    checked={!externalLink}
-                    onChange={() => setExternalLink(false)}
-                  />
-                  <label htmlFor="externalLinkNo">No</label>
                 </td>
               </tr>
               {externalLink && (
-                <tr>
+                <tr className="td_hover">
                   <td>Job Link</td>
                   <td>
                     <input
-                      type="text"
-                      className="job-input"
-                      name="jobLink"
+                      type="url"
                       value={jobLink}
                       onChange={(e) => setJobLink(e.target.value)}
                     />
                   </td>
                 </tr>
               )}
-              <tr className="td_hover">
-                <td>
-                  <button type="submit">Submit</button>
+              <tr>
+                <td colSpan={2}>
+                  <button type="submit" className="btn btn-primary">Submit</button>
                 </td>
               </tr>
             </tbody>

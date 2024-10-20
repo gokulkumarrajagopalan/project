@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import "./App.css";
 import "./Style/Style.css";
+import "./Style/Mobile_mediaQuery.css"
+import "./Style/Tab_MediaQuery.css"
 import NavBar from "./LandingPage/NavBar";
 import Home from "./LandingPage/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

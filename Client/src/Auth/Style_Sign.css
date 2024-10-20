@@ -1,0 +1,160 @@
+/* Main container for both SignIn and Register pages */
+.Register_container,
+.section_card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  padding: 20px; /* Padding around the container */
+  background-color: #001f3f; /* Dark blue background */
+}
+
+/* Card styling for both pages */
+.register-card,
+.section_card {
+  background-color: white; /* White background for the card */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  padding: 30px; /* Inner padding */
+  width: 400px; /* Fixed width for the card */
+  position: relative; /* Positioning context */
+  top: 30px;
+}
+
+/* Header styling for both SignIn and Register */
+.Header_signup {
+  color: #001f3f; /* Dark blue text color */
+  text-align: center; /* Centered text */
+  margin-bottom: 20px; /* Spacing below the header */
+  font-size: 28px; /* Larger font size */
+  font-weight: bold; /* Bold font */
+}
+
+/* Label styling for both forms */
+.register_label,
+label {
+  margin: 10px 0 5px; /* Spacing for labels */
+  color: #001f3f; /* Dark blue text color */
+}
+
+/* Input styling for both forms */
+.register-input,
+.inputtxt {
+  width: 100%; /* Full width inputs */
+  padding: 10px; /* Inner padding */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  margin-bottom: 15px; /* Spacing below inputs */
+  font-size: 16px;
+  color: #001f3f;
+}
+
+/* Button styling for both forms */
+.btn_signup,
+.submitbutton {
+  width: 100%; /* Full width button */
+  padding: 10px; /* Inner padding */
+  background-color: #001f3f; /* Dark blue background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Button hover effect */
+.btn_signup:hover,
+.submitbutton:hover {
+  background-color: #0056b3; /* Lighter blue on hover */
+}
+
+/* Instruction text styling */
+.instructions {
+  font-size: 0.9em; /* Slightly smaller text */
+  color: #666; /* Grey color */
+  margin-top: 5px; /* Spacing above instructions */
+}
+
+/* Error message styling */
+.errmsg {
+  color: red; /* Red text for errors */
+  margin-bottom: 10px; /* Spacing below error message */
+}
+
+/* Offscreen text (for accessibility) */
+.offscreen {
+  position: absolute;
+  left: -9999px; /* Move offscreen */
+}
+
+/* Success message styling */
+.success-message {
+  text-align: center; /* Centered text */
+  color: green; /* Green text */
+}
+
+/* Line styling */
+.line {
+  color: #001f3f; /* Dark blue text */
+  font-weight: bold; /* Bold text */
+}
+
+/* Left side styling for images */
+.left-side {
+  flex: 1; /* Take up remaining space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image styling */
+.left-image {
+  max-width: 100%; /* Responsive image */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .register-card,
+  .section_card {
+    width: 90%; /* Responsive width for mobile */
+  }
+}
+
+/* Typewriter effect (optional styling) */
+.typewriter-text-wrapper {
+  font-size: 2rem;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid #333;
+  animation: typing 3.5s steps(40, end) infinite, blink-caret 0.75s step-end infinite;
+}
+
+.sub-text {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #333;
+  }
+}

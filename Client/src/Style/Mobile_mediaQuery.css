@@ -1,0 +1,169 @@
+@media (max-width: 480px) {
+
+    .jobPostContainer {
+     overflow-y: hidden;
+   }
+ 
+   .img_Logo {
+     width: 40px;
+     height: 40px;
+     margin-left: 10px;
+     top: 3px;
+   }
+   .logo-text {
+     width: 130px;
+     top: 3px;
+   }
+   .textgrade1 {
+     font-size: 10px;
+     font-weight: bolder;
+   }
+   .textgrade3 {
+     font-size: 9px;
+     font-weight: bolder;
+   }
+ 
+   .textgrade4 {
+     font-size: 8px;
+     font-weight: bolder;
+   }
+   .search-container {
+     position: relative;
+     display: flex;
+     align-items: center;
+     left: 1px;
+   }
+ }
+
+ @media (max-width: 480px) {
+    .crossbutton {
+      display: initial;
+      align-self: flex-end;
+      margin-left: auto;
+  
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 25px;
+      
+      position: relative;
+      left: 90%;
+      color: #333;
+    }
+  
+    .no-scroll {
+      overflow: hidden;
+    }
+    .container1 {
+      /* padding: 10px; */
+      width: 80%;
+      left: 5%;
+    }
+  
+    .custom-button {
+      margin: 5px 0;
+      padding: 10px;
+      width: 50%;
+    }
+  
+    .textbox {
+      width: 80%;
+      max-width: 80%;
+    }
+  
+    .search-button {
+      width: 50%;
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+
+    .jobPostContainer {
+     overflow-y: hidden;
+   }
+  
+   .img_Logo {
+     width: 40px;
+     height: 40px;
+     margin-left: 10px;
+     top: 3px;
+   }
+   .logo-text {
+     width: 130px;
+     top: 3px;
+   }
+   .textgrade1 {
+     font-size: 10px;
+     font-weight: bolder;
+   }
+   .textgrade3 {
+     font-size: 9px;
+     font-weight: bolder;
+   }
+  
+   .textgrade4 {
+     font-size: 8px;
+     font-weight: bolder;
+   }
+   .search-container {
+     position: relative;
+     display: flex;
+     align-items: center;
+     left: 1px;
+   }
+  
+    .crossbutton {
+      display: initial;
+      align-self: flex-end;
+      margin-left: auto;
+  
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 25px;
+      
+      position: relative;
+      left: 90%;
+      color: #333;
+    }
+  
+    .no-scroll {
+      overflow: hidden;
+    }
+    .container1 {
+      /* padding: 10px; */
+      width: 80%;
+      left: 5%;
+    }
+  
+    .custom-button {
+      margin: 5px 0;
+      padding: 10px;
+      width: 50%;
+    }
+  
+    .textbox {
+      width: 80%;
+      max-width: 80%;
+    }
+  
+    .search-button {
+      width: 50%;
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .filter-input, 
+    .filter-select {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+  
+    .filter-button,
+    .filter-cancel-button {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+  }

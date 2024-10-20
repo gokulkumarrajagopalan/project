@@ -52,7 +52,11 @@ const UserDetails = ({
             </ul>
         </div>
     ) : null;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 21c169d2 (commit)
 };
 
 export default UserDetails;
