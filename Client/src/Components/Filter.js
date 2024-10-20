@@ -1,5 +1,4 @@
-import React, { useState } from "react"; 
-
+import React, { useState } from "react";
 
 const Filter = ({ showFilter, onToggleFilter, onFilter }) => {
     const [location, setLocation] = useState('');
@@ -10,46 +9,6 @@ const Filter = ({ showFilter, onToggleFilter, onFilter }) => {
     const [workMode, setWorkMode] = useState([]);
     const [employmentType, setEmploymentType] = useState([]);
     const [salary, setSalary] = useState('');
-
-    const handleLocationChange = (e) => {
-        setLocation(e.target.value);
-    };
-
-    const handleSkillsChange = (e) => {
-        setSkills(e.target.value);
-    };
-
-    const handleExperienceChange = (e) => {
-        setExperience(e.target.value);
-    };
-
-    const handleCompanyChange = (e) => {
-        setCompany(e.target.value);
-    };
-
-    const handleSortChange = (e) => {
-        setSort(e.target.value);
-    };
-
-    const handleSalaryChange = (e) => {
-        setSalary(e.target.value);
-    };
-
-    const handleWorkModeChange = (mode) => {
-        if (workMode.includes(mode)) {
-            setWorkMode(workMode.filter((m) => m !== mode));
-        } else {
-            setWorkMode([...workMode, mode]);
-        }
-    };
-
-    const handleEmploymentTypeChange = (type) => {
-        if (employmentType.includes(type)) {
-            setEmploymentType(employmentType.filter((t) => t !== type));
-        } else {
-            setEmploymentType([...employmentType, type]);
-        }
-    };
 
     const handleFilter = () => {
         onFilter(location, skills, company, sort, workMode, experience, employmentType, salary);
@@ -71,22 +30,22 @@ const Filter = ({ showFilter, onToggleFilter, onFilter }) => {
             <div className="filter-row">
                 <div>
                     <label className="filter-label">Location:</label>
-                    <input type="text" className="filter-input" value={location} onChange={handleLocationChange} />
+                    <input type="text" className="filter-input" value={location} onChange={(e) => setLocation(e.target.value)} />
                 </div>
                 <div>
                     <label className="filter-label">Skills:</label>
-                    <input type="text" className="filter-input" value={skills} onChange={handleSkillsChange} />
+                    <input type="text" className="filter-input" value={skills} onChange={(e) => setSkills(e.target.value)} />
                 </div>
             </div>
 
             <div className="filter-row">
                 <div>
                     <label className="filter-label">Company:</label>
-                    <input type="text" className="filter-input" value={company} onChange={handleCompanyChange} />
+                    <input type="text" className="filter-input" value={company} onChange={(e) => setCompany(e.target.value)} />
                 </div>
                 <div>
                     <label className="filter-label">Experience:</label>
-                    <select className="filter-select" value={experience} onChange={handleExperienceChange}>
+                    <select className="filter-select" value={experience} onChange={(e) => setExperience(e.target.value)}>
                         <option value="">Select Experience</option>
                         <option value="Freshers">Freshers</option>
                         <option value="1-2 years">1-2 years</option>
@@ -101,7 +60,7 @@ const Filter = ({ showFilter, onToggleFilter, onFilter }) => {
             <div className="filter-row">
                 <div>
                     <label className="filter-label">Sort:</label>
-                    <select className="filter-select" value={sort} onChange={handleSortChange}>
+                    <select className="filter-select" value={sort} onChange={(e) => setSort(e.target.value)}>
                         <option value="">Sort</option>
                         <option value="7">Last 7 days</option>
                         <option value="15">Last 15 days</option>
@@ -110,7 +69,7 @@ const Filter = ({ showFilter, onToggleFilter, onFilter }) => {
                 </div>
                 <div>
                     <label className="filter-label">Salary:</label>
-                    <select className="filter-select" value={salary} onChange={handleSalaryChange}>
+                    <select className="filter-select" value={salary} onChange={(e) => setSalary(e.target.value)}>
                         <option value="">Select salary</option>
                         <option value="1-3 Lakhs">1-3 Lakhs</option>
                         <option value="3-5 Lakhs">3-5 Lakhs</option>

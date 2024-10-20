@@ -60,7 +60,7 @@ function NavBar() {
               <div className="logo">
                 <Link className="logo-link" to="/">
                   <div className="logo-container">
-                    <img src={Logo} alt="Code Garbages" className="img_Logo" />
+                    <img src={Logo} alt="GDEST.in" className="img_Logo" />
                     <img src={Logotext} alt="GDEST.in" className="logo-text" />
                     {/* <h1 className="logo-text">GDEST.IN</h1> */}
                   </div>
