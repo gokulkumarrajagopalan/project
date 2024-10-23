@@ -59,7 +59,7 @@ function JobPostDetail() {
           if (userType !== "A") {
             //navigate("/Homelogin");
           }
-        }
+        }}
       } catch (e) {
         console.log(e);
       }

@@ -14,6 +14,9 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const MasterAddJobRoles = require("./Routes/MasterAddJobRoles");
+const PaymentRoutes = require("./Routes/PaymentRoutes")
+const mongoose = require("mongoose");
+mongoose.set('strictQuery', true);
 
 const app = express();
 
@@ -47,8 +50,9 @@ app.use(
 
 const corsConfig = {
   //origin: ["https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev"],
-  //origin: ["https://ty376c-3000.csb.app"],
-  origin: ["https://gdest.in"],
+  origin: ["https://ty376c-3001.csb.app"],
+  //origin: ["https://gdest.in"],
+  //"https://ty376c-3000.csb.app",
   methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
 };
@@ -66,6 +70,8 @@ app.use("/addProfile", addProfile);
 app.use("/wordtopdf", wordtopdf);
 // app.use("/pdftoword", pdftoword);
 app.use("/masterAddJobRoles", MasterAddJobRoles);
+app.use("/PaymentRoutes" , PaymentRoutes);
+
 
 app.use(function (err, req, res, next) {
   console.error(err.stack);
