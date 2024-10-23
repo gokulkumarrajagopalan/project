@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import "./App.css";
 import "./Style/Style.css";
+import "./Style/Mobile_mediaQuery.css"
+import "./Style/Tab_MediaQuery.css"
 import NavBar from "./LandingPage/NavBar";
 import Home from "./LandingPage/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -37,6 +39,7 @@ const MasterAddSkills = lazy(() => import("./JobPost/Masters/MasterAddSkills"));
 const JAVA_Preparation = lazy(() => import("./Learning/InterviewQA/JAVA_Preparation"));
 const JavaMiscellaneous = lazy(() => import("./Learning/InterviewQA/JavaMiscellaneous"));
 const DBMS_Preparation = lazy(() => import("./Learning/InterviewQA/DBMS_Preparation"));
+const Basic_interview_codings = lazy(() => import("./Learning/InterviewQA/Basic_interview_codings"));
 
 function App() {
   return (
@@ -77,6 +80,7 @@ function App() {
               <Route path="/JAVA_Preparation" element={<JAVA_Preparation />} />
               <Route path="/JavaMiscellaneous" element={<JavaMiscellaneous />} />
               <Route path="/DBMS_Preparation" element={<DBMS_Preparation />} />
+              <Route path="/Basic_interview_codings" element={<Basic_interview_codings />} />
               <Route path="/Wordtopdf" element={<Wordtopdf />} />
             </Routes>
           </Suspense>
