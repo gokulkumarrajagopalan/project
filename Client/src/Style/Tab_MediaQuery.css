@@ -264,3 +264,9 @@
         padding: 0.6rem;
     }
   }
+
+  @media (max-width: 768px) {
+    .footer-column {
+      flex-basis: 100%;
+    }
+  }

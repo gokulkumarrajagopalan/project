@@ -35,7 +35,7 @@ router.post('/savejobpost', async (req, res) => {
       externalLink,
       jobLink,
     });
-
+    console.log(newJobPost);
     await newJobPost.save();
 
     res.status(201).json({ message: 'Job post created successfully' });
