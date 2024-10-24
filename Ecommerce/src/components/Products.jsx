@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import "../Styles/Products.css"; 
+import "../Styles/Products.css";
 
 const Products = () => {
   const [data, setData] = useState([]);
@@ -16,6 +16,72 @@ const Products = () => {
 
   const addProduct = (product) => {
     dispatch(addCart(product));
+  };
+
+  // Handle payment through Razorpay
+  const handlePayment = async (product) => {
+    try {
+      // Create an order by calling your backend
+      const orderRes = await fetch("https://ty376c-3700.csb.app/PaymentRoutes/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: product.price, // Amount to be paid in smallest unit (Razorpay handles it)
+          currency: "INR",
+          receipt: `receipt#${product.id}`,
+        }),
+      });
+
+      const orderData = await orderRes.json();
+
+      // Razorpay options for payment
+      const options = {
+        key: "rzp_test_RNv1714d2JagoD", // Razorpay key from your backend
+        amount: orderData.amount, // amount in paise
+        currency: orderData.currency,
+        name: "Your Store",
+        description: product.title,
+        order_id: orderData.id, // Razorpay order ID
+        handler: async (response) => {
+          // Verify payment using your backend
+          const verifyRes = await fetch("https://ty376c-3700.csb.app/PaymentRoutes/order/validate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+
+          const verification = await verifyRes.json();
+          if (verifyRes.status === 200) {
+            toast.success("Payment successful!");
+            // Further action after successful payment (e.g., redirect or update cart)
+          } else {
+            toast.error("Payment verification failed");
+          }
+        },
+        prefill: {
+          name: "Customer Name",
+          email: "customer@example.com",
+          contact: "9999999999",
+        },
+        theme: {
+          color: "#F37254",
+        },
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } catch (error) {
+      toast.error("Failed to initiate payment");
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -96,6 +162,12 @@ const Products = () => {
                   }}
                 >
                   Add to Cart
+                </button>
+                <button
+                  className="btn-primary"
+                  onClick={() => handlePayment(product)}
+                >
+                  Pay Now
                 </button>
               </div>
             </div>

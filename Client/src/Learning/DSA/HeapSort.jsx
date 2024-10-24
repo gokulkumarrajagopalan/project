@@ -1,14 +1,18 @@
 import React from "react";
 import TshirtImg from "./tshirt.svg";
+import API_URLS from "../../config";
+const ENV = process.env.REACT_APP_ENV || "production";
+const API_URL = API_URLS[ENV] + "/PaymentRoutes/order";
+const API_URL_VALIDATE = API_URLS[ENV] + "/PaymentRoutes/order/validate";
 
 function HeapSort() {
-  const amount = 500;
+  const amount = 100;
   const currency = "INR";
   const receiptId = "qwsaq1";
 
   const paymentHandler = async (e) => {
     console.log("payment process on going..");
-    const response = await fetch("https://localhost:5000/order", {
+    const response = await fetch(API_URL, {
       method: "POST",
       body: JSON.stringify({
         amount,
@@ -23,7 +27,7 @@ function HeapSort() {
     console.log(order);
 
     var options = {
-      key: "rzp_test_1XK1kWTPuSe4Bs", // Enter the Key ID generated from the Dashboard
+      key: "rzp_test_RNv1714d2JagoD", // Enter the Key ID generated from the Dashboard
       amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency,
       name: "CodeGarbges", //your business name
@@ -36,7 +40,7 @@ function HeapSort() {
         };
 
         const validateRes = await fetch(
-          "http://localhost:5000/order/validate",
+          API_URL_VALIDATE,
           {
             method: "POST",
             body: JSON.stringify(body),
