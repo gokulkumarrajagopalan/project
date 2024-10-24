@@ -1115,11 +1115,11 @@ li.NavItem:hover {
   background-color: #ccc;
   border: 3px solid #007bff;
 }
-
+/* 
 h2,
 h3 {
-  color: white; /* White text for headers */
-}
+  color: white; 
+} */
 
 .profile-section {
   margin-bottom: 20px;
@@ -1207,7 +1207,7 @@ h3 {
   background-color: white;
   color: rgb(0, 0, 0);
 }
-<<<<<<< HEAD
+
 @media (max-width: 480px) {
 
   .jobPostContainer {
@@ -1343,17 +1343,6 @@ h4 {
   color: #666;
 }
 
-@media (max-width: 768px) {
-  .footer-column {
-    flex-basis: 100%;
-  }
-}
-
-=======
-
-
-
->>>>>>> 21c169d2 (commit)
 .QuickSort-container {
   text-align: center;
   margin-top: 20px;
@@ -1482,10 +1471,9 @@ button {
   margin: auto;
 }
 
-<<<<<<< HEAD
-=======
+
 .job-post-detail {
-  background-color: #00264d; /* Slightly lighter dark blue for the form */
+  background-color: #00264d; 
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -1497,18 +1485,18 @@ table {
 }
 
 thead th {
-  background-color: #003366; /* Header background color */
+  background-color: #003366;
   padding: 10px;
   text-align: left;
 }
 
 tbody td {
   padding: 10px;
-  border-bottom: 1px solid #00509e; /* Light blue border for table rows */
+  border-bottom: 1px solid #00509e; 
 }
 
 .td_hover:hover {
-  background-color: #004080; /* Darker blue for hover effect */
+  background-color: #004080; 
 }
 
 .job-input,select,
@@ -1528,13 +1516,13 @@ textarea:focus,
 select:focus,
 input[type="url"]:focus,
 input[type="date"]:focus {
-  border-color: #0099cc; /* Border color on focus */
-  outline: none; /* Remove outline */
+  border-color: #0099cc; 
+  outline: none;
 }
 
 .btn {
-  background-color: #00509e; /* Button color */
-  color: white; /* Button text color */
+  background-color: #00509e;
+  color: white; 
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -1543,7 +1531,7 @@ input[type="date"]:focus {
 }
 
 .btn:hover {
-  background-color: #007acc; /* Button hover color */
+  background-color: #007acc; 
 }
 
 label {
@@ -1556,9 +1544,6 @@ input[type="checkbox"] {
 }
 
 textarea {
-  resize: none; /* Prevent resizing */
+  resize: none; 
 }
 
-
-
->>>>>>> 21c169d2 (commit)

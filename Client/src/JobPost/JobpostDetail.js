@@ -55,17 +55,14 @@ function JobPostDetail() {
         if (!isValid) {
           //navigate("/SignIn");
         } else {
-<<<<<<< HEAD
+
           if (userType !== "A" && userType !== "R" ) {
             navigate("/JobPostScreen");
           if (userType !== "A") {
             //navigate("/Homelogin");
-=======
-          if (userType !== "A" && userType !== "R") {
-            //navigate("/JobPostScreen");
->>>>>>> 21c169d2 (commit)
+
           }
-        }
+        }}
       } catch (e) {
         console.log(e);
       }
@@ -74,38 +71,30 @@ function JobPostDetail() {
     fetchSessionData();
   }, [isValid, userType, navigate]); // Update dependencies here
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
-
+  
     // Simple validation
     if (!jobRole || !companyName || !location || !description) {
       alert("Please fill out all required fields.");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("role", jobRole);
-    formData.append("companyName", companyName);
-    formData.append("skills", skills);
-    formData.append("qualification", qualification);
-    formData.append("location", location);
-    formData.append("salary", salary);
-    formData.append("workMode", JSON.stringify(workMode));
-    formData.append("employmentType", JSON.stringify(employmentType));
-    formData.append("experience", experience);
-    formData.append("companyImage", companyImage);
-    formData.append("description", description);
-    formData.append("expireon", expireon);
-    formData.append("externalLink", externalLink);
-    formData.append("jobLink", externalLink ? jobLink : "");
-
+  
+  
+  
     try {
-      const response = await axios.post(API_URL, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
+  
+      const response = await axios.post(API_URL, { role: jobRole, companyName: companyName,
+         skills: skills, qualification: qualification, location: location, salary: salary,
+        workMode: workMode, 
+        employmentType: employmentType, 
+        experience: experience,
+        companyImage: companyImage,
+        description: description,
+        expireon: expireon,
+        externalLink: externalLink,
+        jobLink: externalLink ? jobLink : "" });
+  
       if (response.status === 201) {
         alert("Data Saved Successfully");
       } else {
@@ -116,7 +105,8 @@ function JobPostDetail() {
       alert("Failed to save data");
     }
   };
-
+  
+  
   return (
     <div className="job-post-detail-container">
       <div className="job-post-detail">
