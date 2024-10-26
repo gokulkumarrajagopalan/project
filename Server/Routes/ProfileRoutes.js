@@ -129,7 +129,7 @@ router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profil
 // Get user profile
 router.get("/getProfile", async (req, res) => {
   try {
-    const userId = 2;
+    const userId = 3;
 
     const profile = await UserProfile.findOne({ userid: userId });
 

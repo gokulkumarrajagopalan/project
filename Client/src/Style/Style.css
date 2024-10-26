@@ -128,6 +128,28 @@
 
 /* HomeNav */
 
+.MobileMenuButton:hover {
+  transform: scale(1.2);
+}
+
+.MobileNavList div:hover {
+  background-color: #d6e8fa; /* Slightly lighter blue */
+  transform: scale(1.05);
+  border-radius: 5px;
+}
+
+.MobileNavList div {
+  padding: 12px 0;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .Header {
   height: 60px;
   background-color: #ffffff;
@@ -144,6 +166,7 @@ li.NavItem:hover {
   color: black;
   border-radius: 50px;
 }
+
 .NavList {
   display: flex;
   justify-content: space-between;
@@ -199,9 +222,12 @@ li.NavItem:hover {
   width: 90%;
   margin: 0 auto;
   padding: 1rem;
-  background-color: #f1f1f1;
+  background-color: #001f3f;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 65px;
+
 }
 
 .filter-row {
@@ -214,7 +240,7 @@ li.NavItem:hover {
 .filter-label {
   margin-bottom: 0.5rem;
   font-size: 1rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .filter-input, 
@@ -227,9 +253,8 @@ li.NavItem:hover {
   box-sizing: border-box;
 }
 
-.filter-button,
-.filter-cancel-button {
-  width: 48%;
+.filter-button, .filter-cancel-button {
+  width: 15%;
   padding: 0.75rem;
   margin-top: 1rem;
   font-size: 1rem;
@@ -239,8 +264,9 @@ li.NavItem:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  position: relative;
+  left: 65%;
 }
-
 .filter-cancel-button {
   background-color: #f44336;
 }
@@ -255,8 +281,7 @@ li.NavItem:hover {
 
 
 /* .jobCard */
-
-.jobCard {
+.jobCard { 
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -272,21 +297,40 @@ li.NavItem:hover {
   z-index: 2;
 }
 
-.readMoreLink {
-  color: gray;
-}
 .CompanyLogo {
   float: right;
   width: 60px;
   height: auto;
   margin-left: 30px;
 }
+
+.jobFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.postedTime {
+  font-size: 13px;
+  color: gray;
+  
+}
+
 .prefer_Section {
   height: 30px;
-  width: auto;
+  width: 70%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-top: 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+ 
 }
+.recentPosted {
+  font-weight: bold;
+  color: rgb(21 176 21); }
+
+
 
 /* HOME PAGE */
 .headsec_1 {
@@ -314,11 +358,7 @@ li.NavItem:hover {
   margin: 10px;
 }
 
-/* .header {
-  background-color: var(--clr-primary);
-  color: black;
-  width: 100%;
-} */
+
 
 .innerWrapper {
   max-width: 100%;
@@ -338,13 +378,13 @@ li.NavItem:hover {
   width: 40px;
   height: 40px;
   margin-left: 10px;
-  top: 7px;
+  top: 3px;
   position: relative;
 }
 
 .logo-text {
   width: 130px;
-  top: 7px;
+  top: 3px;
   position: relative;
 }
 
@@ -429,6 +469,7 @@ li.NavItem:hover {
   display: flex;
   align-items: center;
   right: 40px;
+  top:3px
 }
 
 .search-input {
@@ -504,19 +545,7 @@ li.NavItem:hover {
   background-color: rgb(255, 255, 255);
 }
 
-/* .Jobdescription {
-  max-height: 300px;
-  overflow-y: scroll;
-  border: 1px solid #ccc;
-  padding: 10px;
-} */
 
-/* .header-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-} */
 
 .Jobdescription::-webkit-scrollbar {
   width: 7px;
@@ -534,11 +563,7 @@ li.NavItem:hover {
   padding: 10px;
 }
 
-.filter-container {
-  position: relative;
-  top: 55px;
-  /* display: inline-grid; */
-}
+
 
 /* MobileNav.css */
 
@@ -580,7 +605,7 @@ li.NavItem:hover {
 .userDetailsContainer li:first-child {
   font-weight: bold;
   margin-bottom: 20px;
-  color: #333; /* Darker text for header */
+  color: #333; 
 }
 
 /* General style for all buttons */
@@ -904,10 +929,10 @@ li.NavItem:hover {
 
 
 .Signinlabel {
-  color: black;
+  color: #001f3f;
 }
 .Signuplabel {
-  color: black;
+  color: #001f3f;
 }
 .learninglabel {
   display: none;
@@ -1199,92 +1224,16 @@ h3 {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background-color: #007bff;
-  color: white;
+  background-color: #001f3f;
+  color: white; 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
 .btn-ssa button:hover {
-  background-color: white;
-  color: rgb(0, 0, 0);
+  background-color: #61a0e3; 
+  color: rgb(255, 255, 255); 
+  transform: scale(1.05); 
 }
-
-@media (max-width: 480px) {
-
-  .jobPostContainer {
-   overflow-y: hidden;
- }
-
- .img_Logo {
-   width: 40px;
-   height: 40px;
-   margin-left: 10px;
-   top: 3px;
- }
- .logo-text {
-   width: 130px;
-   top: 3px;
- }
- .textgrade1 {
-   font-size: 10px;
-   font-weight: bolder;
- }
- .textgrade3 {
-   font-size: 9px;
-   font-weight: bolder;
- }
-
- .textgrade4 {
-   font-size: 8px;
-   font-weight: bolder;
- }
- .search-container {
-   position: relative;
-   display: flex;
-   align-items: center;
-   left: 1px;
- }
-
-  .crossbutton {
-    display: initial;
-    align-self: flex-end;
-    margin-left: auto;
-
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 25px;
-    
-    position: relative;
-    left: 90%;
-    color: #333;
-  }
-
-  .no-scroll {
-    overflow: hidden;
-  }
-  .container1 {
-    /* padding: 10px; */
-    width: 80%;
-    left: 5%;
-  }
-
-  .custom-button {
-    margin: 5px 0;
-    padding: 10px;
-    width: 50%;
-  }
-
-  .textbox {
-    width: 80%;
-    max-width: 80%;
-  }
-
-  .search-button {
-    width: 50%;
-    padding: 10px;
-  }
-}
-
 
 
 footer {
@@ -1545,5 +1494,12 @@ input[type="checkbox"] {
 
 textarea {
   resize: none; 
+}
+
+.logotexts {
+  left: 50px;
+  position: fixed;
+  width: 130px;
+  top: 15px;
 }
 

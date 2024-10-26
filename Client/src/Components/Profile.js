@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Textbox from "./Textbox";
+import Textbox from "./Textbox"; // Assuming Textbox is a custom component
 import API_URLS from "../config";
 
 const ENV = process.env.REACT_APP_ENV || "production";
-const API_URL = API_URLS[ENV] + "/addProfile/getProfile/";
-const API_URL_CREATE = API_URLS[ENV] + "/addProfile/createProfile/";
+const API_URL_GET_PROFILE = API_URLS[ENV] + "/addProfile/getProfile/";
+const API_URL_CREATE_PROFILE = API_URLS[ENV] + "/addProfile/createProfile/";
+
 function Profile() {
   const [profile, setProfile] = useState({
     firstName: "",
@@ -26,19 +27,21 @@ function Profile() {
 
   const [isEditing, setIsEditing] = useState(true);
 
-  const fetchProfile = async () => {
-    try {
-      const response = await fetch(API_URL);
-      const data = await response.json();
-      if (data.profile) {
-        setProfile(data.profile);
-      }
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-    }
-  };
-
+  // Fetch the profile data when the component mounts
   useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(API_URL_GET_PROFILE);
+        const data = await response.json();
+        if (data.profile) {
+          // Set the profile data if fetched successfully
+          setProfile(data.profile);
+        }
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
     fetchProfile();
   }, []);
 
@@ -54,7 +57,7 @@ function Profile() {
     const { name, files } = e.target;
     setProfile({
       ...profile,
-      [name]: files[0],
+      [name]: files[0], // Assuming single file upload
     });
   };
 
@@ -65,21 +68,15 @@ function Profile() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsEditing(false);
-    saveProfile(profile);
+    await saveProfile(profile); // Save the profile
   };
 
   const handleEditClick = () => {
-    setIsEditing(true);
+    setIsEditing(true); // Enable editing mode
   };
-
-  useEffect(() => {
-    if (!isEditing) {
-      saveProfile(profile);
-    }
-  }, [profile, isEditing]);
 
   const saveProfile = async (profileData) => {
     try {
@@ -90,7 +87,7 @@ function Profile() {
         }
       });
 
-      const response = await fetch(API_URL_CREATE, {
+      const response = await fetch(API_URL_CREATE_PROFILE, {
         method: "POST",
         body: formData,
       });
@@ -123,7 +120,7 @@ function Profile() {
       <div className="profile-picture-container">
         {profile.profilePicture ? (
           <img
-            src={profile.profilePicture}
+            src={URL.createObjectURL(profile.profilePicture)}
             alt="Profile"
             className="profile-picture"
           />
@@ -140,7 +137,7 @@ function Profile() {
         </button>
       ) : (
         <form onSubmit={handleSubmit}>
-          <h2>Create Your Profile</h2>
+          <h2>Your Profile</h2>
 
           <div className="profile-section">
             <h3>Personal Information</h3>
@@ -149,7 +146,7 @@ function Profile() {
               type="text"
               name="firstName"
               placeholder="First Name"
-              value={profile.firstName}
+              value={profile.firstName || ""}
               onChange={handleChange}
               className="profile-input"
             />
@@ -157,16 +154,15 @@ function Profile() {
               type="text"
               name="lastName"
               placeholder="Last Name"
-              value={profile.lastName}
+              value={profile.lastName || ""}
               onChange={handleChange}
               className="profile-input"
             />
-
             <input
               type="tel"
               name="phone"
               placeholder="Phone"
-              value={profile.phone}
+              value={profile.phone || ""}
               onChange={handleChange}
               className="profile-input"
             />
@@ -179,7 +175,7 @@ function Profile() {
               type="text"
               name="jobTitle"
               placeholder="Job Title"
-              value={profile.jobTitle}
+              value={profile.jobTitle || ""}
               onChange={handleChange}
               className="profile-input"
             />
@@ -187,7 +183,7 @@ function Profile() {
               type="text"
               name="company"
               placeholder="Company"
-              value={profile.company}
+              value={profile.company || ""}
               onChange={handleChange}
               className="profile-input"
             />
@@ -195,7 +191,7 @@ function Profile() {
               type="number"
               name="experienceYears"
               placeholder="Years of Experience"
-              value={profile.experienceYears}
+              value={profile.experienceYears || ""}
               onChange={handleChange}
               className="profile-input"
             />
@@ -207,8 +203,8 @@ function Profile() {
             <input
               type="text"
               name="education"
-              placeholder="Highest Degree or Certification"
-              value={profile.education}
+              placeholder="Highest Degree"
+              value={profile.education || ""}
               onChange={handleChange}
               className="profile-input"
             />
@@ -220,7 +216,7 @@ function Profile() {
             <Textbox
               label="Add Your Skills"
               placeholder="Type and select skills"
-              value={profile.skills}
+              value={profile.skills || []}
               onChange={handleSkillsChange}
             />
           </div>

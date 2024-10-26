@@ -25,26 +25,26 @@ function JobPostDetail() {
   const [jobLink, setJobLink] = useState("");
   const navigate = useNavigate();
 
-  // Handle salary change
+
   const handleSalaryChange = (e) => {
     setSalary(e.target.value);
   };
 
-  // Handle work mode change
+
   const handleWorkModeChange = (mode) => {
     setWorkMode((prev) =>
       prev.includes(mode) ? prev.filter((item) => item !== mode) : [...prev, mode]
     );
   };
 
-  // Handle employment type change
+
   const handleEmploymentTypeChange = (type) => {
     setEmploymentType((prev) =>
       prev.includes(type) ? prev.filter((item) => item !== type) : [...prev, type]
     );
   };
 
-  // Handle experience change
+
   const handleExperienceChange = (e) => {
     setExperience(e.target.value);
   };
@@ -53,15 +53,12 @@ function JobPostDetail() {
     const fetchSessionData = async () => {
       try {
         if (!isValid) {
-          //navigate("/SignIn");
+          navigate("/SignIn");
         } else {
 
           if (userType !== "A" && userType !== "R" ) {
             navigate("/JobPostScreen");
-          if (userType !== "A") {
-            //navigate("/Homelogin");
-
-          }
+         
         }}
       } catch (e) {
         console.log(e);
@@ -69,12 +66,11 @@ function JobPostDetail() {
     };
 
     fetchSessionData();
-  }, [isValid, userType, navigate]); // Update dependencies here
-
+  }, [isValid, userType, navigate]);
   const handleSubmit = async (e) => { 
     e.preventDefault();
   
-    // Simple validation
+
     if (!jobRole || !companyName || !location || !description) {
       alert("Please fill out all required fields.");
       return;

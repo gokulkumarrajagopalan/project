@@ -7,8 +7,8 @@ import NavBar from "./LandingPage/NavBar";
 import Home from "./LandingPage/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { StateContext } from "./context";
+import Loader from "./Components/Loader";
 
-// Lazy loading all components except Home
 const SignUp = lazy(() => import("./Auth/SignUp"));
 const SignIn = lazy(() => import("./Auth/SignIn"));
 const JobPostDetail = lazy(() => import("./JobPost/JobpostDetail"));
@@ -47,7 +47,7 @@ function App() {
       <div className="app">
         <Router>
           {/* Suspense with fallback loader */}
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Signup" element={<SignUp />} />
