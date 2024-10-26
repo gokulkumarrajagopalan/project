@@ -40,6 +40,26 @@ function JobPostScreen() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Listen for back button presses and navigate accordingly
+useEffect(() => {
+  const handleBackNavigation = () => {
+    if (showSelectedJob) {
+      setShowSelectedJob(false);
+      document.body.classList.remove("no-scroll");
+      navigate("/jobPostScreen");  // Return to main screen if details are open
+    }
+  };
+
+  if (showSelectedJob) {
+    window.addEventListener("popstate", handleBackNavigation);
+  }
+
+  return () => {
+    window.removeEventListener("popstate", handleBackNavigation);
+  };
+}, [showSelectedJob, navigate]);
+
+
   useEffect(() => {
     const fetchJobData = async () => {
       setLoading(true);

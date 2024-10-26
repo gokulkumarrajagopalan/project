@@ -1,18 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import API_URLS from "../config";
+import { useNavigate } from "react-router-dom";
+
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL_SAVE = API_URLS[ENV] + "/addJobPost/saveJob";
+
 function JobPostScreenSub({ job, onClose, onShare }) {
+  const navigate = useNavigate();
+
+  
+  useEffect(() => {
+    const handleBackNavigation = (event) => {
+      event.preventDefault();
+      navigate(-1); 
+    };
+
+    window.history.pushState(null, null, window.location.pathname); 
+    window.addEventListener("popstate", handleBackNavigation);
+
+    return () => {
+      window.removeEventListener("popstate", handleBackNavigation);
+    };
+  }, [navigate]);
+
   if (!job) {
     return <div>Select a job to view details.</div>;
   }
+
   const userId = 1;
   const handleSaveJob = async () => {
     try {
       const response = await axios.post(API_URL_SAVE, {
-        userId, // Assuming this is already a string
-        jobId: job.jobID.toString(), // Convert jobID to a string
+        userId,
+        jobId: job.jobID.toString(),
       });
       console.log(job.jobID.toString());
       console.log("Job saved successfully:", response.data);
@@ -20,7 +41,6 @@ function JobPostScreenSub({ job, onClose, onShare }) {
       console.error("Error saving job:", error);
     }
   };
-
 
   const {
     jobID,

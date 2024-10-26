@@ -7,13 +7,15 @@ const SavedJob = require('../Model/Savedjobs');
 router.get("/listJobPosts", async (req, res) => {
   try {
     const currentDate = new Date();
-    const jobPosts = await JobPost.find({ expireon: { $gte: currentDate } });
+    const jobPosts = await JobPost.find({ expireon: { $gte: currentDate } })
+                                  .sort({ Posted_Date: -1 }); 
     res.json(jobPosts);
   } catch (error) {
     console.error('Error fetching job posts:', error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 router.post('/savejobpost', async (req, res) => {
   try {
