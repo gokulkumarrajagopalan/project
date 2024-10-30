@@ -21,6 +21,10 @@ function NavBar() {
     window.location.href = "/jobPostScreen";
   };
 
+  const handleJobspost = () => {
+    window.location.href = "/jobPostDetail";
+  }
+
   const toggleMobileMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -82,14 +86,22 @@ function NavBar() {
                   <label onClick={handleSignIn} className="Signinlabel">
                     Sign In
                   </label>
-                  {/* <Button text="Sign In" onClick={handleSignIn} className="" /> */}
+                  
                 </div>
                 <div>
                   <label onClick={handleSignUp} className="Signuplabel">
                     Sign Up
                   </label>
-
-                  {/* <Button text="Sign Up" onClick={handleSignUp} className="" /> */}
+                </div>
+                <div>
+                  <label onClick={handleJobspostcreen} className="Signinlabel">
+                    Search Jobs
+                  </label>
+                </div>
+                <div>
+                  <label onClick={handleJobspost} className="Signinlabel">
+                    Post Jobs
+                  </label>
                 </div>
               </div>
             </nav>

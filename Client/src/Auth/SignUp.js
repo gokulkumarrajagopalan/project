@@ -25,6 +25,21 @@ const Register = () => {
   const [Success, setSuccess] = useState(false);
   const [ExistingEmails, setExistingEmails] = useState([]);
 
+  const [hasUpper, setHasUpper] = useState(false);
+const [hasLower, setHasLower] = useState(false);
+const [hasNumber, setHasNumber] = useState(false);
+const [hasSpecial, setHasSpecial] = useState(false);
+const [hasMinLength, setHasMinLength] = useState(false);
+
+useEffect(() => {
+  setHasUpper(/[A-Z]/.test(Pwd));
+  setHasLower(/[a-z]/.test(Pwd));
+  setHasNumber(/[0-9]/.test(Pwd));
+  setHasSpecial(/[!@#$%]/.test(Pwd));
+  setHasMinLength(Pwd.length >= 8 && Pwd.length <= 24);
+}, [Pwd]);
+
+
   useEffect(() => {
     axios
       .get(API_URL_UserValidate)
@@ -131,12 +146,24 @@ const Register = () => {
                 onBlur={() => setPwdFocus(false)}
                 className="register-input"
               />
-              <p className={PwdFocus && !ValidPwd ? "instructions" : "offscreen"}>
-                8 - 24 characters
-                <br />
-                Must include uppercase, lowercase, number, and a special character
-                <br />
-              </p>
+              <p className={PwdFocus ? "instructions" : "offscreen"}>
+  <span className={hasMinLength ? "valid-condition" : "invalid-condition"}>
+    8 - 24 characters, 
+  </span>
+  <span className={hasUpper ? "valid-condition" : "invalid-condition"}>
+    Must include uppercase,
+  </span>
+  <span className={hasLower ? "valid-condition" : "invalid-condition"}>
+    Must include lowercase,
+  </span>
+  <span className={hasNumber ? "valid-condition" : "invalid-condition"}>
+    Must include a number,
+  </span>
+  <span className={hasSpecial ? "valid-condition" : "invalid-condition"}>
+    Must include a special character (!@#$%)
+  </span>
+</p>
+
 
               <label htmlFor="confirm_pwd" className="register_label">Confirm Password:</label>
               <input

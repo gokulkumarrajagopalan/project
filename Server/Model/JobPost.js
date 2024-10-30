@@ -50,6 +50,7 @@ companyImage: String,
 Posted_Date: {
   type: Date,
   default: Date.now,
+  index: true ,
 },
 expireon: {
   type: Date,

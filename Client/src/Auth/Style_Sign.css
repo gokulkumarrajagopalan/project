@@ -158,3 +158,6 @@ label {
     border-color: #333;
   }
 }
+.valid-condition {
+  color: green;
+}

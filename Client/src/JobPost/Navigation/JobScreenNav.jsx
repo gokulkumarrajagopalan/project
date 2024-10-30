@@ -46,10 +46,10 @@ const JobScreenNav = ({
         </Link>
       </div>
       <div className="search-container">
-        {!showSearch && ( // Only show the logo text when search is hidden
-          <img src={Logotext} alt="GDEST.in" className="logo-text" />
+        {!showSearch && ( 
+          <img src={Logotext} alt="GDEST.in" className="logotexts" />
         )}
-        {showSearch && ( // Only show the search input when search is enabled
+        {showSearch && ( 
           <>
             <input
               type="text"
