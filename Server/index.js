@@ -47,7 +47,7 @@ app.use(
 
 const corsConfig = {
   origin: ["https://gdest.in"],
- // origin: ["https://ty376c-3000.csb.app"],
+ //origin: ["https://ty376c-3000.csb.app"],
   //origin: ["https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev"],
 
   methods: ["POST", "GET", "PUT", "DELETE"],
