@@ -241,6 +241,10 @@ useEffect(() => {
   const handleOnSaved = () => {
     navigate("/Saved");
   };
+
+  const handleJobPost = () =>{
+    navigate("/JobpostDetail");
+  }
   const handleShareJob = (jobID) => {
     const shareLink = `${window.location.origin}/viewjobs/${jobID}`;
     navigator.clipboard
@@ -314,6 +318,7 @@ useEffect(() => {
           onSettings={handleSettings}
           onProfile={handleProfile}
           onSaved={handleOnSaved}
+          onJobPost ={handleJobPost}
         />
       )}
       {showFilter && (

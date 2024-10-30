@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmyapp=self.webpackChunkmyapp||[]).push([[396],{7396:(e,n,s)=>{s.r(n),s.d(n,{default:()=>o});s(2791);var t=s(1087),r=s(184);const o=function(){return(0,r.jsxs)("div",{className:"notAuthorizeContainer",children:[(0,r.jsx)("h2",{children:"Access Denied"}),(0,r.jsx)("p",{children:"Sorry, you are not authorized to view this page."}),(0,r.jsx)(t.rU,{to:"/",className:"button-link",children:(0,r.jsx)("button",{children:"Go to Home"})})]})}}}]);
+//# sourceMappingURL=396.ec4be732.chunk.js.map

@@ -22,7 +22,7 @@ const Products = () => {
   const handlePayment = async (product) => {
     try {
       // Create an order by calling your backend
-      const orderRes = await fetch("https://ty376c-3700.csb.app/PaymentRoutes/order", {
+      const orderRes = await fetch("https://3700-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev/PaymentRoutes/order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const Products = () => {
         order_id: orderData.id, // Razorpay order ID
         handler: async (response) => {
           // Verify payment using your backend
-          const verifyRes = await fetch("https://ty376c-3700.csb.app/PaymentRoutes/order/validate", {
+          const verifyRes = await fetch("https://3700-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev/PaymentRoutes/order/validate", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
