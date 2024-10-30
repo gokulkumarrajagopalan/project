@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmyapp=self.webpackChunkmyapp||[]).push([[631],{6631:(e,s,n)=>{n.r(s),n.d(s,{default:()=>t});var c=n(2791),i=n(7689),l=n(4901),r=n(184);const t=()=>{const e=(0,i.s0)(),{userType:s,isValid:n}=(0,c.useContext)(l.I);return n?"A"!==s?(0,r.jsx)("div",{children:"Unauthorized access"}):(0,r.jsx)("div",{children:(0,r.jsx)("p",{children:"Welcome to Homelogin!"})}):(e("/SignIn"),null)}}}]);
+//# sourceMappingURL=631.bc954e5e.chunk.js.map

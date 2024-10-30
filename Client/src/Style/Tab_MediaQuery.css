@@ -262,6 +262,8 @@
     .filter-cancel-button {
         font-size: 0.9rem;
         padding: 0.6rem;
+        width: 100px;
+        left: 100px;
     }
   }
 

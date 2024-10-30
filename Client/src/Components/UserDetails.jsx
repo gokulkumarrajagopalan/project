@@ -13,8 +13,11 @@ const UserDetails = ({
     onSettings,
     onProfile,
     onSaved,
+    onJobPost,
 }) => {
     const [email, setEmail] = useState("");
+    const [userType, setUserType] = useState(null);
+    const [isValid, setIsValid] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,8 +29,10 @@ const UserDetails = ({
                 console.log(res);
                 if (res.data.valid) {
                     setEmail(res.data.email);
+                    setUserType(res.data.userType);
+                    setIsValid(true);
                 } else {
-
+                    setIsValid(false);
                 }
             })
             .catch((err) => console.log(err));
@@ -49,6 +54,11 @@ const UserDetails = ({
                 <li>
                     <button className="user-link settings-link" onClick={onSettings}>Settings</button>
                 </li>
+                {userType === "A" && (
+                    <li>
+                        <button className="user-link jobpost-link" onClick={onJobPost}>Job Post</button>
+                    </li>
+                )}
             </ul>
         </div>
     ) : null;
