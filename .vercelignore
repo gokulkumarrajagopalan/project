@@ -1,0 +1,9 @@
+# Ignore everything except the build directory
+Client/src/
+Client/public/
+Client/node_modules/
+Client/package.json
+Client/*.lock
+*.json
+*.md
+*.lock
