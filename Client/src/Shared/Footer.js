@@ -60,7 +60,7 @@ function Footer() {
                 <a href="#" className="footer-link">Facebook</a>
               </li>
               <li className="footer-list-item">
-                <a href="#" className="footer-link">Twitter</a>
+                <a href="#" className="footer-link">Gmail</a>
               </li>
               <li className="footer-list-item">
                 <a href="#" className="footer-link">Instagram</a>
