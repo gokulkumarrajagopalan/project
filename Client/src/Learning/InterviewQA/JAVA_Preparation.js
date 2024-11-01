@@ -7,6 +7,7 @@ const JAVA_Preparation = () => {
 
 <Helmet>
       <title>50 Important Java Interview Questions - GDest</title>
+      <meta name="google-adsense-account" content="ca-pub-5596475153443183" />
       <meta
         name="description"
         content="Prepare for your Java interview with key concepts, platform independence, features of Java, and more."
