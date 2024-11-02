@@ -60,7 +60,7 @@
       background-color: white;
       z-index: 998;
       overflow-y: auto;        
-      margin-bottom: 10%;
+      margin-bottom: 12%;
     }
   }
 
@@ -156,7 +156,26 @@
   }
 
   @media (max-width: 768px) {
+    .header-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0px; /* Reduced padding to avoid overflow */
+      width: 100%;
+      box-sizing: border-box; /* Ensures padding doesn’t add extra width */
+      overflow: hidden;
+    }
+    
     .crossbutton {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #333;
+      margin-left: auto;
+    }
+    
+    /* .crossbutton {
   
       display: initial;
       align-self: flex-end;
@@ -168,7 +187,7 @@
       position: relative;
       left: 90%;
       color: #333;
-    }
+    } */
     .no-scroll {
       overflow: hidden;
     }
