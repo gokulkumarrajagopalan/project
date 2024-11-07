@@ -3,6 +3,7 @@ import axios from "axios";
 import NavBar from "../LandingPage/NavBar";
 import API_URLS from "../config";
 import './Style_Sign.css'; 
+import { Cursor } from "react-simple-typewriter";
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -24,21 +25,26 @@ const Register = () => {
   const [ErrMsg, setErrMsg] = useState("");
   const [Success, setSuccess] = useState(false);
   const [ExistingEmails, setExistingEmails] = useState([]);
+  const [text, setText] = useState("");
+  const [index, setIndex] = useState(0);
 
   const [hasUpper, setHasUpper] = useState(false);
-const [hasLower, setHasLower] = useState(false);
-const [hasNumber, setHasNumber] = useState(false);
-const [hasSpecial, setHasSpecial] = useState(false);
-const [hasMinLength, setHasMinLength] = useState(false);
+  const [hasLower, setHasLower] = useState(false);
+  const [hasNumber, setHasNumber] = useState(false);
+  const [hasSpecial, setHasSpecial] = useState(false);
+  const [hasMinLength, setHasMinLength] = useState(false);
 
-useEffect(() => {
-  setHasUpper(/[A-Z]/.test(Pwd));
-  setHasLower(/[a-z]/.test(Pwd));
-  setHasNumber(/[0-9]/.test(Pwd));
-  setHasSpecial(/[!@#$%]/.test(Pwd));
-  setHasMinLength(Pwd.length >= 8 && Pwd.length <= 24);
-}, [Pwd]);
+  const words = ["Join Us", "Create Your Account"];
 
+  useEffect(() => {
+    setHasUpper(/[A-Z]/.test(Pwd));
+    setHasLower(/[a-z]/.test(Pwd));
+    setHasNumber(/[0-9]/.test(Pwd));
+    setHasSpecial(/[!@#$%]/.test(Pwd));
+    setHasMinLength(Pwd.length >= 8 && Pwd.length <= 24);
+    setValidPwd(PWD_REGEX.test(Pwd));
+    setValidMatch(Pwd === MatchPwd);
+  }, [Pwd, MatchPwd]);
 
   useEffect(() => {
     axios
@@ -52,43 +58,29 @@ useEffect(() => {
   }, []);
 
   useEffect(() => {
-    const typingTexts = ["Your Journey Begins Here"];
-    let textIndex = 0;
-    let charIndex = 0;
-  
-    const typeEffect = () => {
-      const element = document.querySelector(".typewriter-text");
-      if (element) {
-        element.textContent = typingTexts[textIndex].slice(0, charIndex);
-        charIndex++;
-        if (charIndex > typingTexts[textIndex].length) {
-          charIndex = 0;
-          textIndex = (textIndex + 1) % typingTexts.length;
-        }
-        setTimeout(typeEffect, 1200); 
+    const timer = setTimeout(() => {
+      if (text.length === words[index].length) {
+        setTimeout(() => {
+          setIndex((index + 1) % words.length);
+          setText("");
+        }, 3000);
+      } else {
+        setText((prevText) => prevText + words[index][prevText.length]);
       }
-    };
-  
-    typeEffect();
-  }, []);
-  
+    }, 280);
+    return () => clearTimeout(timer);
+  }, [text, index]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (Pwd !== MatchPwd) {
-      setErrMsg("Passwords do not match");
-      return;
-    }
 
     if (ExistingEmails.includes(EmailID)) {
       setErrMsg("Email already exists");
       return;
     }
 
-    // Save users
     try {
-      const response = await axios.post(API_URL, { email: EmailID, pwd: Pwd });
+      await axios.post(API_URL, { email: EmailID, pwd: Pwd });
       setSuccess(true);
     } catch (error) {
       console.error("Error:", error);
@@ -110,9 +102,11 @@ useEffect(() => {
         <div className="Register_container">
           <div className="left-side">
             <div className="typewriter-text-wrapper">
-              <h2 className="typewriter-text"></h2>
+              <h2 className="typewriter-text">
+                {text}
+                <Cursor />
+              </h2>
             </div>
-            {/* <p className="sub-text">Join us today and experience seamless integration!</p> */}
           </div>
           <div className="register-card">
             <p className={ErrMsg ? "errmsg" : "offscreen"} aria-live="assertive">
@@ -134,6 +128,7 @@ useEffect(() => {
                 onBlur={() => setEmailIDFocus(false)}
                 className="register-input"
               />
+
               <label htmlFor="password">Password:</label>
               <input
                 type="password"
@@ -147,23 +142,12 @@ useEffect(() => {
                 className="register-input"
               />
               <p className={PwdFocus ? "instructions" : "offscreen"}>
-  <span className={hasMinLength ? "valid-condition" : "invalid-condition"}>
-    8 - 24 characters, 
-  </span>
-  <span className={hasUpper ? "valid-condition" : "invalid-condition"}>
-    Must include uppercase,
-  </span>
-  <span className={hasLower ? "valid-condition" : "invalid-condition"}>
-    Must include lowercase,
-  </span>
-  <span className={hasNumber ? "valid-condition" : "invalid-condition"}>
-    Must include a number,
-  </span>
-  <span className={hasSpecial ? "valid-condition" : "invalid-condition"}>
-    Must include a special character (!@#$%)
-  </span>
-</p>
-
+                <span className={hasMinLength ? "valid-condition" : "invalid-condition"}>8 - 24 characters, </span>
+                <span className={hasUpper ? "valid-condition" : "invalid-condition"}>Uppercase, </span>
+                <span className={hasLower ? "valid-condition" : "invalid-condition"}>Lowercase, </span>
+                <span className={hasNumber ? "valid-condition" : "invalid-condition"}>Number, </span>
+                <span className={hasSpecial ? "valid-condition" : "invalid-condition"}>Special character (!@#$%)</span>
+              </p>
 
               <label htmlFor="confirm_pwd" className="register_label">Confirm Password:</label>
               <input

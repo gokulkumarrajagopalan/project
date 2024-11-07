@@ -29,11 +29,11 @@ const StateContext = ({ children }) => {
         setUserId(userId);
         setIsValid(valid);
         setIsLoading(false);
-        console.log("isValid", valid);
-        console.log("userType", userType);
-        console.log("userId", userId);
+        //console.log("isValid", valid);
+        //console.log("userType", userType);
+        //console.log("userId", userId);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
         setIsLoading(false);
       }
     };

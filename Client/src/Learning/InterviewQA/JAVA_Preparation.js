@@ -29,7 +29,7 @@ const JAVA_Preparation = () => {
       />
       <link rel="canonical" href="https://www.gdest.in/JAVA_Preparation" />
     </Helmet>
-
+<div className="java-preparation-container" >
 
       <h1>Java Interview Preparation</h1>
 
@@ -365,27 +365,8 @@ const JAVA_Preparation = () => {
       <p>
         Streams are sequences of elements that support various methods for processing data in a functional style (e.g., filter, map, collect).
       </p>
-
-      <style jsx>{`
-        div {
-          margin: 20px;
-        }
-        h1 {
-          font-size: 24px;
-          margin-bottom: 10px;
-        }
-        h2 {
-          font-size: 20px;
-          margin-top: 20px;
-        }
-        h3 {
-          font-size: 18px;
-          margin-top: 15px;
-        }
-        p, ul {
-          margin-left: 20px;
-        }
-      `}</style>
+      </div>
+   
     </div>
   );
 };
