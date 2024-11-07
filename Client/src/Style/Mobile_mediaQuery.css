@@ -257,3 +257,45 @@
   }
   }
   
+
+  @media (max-width: 480px) {
+    .settings-navigation {
+        flex-direction: column;
+    }
+
+    .settings-navigation button {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .settings-content {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .settings-content h2 {
+        font-size: 1.2em;
+    }
+
+    .settings-content label {
+        font-size: 0.9em;
+    }
+
+    .settings-content input,
+    .settings-content select {
+        font-size: 0.9em;
+    }
+
+
+
+
+    @media (max-width: 480px) {
+      .Selectedjob {
+          margin-bottom: 12% !important; 
+      }
+  }
+  
+}

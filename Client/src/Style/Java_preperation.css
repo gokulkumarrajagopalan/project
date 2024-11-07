@@ -1,0 +1,79 @@
+/* Basic styles for the JAVA_Preparation component */
+
+.java-preparation-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .java-preparation-container h1 {
+    font-size: 2em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  
+  .java-preparation-container h2 {
+    font-size: 1.5em;
+    color: #2980b9;
+    margin-top: 1em;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5em;
+  }
+  
+  .java-preparation-container h3 {
+    font-size: 1.2em;
+    color: #3498db;
+    margin-top: 1em;
+  }
+  
+  .java-preparation-container p,
+  .java-preparation-container ul,
+  .java-preparation-container ol {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+  }
+  
+  .java-preparation-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .java-preparation-container li {
+    margin-bottom: 0.5em;
+  }
+  
+  /* Style for links */
+  .java-preparation-container a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  .java-preparation-container a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .java-preparation-container h1 {
+      font-size: 1.8em;
+    }
+  
+    .java-preparation-container h2 {
+      font-size: 1.3em;
+    }
+  
+    .java-preparation-container h3 {
+      font-size: 1.1em;
+    }
+  
+    .java-preparation-container p,
+    .java-preparation-container ul,
+    .java-preparation-container ol {
+      font-size: 0.95em;
+    }
+  }
+  

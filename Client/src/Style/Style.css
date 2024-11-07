@@ -1230,8 +1230,6 @@ h3 {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background-color: #001f3f;
-  color: white; 
   transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
@@ -1239,6 +1237,10 @@ h3 {
   background-color: #61a0e3; 
   color: rgb(255, 255, 255); 
   transform: scale(1.05); 
+}
+.btn-apply{
+  background-color: #0c2c4f; 
+  color: rgb(255, 255, 255); 
 }
 
 
@@ -1509,3 +1511,117 @@ textarea {
   top: 15px;
 }
 
+
+
+/* Settings Container */
+.settings-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  top: 60px;
+  position: relative;
+}
+
+.settings-container h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Settings Navigation */
+.settings-navigation {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.settings-navigation button {
+  background-color: #f0f0f0;
+  border: none;
+  color: #333;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.settings-navigation button:hover {
+  background-color: #e0e0e0;
+}
+
+.settings-navigation button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Settings Content */
+.settings-content div {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+}
+
+.settings-content h2 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.settings-content p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+
+/* Button styling */
+.btn-ssa {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-save {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    position: relative;
+    padding: 10px;
+}
+
+.btn-save img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Hover text display */
+.btn-save:hover::after {
+    content: attr(data-hover-text);
+    position: absolute;
+    bottom: -25px;
+    font-size: 0.9rem;
+    color: #555;
+    white-space: nowrap;
+}
+
+/* Transition for smooth appearance */
+.btn-save img {
+    transition: opacity 0.3s ease;
+}
+
+.btn-save:hover img {
+    opacity: 0.7;
+}

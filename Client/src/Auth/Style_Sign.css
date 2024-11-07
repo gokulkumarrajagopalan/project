@@ -7,6 +7,7 @@
   height: 100vh; /* Full viewport height */
   padding: 20px; /* Padding around the container */
   background-color: #001f3f; /* Dark blue background */
+  overflow: hidden; /* Prevents layout shifting */
 }
 
 /* Card styling for both pages */
@@ -19,6 +20,7 @@
   width: 400px; /* Fixed width for the card */
   position: relative; /* Positioning context */
   top: 30px;
+  flex-shrink: 0; /* Prevents shrinking */
 }
 
 /* Header styling for both SignIn and Register */
@@ -107,30 +109,22 @@ label {
   justify-content: center;
 }
 
-/* Image styling */
-.left-image {
-  max-width: 100%; /* Responsive image */
-  height: auto; /* Maintain aspect ratio */
-}
-
-/* Media query for responsiveness */
-@media (max-width: 768px) {
-  .register-card,
-  .section_card {
-    width: 90%; /* Responsive width for mobile */
-  }
-}
-
-/* Typewriter effect (optional styling) */
+/* Typewriter text wrapper with fixed width to prevent shrinking */
 .typewriter-text-wrapper {
-  font-size: 2rem;
-  color: #333;
-  font-weight: bold;
+  width: 100%; /* Full width */
   text-align: center;
+  overflow: hidden; /* Avoids text overflow */
   white-space: nowrap;
-  overflow: hidden;
-  border-right: 0.15em solid #333;
-  animation: typing 3.5s steps(40, end) infinite, blink-caret 0.75s step-end infinite;
+  border-right: 0.15em solid #ffffff;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+.typewriter-text {
+  display: inline-block;
+  font-size: 2rem;
+  color: #ffffff;
+  font-weight: bold;
+  animation: typing 3.5s steps(40, end) infinite;
 }
 
 .sub-text {
@@ -140,6 +134,7 @@ label {
   text-align: center;
 }
 
+/* Keyframes for typing animation */
 @keyframes typing {
   from {
     width: 0;
@@ -158,6 +153,25 @@ label {
     border-color: #333;
   }
 }
+
+/* Conditions for valid/invalid states */
 .valid-condition {
   color: green;
 }
+
+.invalid-condition {
+  color: red;
+}
+
+/* Hide the left side part (typewriter effect) on smaller screens */
+@media (max-width: 768px) {
+  .left-side {
+    display: none;
+  }
+
+  .register-card,
+  .section_card {
+    width: 80%; /* Full width for the card on mobile */
+  }
+}
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Textbox from "./Textbox"; // Assuming Textbox is a custom component
+import Textbox from "./Textbox"; 
 import API_URLS from "../config";
 
 const ENV = process.env.REACT_APP_ENV || "production";
@@ -27,14 +27,14 @@ function Profile() {
 
   const [isEditing, setIsEditing] = useState(true);
 
-  // Fetch the profile data when the component mounts
+  
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(API_URL_GET_PROFILE);
         const data = await response.json();
         if (data.profile) {
-          // Set the profile data if fetched successfully
+          
           setProfile(data.profile);
         }
       } catch (error) {
@@ -57,7 +57,7 @@ function Profile() {
     const { name, files } = e.target;
     setProfile({
       ...profile,
-      [name]: files[0], // Assuming single file upload
+      [name]: files[0], 
     });
   };
 
@@ -71,11 +71,11 @@ function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsEditing(false);
-    await saveProfile(profile); // Save the profile
+    await saveProfile(profile); 
   };
 
   const handleEditClick = () => {
-    setIsEditing(true); // Enable editing mode
+    setIsEditing(true); 
   };
 
   const saveProfile = async (profileData) => {

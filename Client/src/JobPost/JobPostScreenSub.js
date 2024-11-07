@@ -1,22 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API_URLS from "../config";
 import { useNavigate } from "react-router-dom";
-
+import saveIcon from "../Asset/save.png";
+import savedIcon from "../Asset/saved.png";
+import share from "../Asset/share.png";
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL_SAVE = API_URLS[ENV] + "/addJobPost/saveJob";
 
 function JobPostScreenSub({ job, onClose, onShare }) {
   const navigate = useNavigate();
+  const [isSaved, setIsSaved] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
-  
   useEffect(() => {
     const handleBackNavigation = (event) => {
       event.preventDefault();
-      navigate(-1); 
+      navigate(-1);
     };
 
-    window.history.pushState(null, null, window.location.pathname); 
+    window.history.pushState(null, null, window.location.pathname);
     window.addEventListener("popstate", handleBackNavigation);
 
     return () => {
@@ -35,7 +38,7 @@ function JobPostScreenSub({ job, onClose, onShare }) {
         userId,
         jobId: job.jobID.toString(),
       });
-      console.log(job.jobID.toString());
+      setIsSaved(true);
       console.log("Job saved successfully:", response.data);
     } catch (error) {
       console.error("Error saving job:", error);
@@ -83,13 +86,23 @@ function JobPostScreenSub({ job, onClose, onShare }) {
       <p>Skills: {skills}</p>
       <div className="btn-ssa">
         <button onClick={handleApplyJob} className="btn-apply">Apply Job</button>
-        <button onClick={() => onShare(jobID)} className="btn-share">Share Job</button>
-        <button onClick={handleSaveJob} className="btn-save">Save</button>
+        <button onClick={() => onShare(jobID)} className="btn-save">
+        <img src={share} alt="Share Icon" />
+        </button>
+        <button
+          onClick={handleSaveJob}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          className="btn-save"
+        >
+          <img src={isSaved ? savedIcon : saveIcon} alt="Save Icon" />
+          {hovered && (isSaved ? "Saved" : "Save")}
+        </button>
       </div>
       <div className="Jobdescription">
         <h3>Description</h3>
-        <p> Work Mode : {workMode}</p>
-        <p> Employment Type: {employmentType}</p>
+        <p>Work Mode: {workMode}</p>
+        <p>Employment Type: {employmentType}</p>
         <p>{description}</p>
       </div>
     </div>
