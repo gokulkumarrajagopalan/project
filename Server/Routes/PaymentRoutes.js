@@ -1,13 +1,13 @@
 const express = require("express");
 const Razorpay = require("razorpay");
 const bodyParser = require("body-parser");
-const crypto = require("crypto"); // Import crypto for signature verification
+const crypto = require("crypto");
 const router = express.Router();
 
 const app = express();
 app.use(bodyParser.json());
 
-// Initialize Razorpay with your key and secret
+
 const razorpayInstance = new Razorpay({
   key_id: "rzp_test_RNv1714d2JagoD",
   key_secret: "w3dOoqTgQnNOIRF4PFWJaID6",

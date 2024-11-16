@@ -14,6 +14,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const MasterAddJobRoles = require("./Routes/MasterAddJobRoles");
+const PaymentRoutes = require("./Routes/PaymentRoutes");
 
 const app = express();
 
@@ -66,7 +67,7 @@ app.use("/addProfile", addProfile);
 app.use("/wordtopdf", wordtopdf);
 // app.use("/pdftoword", pdftoword);
 app.use("/masterAddJobRoles", MasterAddJobRoles);
-
+app.use("/PaymentRoutes" , PaymentRoutes)
 app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).send("Something broke!");

@@ -76,5 +76,32 @@ router.post('/saveJob', async (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
+router.get('/savedJobs', async (req, res) => {
+  const { userID } = req.query; // Extract userID from query params
+
+  if (!userID) {
+    return res.status(400).json({ message: "User ID is required" });
+  }
+
+  try {
+    // Fetch the saved jobs for the user
+    const savedJob = await SavedJob.findOne({ userID });
+    if (!savedJob) {
+      return res.status(404).json({ message: "No saved jobs found" });
+    }
+
+    // Extract job IDs (comma-separated)
+    const jobIds = savedJob.jobId.split(',').map(id => parseInt(id.trim()));
+
+    // Fetch corresponding job posts
+    const jobPosts = await JobPost.find({ jobID: { $in: jobIds } }).sort({ Posted_Date: -1 });
+
+    res.json(jobPosts);
+  } catch (error) {
+    console.error("Error fetching saved jobs:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 module.exports = router;
