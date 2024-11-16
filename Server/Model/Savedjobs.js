@@ -6,7 +6,7 @@ const SavedJobSchema = new mongoose.Schema({
         required: true,
     },
     jobId: {
-        type: String, // Changed from ObjectId to String
+        type: String, 
         required: true,
     },
 });

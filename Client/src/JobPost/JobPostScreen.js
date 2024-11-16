@@ -40,13 +40,13 @@ function JobPostScreen() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Listen for back button presses and navigate accordingly
+ 
 useEffect(() => {
   const handleBackNavigation = () => {
     if (showSelectedJob) {
       setShowSelectedJob(false);
       document.body.classList.remove("no-scroll");
-      navigate("/jobPostScreen");  // Return to main screen if details are open
+      navigate("/jobPostScreen");  
     }
   };
 
@@ -204,7 +204,7 @@ useEffect(() => {
     setShowUserDetails(!showUserDetails);
     setShowFilter(false);
     setShowNotification(false);
-    // setShowSelectedJob(false);
+    
   };
 
   const toggleFilterDetails = () => {
