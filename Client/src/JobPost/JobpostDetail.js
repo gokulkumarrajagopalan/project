@@ -53,11 +53,11 @@ function JobPostDetail() {
     const fetchSessionData = async () => {
       try {
         if (!isValid) {
-          navigate("/SignIn");
+          navigate("/NotAuthorize");
         } else {
 
           if (userType !== "A" && userType !== "R" ) {
-            navigate("/JobPostScreen");
+            navigate("/NotAuthorize");
          
         }}
       } catch (e) {

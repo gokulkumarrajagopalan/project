@@ -39,9 +39,10 @@
       position: relative;
       display: flex;
       align-items: center;
-      width: 180px;
+      width: 150px;
       height: 8px;
       left: 2px;
+      animation: fadeInOut 5s ease-in-out;
     }
   
     .jobcontainer {
@@ -54,7 +55,7 @@
       position: fixed;
       width: 100%;
       top: 55px;
-      left: 0;
+      /* left: 0; */
       right: 0;
       bottom: 0;
       background-color: white;
@@ -160,9 +161,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 0px; /* Reduced padding to avoid overflow */
+      padding: 0 0px; 
       width: 100%;
-      box-sizing: border-box; /* Ensures padding doesn’t add extra width */
+      box-sizing: border-box; 
       overflow: hidden;
     }
     
@@ -175,7 +176,7 @@
       margin-left: auto;
       display: inline;
       position: relative;
-      right: 20px;
+      /* right: 20px; */
     }
     
     
@@ -199,6 +200,7 @@
     .textbox {
       width: 100%;
       max-width: 100%;
+      font-size: 13px;
     }
   }
 
@@ -328,4 +330,33 @@
       cursor: pointer;
       transition: all 0.3s;
     }
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .learning-title {
+      font-size: 2rem; /* Adjust title size for smaller screens */
+  }
+  .learning-description {
+      font-size: 1rem; /* Adjust description size for smaller screens */
+  }
+  .learning-link {
+      font-size: 1.2rem; /* Adjust link font size */
+      padding: 8px 16px; /* Reduce padding */
+  }
+
+  .headerJobpostsreensub{
+     padding: 0 10px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-wrap: nowrap; 
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .copied-message{
+    left: 50%;
+  }
 }

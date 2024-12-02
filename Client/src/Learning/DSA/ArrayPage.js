@@ -28,7 +28,7 @@ function ArrayPage() {
     ];
   
     return (
-      <div className="App">
+      <div className="Array-header">
          <h2>Array</h2>
       <ul>
         <li>

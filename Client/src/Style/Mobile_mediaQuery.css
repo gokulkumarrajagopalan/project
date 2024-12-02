@@ -291,11 +291,16 @@
 
 
 
-
+  }
     @media (max-width: 480px) {
       .Selectedjob {
-          margin-bottom: 12% !important; 
+          margin-bottom: 10% !important; 
       }
+
+      .filter-container {
+        margin-bottom: 75px !important ;
+      }
+
   }
   
-}
+
