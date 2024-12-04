@@ -4,7 +4,9 @@ const API_URLS = {
   };
   
   const API_UI_URLS = {
-    production: "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev",
+    production:  "https://gdest.in",
+    //production: "https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev",
+
   };
   
   export { API_URLS, API_UI_URLS };
