@@ -6,7 +6,7 @@ import JobScreenNav from "../JobPost/Navigation/JobScreenNav";
 import MobileNav from "../JobPost/Navigation/MobileNav";
 import Notification from "../Components/notification";
 import Filter from "../Components/Filter";
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 import JobPostScreenSub from "../JobPost/JobPostScreenSub";
 import UserDetails from "../Components/UserDetails";
 import { MyContext } from "../context";

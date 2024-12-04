@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../LandingPage/NavBar";
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 import './Style_Sign.css'; 
 import { Cursor } from "react-simple-typewriter";
 

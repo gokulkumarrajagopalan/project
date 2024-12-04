@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext } from "react";
 import axios from "axios";
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 import { useNavigate } from "react-router-dom";
 import saveIcon from "../Asset/save.png";
 import savedIcon from "../Asset/saved.png";
 import share from "../Asset/share.png";
+import { MyContext } from "../context"; 
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL_SAVE = API_URLS[ENV] + "/addJobPost/saveJob";
@@ -13,7 +14,7 @@ function JobPostScreenSub({ job, onClose }) {
   const navigate = useNavigate();
   const [isSaved, setIsSaved] = useState(false);
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
-
+  const { userType, isValid, userId } = useContext(MyContext);   
   useEffect(() => {
     const handleBackNavigation = (event) => {
       event.preventDefault();
@@ -32,7 +33,7 @@ function JobPostScreenSub({ job, onClose }) {
     return <div>Select a job to view details.</div>;
   }
 
-  const userId = 1;
+  
 
   const handleSaveJob = async () => {
     try {
@@ -48,10 +49,10 @@ function JobPostScreenSub({ job, onClose }) {
   };
 
   const handleShare = () => {
-    const link = `${window.location.origin}/job/${job.jobID}`;
+    const link = `${window.location.origin}/viewjobs/${job.jobID}`;
     navigator.clipboard.writeText(link).then(() => {
-      setShowCopiedMessage(true); // Show copied message
-      setTimeout(() => setShowCopiedMessage(false), 3000); // Hide after 3 seconds
+      setShowCopiedMessage(true); 
+      setTimeout(() => setShowCopiedMessage(false), 3000); 
     });
   };
 
@@ -94,13 +95,13 @@ function JobPostScreenSub({ job, onClose }) {
           Apply Job
         </button>
 
-        {/* Share Button */}
+        
         <button onClick={handleShare} className="btn-save tooltip">
           <img src={share} alt="Share Icon" />
           <span className="tooltip-text">Share</span>
         </button>
 
-        {/* Save Button */}
+        
         <button onClick={handleSaveJob} className="btn-save tooltip">
           <img src={isSaved ? savedIcon : saveIcon} alt="Save Icon" />
           <span className="tooltip-text">{isSaved ? "Saved" : "Save"}</span>
@@ -113,7 +114,7 @@ function JobPostScreenSub({ job, onClose }) {
         <p>{description}</p>
       </div>
 
-      {/* Copied Message */}
+      
       {showCopiedMessage && (
         <div className="copied-message">
           Link has been copied!

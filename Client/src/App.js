@@ -40,6 +40,7 @@ const JAVA_Preparation = lazy(() => import("./Learning/InterviewQA/JAVA_Preparat
 const JavaMiscellaneous = lazy(() => import("./Learning/InterviewQA/JavaMiscellaneous"));
 const DBMS_Preparation = lazy(() => import("./Learning/InterviewQA/DBMS_Preparation"));
 const Basic_interview_codings = lazy(() => import("./Learning/InterviewQA/Basic_interview_codings"));
+const OpenLink = lazy(() => import("./Components/openLink"));
 
 function App() {
   return (
@@ -65,6 +66,8 @@ function App() {
               <Route path="/AddJobRoles" element={<AddJobRoles />} />
               <Route path="/MasterAddSkills" element={<MasterAddSkills />} />
               <Route path="/LearningDefault" element={<LearningDefault />} />
+              <Route path="/OpenLink" element={<OpenLink />} />
+              
               {/* ---------------- DSA ------------------------*/}
               <Route path="/Array" element={<ArrayPage />} />
               <Route path="/LinearSearch" element={<LinearSearch />} />

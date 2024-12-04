@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
 import axios from "axios";
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 import { useNavigate } from "react-router-dom";
 
 const ENV = process.env.REACT_APP_ENV || "production";

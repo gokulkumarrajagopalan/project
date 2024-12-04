@@ -227,6 +227,7 @@ li.NavItem:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   top: 95px;
+  z-index: 1;
 
 }
 
@@ -410,7 +411,7 @@ li.NavItem:hover {
   color: white;
   border: 2px solid white;
   padding: 0.5rem 1rem;
-  position: relative;
+  /* position: relative; */
   top: 8px;
   cursor: pointer;
 }
@@ -423,13 +424,13 @@ li.NavItem:hover {
   border: 2px solid white;
   padding: 0.5rem 0.5rem;
   margin-right: 1rem;
-  position: relative;
+  /* position: relative; */
   top: 8px;
   cursor: pointer;
 }
 .labellearn {
   width: 30px;
-  position: relative;
+  /* position: relative; */
   top: 8px;
   cursor: pointer;
 }
@@ -527,6 +528,7 @@ li.NavItem:hover {
   padding-top: 20px;
   position: relative;
   overflow-y: scroll;
+  background-color: #f3f3f1;
 }
 
 .jobcontainer {
@@ -540,7 +542,7 @@ li.NavItem:hover {
   right: 0;
   bottom: 0;
   width: 47%;
-  background-color: #ffffff;
+  background-color: #f3f3f1;
   overflow-y: scroll;
 }
 
@@ -1031,7 +1033,7 @@ li.NavItem:hover {
   top: 55px;
   right: 0;
   bottom: 0;
-  width: 47%;
+ 
 }
 
 .textbox-container {
@@ -1855,13 +1857,13 @@ pre {
     padding: 6px;
   }
 }
-/* Copied Message */
+
 .copied-message {
   position: fixed;
   top: 60px;
   left: 75%;
   transform: translateX(-50%);
-  background-color: #4caf50; /* Green background */
+  background-color: #4caf50; 
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -1871,7 +1873,7 @@ pre {
   animation: fadeInOut 3s ease-in-out;
 }
 
-/* Fade In/Out Animation */
+
 @keyframes fadeInOut {
   0% { opacity: 0; }
   10% { opacity: 1; }
@@ -1879,7 +1881,7 @@ pre {
   100% { opacity: 0; }
 }
 
-/* Tooltip */
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -1969,3 +1971,24 @@ pre {
   font-size: 16px;
   color: #171717;
 }
+
+.jobPostContainer.inactive {
+  pointer-events: none; 
+  opacity: 0.5; 
+  transition: opacity 0.3s ease; 
+}
+
+
+.notificationContainer.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notificationContainer.hidden {
+  pointer-events: none; 
+  opacity: 0.5; 
+  transition: opacity 0.3s ease; 
+}
+
+
+
