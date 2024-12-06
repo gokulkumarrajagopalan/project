@@ -77,6 +77,10 @@ function JobPostScreenSub({ job, onClose }) {
     window.open(link, "_blank");
   };
 
+  const handleEditJob = () => {
+    navigate(`/JobPostDetail/${jobID}`);
+  };
+
   return (
     <div className="headerJobpostsreensub">
       <div className="header-section">
@@ -120,6 +124,14 @@ function JobPostScreenSub({ job, onClose }) {
           Link has been copied!
         </div>
       )}
+
+{/* {userType === 'A' && isValid  && ( */}
+  <div className="Editbtn">
+    <button onClick={handleEditJob}>Edit</button>
+  </div>
+{/* )} */}
+
+
     </div>
   );
 }

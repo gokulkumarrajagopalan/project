@@ -1,4 +1,3 @@
-// Components/Loader.js
 import React from 'react';
 import "../Style/Loader.css"; 
 

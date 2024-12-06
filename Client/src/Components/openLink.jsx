@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "./Loader"
 import { API_URLS, API_UI_URLS } from "../config";
 
 const ENV = process.env.REACT_APP_ENV || "production";
@@ -25,8 +26,8 @@ const themes = {
   },
   3: {
     container: { color: "#fff" },
-    card: { backgroundColor: "rgb(255 255 255 / 70%)", color: "#fff" },
-    button: { backgroundColor: "rgb(255 255 255 / 70%)", color: "#fff" },
+    card: { backgroundColor: "rgb(255 255 255 / 70%)", color: "rgb(0 27 89)" },
+    button: { backgroundColor: "rgb(255 255 255 / 70%)", color: "rgb(0 27 89)" },
     video: "https://cdn.pixabay.com/video/2024/02/23/201735-916310640_small.mp4",
   },
   4: {
@@ -121,7 +122,7 @@ const OpenLink = () => {
       </div>
 
       {loading ? (
-        <p>Loading job posts...</p>
+        <Loader/>
       ) : (
         <div
           style={{

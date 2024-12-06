@@ -56,6 +56,7 @@ function App() {
               <Route path="/ViewJobs" element={<ViewJobs />} />
               <Route path="/ViewJobs/:jobid" element={<ViewJobs />} />
               <Route path="/JobpostDetail" element={<JobPostDetail />} />
+              <Route path="/JobpostDetail/:jobid" element={<JobPostDetail />} />
               <Route path="/SignIn" element={<SignIn />} />
               <Route path="/DSAHome" element={<DSAHome />} />
               <Route path="/Homelogin" element={<Homelogin />} />
