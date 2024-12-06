@@ -6,14 +6,14 @@ import JobScreenNav from "./Navigation/JobScreenNav";
 import JobPostScreenSub from "./JobPostScreenSub";
 import UserDetails from "../Components/UserDetails";
 import Filter from "../Components/Filter";
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 import MobileNav from "./Navigation/MobileNav";
 import Notification from "../Components/notification";
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
 const API_URL_SIGNOUT = API_URLS[ENV] + "/signOut";
-const API_URL_SESSION = API_URLS[ENV] + "/signIn/sessioncheck";
+
 
 function JobPostScreen() {
   const [jobData, setJobData] = useState([]);
@@ -76,30 +76,7 @@ useEffect(() => {
     fetchJobData();
   }, []);
 
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-
-    const fetchSessionData = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(API_URL_SESSION, {});
-        const valid = res.data.valid;
-        const userEmail = res.data.email;
-
-        if (valid) {
-          setEmail(userEmail);
-          console.log("email", userEmail);
-        } else {
-        }
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-      }
-    };
-
-    fetchSessionData();
-  }, [navigate]);
+  
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -302,14 +279,14 @@ useEffect(() => {
         toggleNotification={toggleNotification}
         showSearch={showSearch}
       />
-
+<div className={`notificationContainer ${showNotification ? "active" : "hidden"}`}>
       {showNotification && (
         <Notification
           showNotification={showNotification}
           ontoggleNotification={toggleNotification}
         />
       )}
-
+</div>
       {showUserDetails && (
         <UserDetails
           showUserDetails={showUserDetails}
@@ -334,17 +311,20 @@ useEffect(() => {
         toggleUserDetails={toggleUserDetails}
         setShowSearch={setShowSearch}
       />
-      <div className="jobPostContainer" ref={jobPostContainerRef}>
-        {showJobContainer && (
-          <div className="jobcontainer">
-            {filteredJobs.map((job) => (
-              <div key={job.jobID} onClick={() => handleJobCardClick(job)}>
-                <JobCard job={job} />
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      <div
+  className={`jobPostContainer ${showFilter ? "inactive" : ""}`}
+  ref={jobPostContainerRef}
+>
+  {showJobContainer && (
+    <div className="jobcontainer">
+      {filteredJobs.map((job) => (
+        <div key={job.jobID} onClick={() => handleJobCardClick(job)}>
+          <JobCard job={job} />
+        </div>
+      ))}
+    </div>
+  )}
+</div>
 
       {showSelectedJob && selectedJob && (
         <div className="Selectedjob">

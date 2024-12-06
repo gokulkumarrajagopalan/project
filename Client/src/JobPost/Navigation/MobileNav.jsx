@@ -41,7 +41,8 @@ const MobileNav = ({
           className="navIcon"
           onClick={handleFilterClick}
         />
-        <Link className="Linkk" to="/LearningDefault">
+        <Link className="Linkk" > 
+        {/* LearningDefault */}
           <img src={LearningIcon} alt="Learning Icon" className="navIcon" />
         </Link>
         <img

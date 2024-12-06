@@ -222,11 +222,12 @@ li.NavItem:hover {
   width: 90%;
   margin: 0 auto;
   padding: 1rem;
-  background-color: #001f3f;
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
-  top: 65px;
+  top: 95px;
+  z-index: 1;
 
 }
 
@@ -241,7 +242,7 @@ li.NavItem:hover {
 .filter-label {
   margin-bottom: 0.5rem;
   font-size: 1rem;
-  color: #ffffff;
+  color: #000000;
 }
 
 .filter-input, 
@@ -269,7 +270,7 @@ li.NavItem:hover {
   left: 65%;
 }
 .filter-cancel-button {
-  background-color: #f44336;
+  background-color: #0f0f0f;
 }
 
 
@@ -410,7 +411,7 @@ li.NavItem:hover {
   color: white;
   border: 2px solid white;
   padding: 0.5rem 1rem;
-  position: relative;
+  /* position: relative; */
   top: 8px;
   cursor: pointer;
 }
@@ -423,13 +424,13 @@ li.NavItem:hover {
   border: 2px solid white;
   padding: 0.5rem 0.5rem;
   margin-right: 1rem;
-  position: relative;
+  /* position: relative; */
   top: 8px;
   cursor: pointer;
 }
 .labellearn {
   width: 30px;
-  position: relative;
+  /* position: relative; */
   top: 8px;
   cursor: pointer;
 }
@@ -482,7 +483,7 @@ li.NavItem:hover {
   padding: 10px;
   border: 2px solid white;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 12px;
   width: 350px;
   background-color: #ffffff;
   color: #000000;
@@ -497,6 +498,7 @@ li.NavItem:hover {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  animation: fadeInOut 5s ease-in-out;
 }
 
 .iconStyle {
@@ -526,6 +528,7 @@ li.NavItem:hover {
   padding-top: 20px;
   position: relative;
   overflow-y: scroll;
+  background-color: #f3f3f1;
 }
 
 .jobcontainer {
@@ -539,7 +542,7 @@ li.NavItem:hover {
   right: 0;
   bottom: 0;
   width: 47%;
-  background-color: #ffffff;
+  background-color: #f3f3f1;
   overflow-y: scroll;
 }
 
@@ -1030,7 +1033,7 @@ li.NavItem:hover {
   top: 55px;
   right: 0;
   bottom: 0;
-  width: 47%;
+ 
 }
 
 .textbox-container {
@@ -1509,6 +1512,7 @@ textarea {
   position: fixed;
   width: 130px;
   top: 15px;
+  animation: fadeInOut 20s ease-in-out;
 }
 
 
@@ -1625,3 +1629,366 @@ textarea {
 .btn-save:hover img {
     opacity: 0.7;
 }
+
+
+
+/* Container styles */
+.learning-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f9fa; /* Light background */
+  color: #333; /* Neutral text color */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Title styles */
+.learning-title {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #2b6cb0; /* Professional dark blue */
+}
+
+/* Description styles for "under progress" message */
+.learning-description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #6c757d; /* Subtle gray for secondary text */
+}
+
+/* Link container styles */
+.link-container {
+  margin-top: 20px;
+}
+
+/* Link styles for "Explore DSA" */
+.learning-link {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #ffffff; /* White text for contrast */
+  background-color: #007bff; /* Bootstrap primary blue */
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Link hover effect */
+.learning-link:hover {
+  background-color: #0056b3; /* Slightly darker blue */
+  transform: scale(1.05); /* Gentle scaling effect */
+}
+
+/* Link active state */
+.learning-link:active {
+  transform: scale(0.95); /* Pressed-down effect */
+}
+
+
+
+/*  */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  height: auto; /* Allow the height to adjust based on content */
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.btnC,
+.btnJava {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  border-color: rgb(12, 12, 12);
+  border-width: 2px;
+  border-style: solid;
+  margin: 5px; /* Add spacing for better alignment on mobile */
+  text-align: center;
+}
+
+.btnC {
+  background-color: white;
+  color: rgb(105, 103, 103);
+}
+
+.btnJava {
+  background-color: white;
+  color: rgb(105, 103, 103);
+}
+
+.btnC.active,
+.btnJava.active {
+  border-color: #4caf50;
+}
+
+.code-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%; /* Full width for small screens */
+  max-width: 600px; /* Limit width on larger screens */
+  margin-top: 15px;
+  font-family: monospace;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.copy-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.copy-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
+
+.copy-button.copied {
+  background-color: #28a745;
+  cursor: not-allowed;
+}
+
+.copy-button.copied:hover {
+  background-color: #1d9238;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word; /* Prevent overflow for long lines */
+  font-size: 14px;
+  background-color: #020718;
+  color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto; /* Enable horizontal scrolling for code blocks */
+}
+
+.token.keyword {
+  color: #208ff7;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .button-group {
+    margin-bottom: 10px;
+  }
+
+  .btnC,
+  .btnJava {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .code-section {
+    padding: 10px;
+    margin-top: 10px;
+    width: 95%;
+    font-size: 12px;
+  }
+
+  .copy-button {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  pre {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btnC,
+  .btnJava {
+    width: 35px;
+    height: 35px;
+    font-size: 10px;
+  }
+
+  .code-section {
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  .copy-button {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+
+  pre {
+    font-size: 11px;
+    padding: 6px;
+  }
+}
+
+.copied-message {
+  position: fixed;
+  top: 60px;
+  left: 75%;
+  transform: translateX(-50%);
+  background-color: #4caf50; 
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 100px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+
+  /* Positioning */
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  /* Fade In Effect */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* Header Section */
+.headerJobpostsreensub {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.header-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+.crossbutton:hover {
+  background-color: #828181;
+  color: #fff;
+  border-radius: 25px;
+}
+
+
+
+
+
+
+
+
+
+/* Job Description */
+.Jobdescription h3 {
+  font-size: 20px;
+  color: #000000;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.Jobdescription p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #171717;
+}
+
+.jobPostContainer.inactive {
+  pointer-events: none; 
+  opacity: 0.5; 
+  transition: opacity 0.3s ease; 
+}
+
+
+.notificationContainer.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notificationContainer.hidden {
+  pointer-events: none; 
+  opacity: 0.5; 
+  transition: opacity 0.3s ease; 
+}
+
+
+

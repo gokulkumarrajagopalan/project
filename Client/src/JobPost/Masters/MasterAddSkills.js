@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import API_URLS from "../../config";
+import { API_URLS, API_UI_URLS } from "../../config";
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/AddMasterSkills";

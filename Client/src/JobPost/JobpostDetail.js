@@ -1,65 +1,101 @@
-import React, { useContext, useEffect, useState } from "react";
-import { MyContext } from "../context";
-import axios from "axios";
-import API_URLS from "../config";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import html2canvas from 'html2canvas';
+import { MyContext } from '../context';
+import { API_URLS } from '../config';
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/savejobpost";
+const API_LIST_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
 
-function JobPostDetail() {
+const JobPostDetail = () => {
   const { userType, isValid } = useContext(MyContext);
-  const [jobRole, setJobRole] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [skills, setSkills] = useState("");
-  const [qualification, setQualification] = useState("");
-  const [location, setLocation] = useState("");
-  const [salary, setSalary] = useState("");
+  const navigate = useNavigate();
+  const { jobid } = useParams();
+
+  const [jobRole, setJobRole] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [skills, setSkills] = useState('');
+  const [qualification, setQualification] = useState('');
+  const [location, setLocation] = useState('');
+  const [salary, setSalary] = useState('');
   const [workMode, setWorkMode] = useState([]);
   const [employmentType, setEmploymentType] = useState([]);
-  const [experience, setExperience] = useState("");
+  const [experience, setExperience] = useState('');
   const [companyImage, setCompanyImage] = useState(null);
-  const [description, setDescription] = useState("");
-  const [expireon, setExpireon] = useState("");
+  const [description, setDescription] = useState('');
+  const [expireon, setExpireon] = useState('');
   const [externalLink, setExternalLink] = useState(false);
-  const [jobLink, setJobLink] = useState("");
-  const navigate = useNavigate();
+  const [jobLink, setJobLink] = useState('');
 
-
-  const handleSalaryChange = (e) => {
-    setSalary(e.target.value);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = ("0" + date.getDate()).slice(-2);
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
   };
 
-
-  const handleWorkModeChange = (mode) => {
-    setWorkMode((prev) =>
-      prev.includes(mode) ? prev.filter((item) => item !== mode) : [...prev, mode]
-    );
+  const generateMessage = () => {
+    const jobMessage = `
+  Role: ${jobRole}
+  Company: ${companyName}
+  Salary: ${salary}
+  Experience: ${experience}
+  
+  🔗 Apply Here: ${jobLink}
+  📲 Telegram: [Your Telegram Group Link]
+  
+  📢 Share this opportunity with friends!
+    `;
+  
+    return encodeURIComponent(jobMessage.trim());
   };
-
-
-  const handleEmploymentTypeChange = (type) => {
-    setEmploymentType((prev) =>
-      prev.includes(type) ? prev.filter((item) => item !== type) : [...prev, type]
-    );
-  };
-
-
-  const handleExperienceChange = (e) => {
-    setExperience(e.target.value);
-  };
+  
+  useEffect(() => {
+    if (jobid) {
+      const fetchJobDetails = async () => {
+        try {
+          const response = await axios.get(API_LIST_URL);
+          const job = response.data.find((job) => job.jobID.toString() === jobid);
+          if (job) {
+            setJobRole(job.role || "");
+            setCompanyName(job.companyName || "");
+            setSkills(job.skills || "");
+            setQualification(job.qualification || "");
+            setLocation(job.location || "");
+            setSalary(job.salary || "");
+            setWorkMode(job.workMode || []);
+            setEmploymentType(job.employmentType || []);
+            setExperience(job.experience || "");
+            setCompanyImage(job.companyImage || null);
+            setDescription(job.description || "");
+            setExpireon(formatDate(job.expireon));
+            setExternalLink(job.externalLink || false);
+            setJobLink(job.jobLink || "");
+            console.log("job found: " + job.expireon);
+          } else {
+            console.log("No job found with the given ID");
+          }
+        } catch (error) {
+          console.error("Error fetching job details:", error);
+        }
+      };
+      fetchJobDetails();
+    }
+  }, [jobid]);
 
   useEffect(() => {
     const fetchSessionData = async () => {
       try {
         if (!isValid) {
-          navigate("/SignIn");
+          // navigate("/NotAuthorize");
         } else {
-
-          if (userType !== "A" && userType !== "R" ) {
-            navigate("/JobPostScreen");
-         
-        }}
+          if (userType !== "A" && userType !== "R") {
+            // navigate("/NotAuthorize");
+          }
+        }
       } catch (e) {
         console.log(e);
       }
@@ -67,32 +103,70 @@ function JobPostDetail() {
 
     fetchSessionData();
   }, [isValid, userType, navigate]);
-  const handleSubmit = async (e) => { 
+
+  const handleSalaryChange = (e) => {
+    setSalary(e.target.value);
+  };
+
+  const handleWorkModeChange = (mode) => {
+    setWorkMode((prev) =>
+      prev.includes(mode) ? prev.filter((item) => item !== mode) : [...prev, mode]
+    );
+  };
+
+  const handleEmploymentTypeChange = (type) => {
+    setEmploymentType((prev) =>
+      prev.includes(type) ? prev.filter((item) => item !== type) : [...prev, type]
+    );
+  };
+
+  const handleExperienceChange = (e) => {
+    setExperience(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
 
     if (!jobRole || !companyName || !location || !description) {
       alert("Please fill out all required fields.");
       return;
     }
-  
-  
-  
+
     try {
-  
-      const response = await axios.post(API_URL, { role: jobRole, companyName: companyName,
-         skills: skills, qualification: qualification, location: location, salary: salary,
-        workMode: workMode, 
-        employmentType: employmentType, 
+      const response = await axios.post(API_URL, {
+        role: jobRole,
+        companyName: companyName,
+        skills: skills,
+        qualification: qualification,
+        location: location,
+        salary: salary,
+        workMode: workMode,
+        employmentType: employmentType,
         experience: experience,
         companyImage: companyImage,
         description: description,
         expireon: expireon,
         externalLink: externalLink,
-        jobLink: externalLink ? jobLink : "" });
-  
+        jobLink: externalLink ? jobLink : ""
+      });
+
       if (response.status === 201) {
         alert("Data Saved Successfully");
+
+        // Generate job card image
+        const jobCardImage = await generateJobCard();
+
+        // Create a temporary anchor element
+        const link = document.createElement('a');
+        link.href = jobCardImage;
+        link.download = `job_card_${jobRole.replace(/\s+/g, '_')}.png`;
+
+        // Programmatically click the link to trigger the download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        console.log("Job card image generated and download initiated");
       } else {
         throw new Error("Failed to save data");
       }
@@ -101,8 +175,49 @@ function JobPostDetail() {
       alert("Failed to save data");
     }
   };
-  
-  
+
+  const generateJobCard = async () => {
+    const jobCard = document.createElement('div');
+    jobCard.innerHTML = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Job Card</title>
+      </head>
+      <body style="margin: 0; font-family: Arial, sans-serif; background-color: #0d1b48; display: flex; justify-content: center; align-items: center; height: 720px; width: 300px;">
+        <div style="background-color: #fff; width: 900px; height: 900px; padding: 40px; border-radius: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center; display: flex; flex-direction: column; justify-content: center;">
+          <h2 style="margin-top: 0; color: #4b4b4b; font-size: 36px; font-weight: bold;">
+            <span style="font-weight: normal; color: #0d1b48;">G</span><span style="color: #b83378;">dest</span><span style="color: #0d1b48;">.in</span>
+          </h2>
+          <p style="margin: 20px 0; font-weight: bold; color: #333; font-size: 28px;">
+            Role: ${jobRole}
+          </p>
+          <p style="margin: 20px 0; color: #333; font-size: 24px;">
+            <strong>LOCATION:</strong> ${location.toUpperCase()}
+          </p>
+          <p style="margin: 20px 0; color: #333; font-size: 24px;">
+            <strong>Salary:</strong> ${salary}
+          </p>
+          <p style="margin: 20px 0; color: #333; font-size: 24px;">
+            <strong>Experience:</strong> ${experience}
+          </p>
+          <a href="https://gdest.in" style="display: inline-block; padding: 15px 30px; background-color: #2749ff; color: white; text-decoration: none; border-radius: 30px; font-size: 24px; margin-top: 30px;">
+            Visit our website
+          </a>
+        </div>
+      </body>
+      </html>
+    `;
+
+    document.body.appendChild(jobCard);
+    const canvas = await html2canvas(jobCard);
+    document.body.removeChild(jobCard);
+
+    return canvas.toDataURL('image/png');
+  };
+
   return (
     <div className="job-post-detail-container">
       <div className="job-post-detail">
@@ -201,15 +316,7 @@ function JobPostDetail() {
                       checked={workMode.includes("office")}
                       onChange={() => handleWorkModeChange("office")}
                     />
-                    <label>Work from Office</label>
-                  </div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      checked={workMode.includes("hybrid")}
-                      onChange={() => handleWorkModeChange("hybrid")}
-                    />
-                    <label>Hybrid</label>
+                    <label>Office</label>
                   </div>
                   <div>
                     <input
@@ -218,6 +325,14 @@ function JobPostDetail() {
                       onChange={() => handleWorkModeChange("remote")}
                     />
                     <label>Remote</label>
+                  </div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked={workMode.includes("hybrid")}
+                      onChange={() => handleWorkModeChange("hybrid")}
+                    />
+                    <label>Hybrid</label>
                   </div>
                 </td>
               </tr>
@@ -229,14 +344,6 @@ function JobPostDetail() {
                   <div>
                     <input
                       type="checkbox"
-                      checked={employmentType.includes("part-time")}
-                      onChange={() => handleEmploymentTypeChange("part-time")}
-                    />
-                    <label>Part-time</label>
-                  </div>
-                  <div>
-                    <input
-                      type="checkbox"
                       checked={employmentType.includes("full-time")}
                       onChange={() => handleEmploymentTypeChange("full-time")}
                     />
@@ -245,10 +352,18 @@ function JobPostDetail() {
                   <div>
                     <input
                       type="checkbox"
-                      checked={employmentType.includes("contract")}
-                      onChange={() => handleEmploymentTypeChange("contract")}
+                      checked={employmentType.includes("part-time")}
+                      onChange={() => handleEmploymentTypeChange("part-time")}
                     />
-                    <label>Contract</label>
+                    <label>Part-time</label>
+                  </div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked={employmentType.includes("intern")}
+                      onChange={() => handleEmploymentTypeChange("intern")}
+                    />
+                    <label>Intern</label>
                   </div>
                 </td>
               </tr>
@@ -258,6 +373,7 @@ function JobPostDetail() {
                   <input
                     type="text"
                     className="job-input"
+                    name="experience"
                     value={experience}
                     onChange={handleExperienceChange}
                   />
@@ -268,7 +384,6 @@ function JobPostDetail() {
                 <td>
                   <input
                     type="file"
-                    accept="image/*"
                     onChange={(e) => setCompanyImage(e.target.files[0])}
                   />
                 </td>
@@ -277,14 +392,14 @@ function JobPostDetail() {
                 <td>Description</td>
                 <td>
                   <textarea
-                    rows={5}
+                    className="job-input"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </td>
               </tr>
               <tr className="td_hover">
-                <td>Expire On</td>
+                <td>Expiry Date</td>
                 <td>
                   <input
                     type="date"
@@ -308,24 +423,22 @@ function JobPostDetail() {
                   <td>Job Link</td>
                   <td>
                     <input
-                      type="url"
+                      type="text"
                       value={jobLink}
                       onChange={(e) => setJobLink(e.target.value)}
                     />
                   </td>
                 </tr>
               )}
-              <tr>
-                <td colSpan={2}>
-                  <button type="submit" className="btn btn-primary">Submit</button>
-                </td>
-              </tr>
             </tbody>
           </table>
+          <button type="submit">Save</button>
+          <button type="button" onClick={generateJobCard}>Generate Job Card Image</button>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default JobPostDetail;
+

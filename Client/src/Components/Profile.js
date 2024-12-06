@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Textbox from "./Textbox"; 
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL_GET_PROFILE = API_URLS[ENV] + "/addProfile/getProfile/";

@@ -6,7 +6,7 @@ import JobScreenNav from "../JobPost/Navigation/JobScreenNav";
 import MobileNav from "../JobPost/Navigation/MobileNav";
 import Notification from "../Components/notification";
 import Filter from "../Components/Filter";
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 import JobPostScreenSub from "../JobPost/JobPostScreenSub";
 import UserDetails from "../Components/UserDetails";
 import { MyContext } from "../context";
@@ -34,7 +34,7 @@ function Saved() {
     const fetchSavedJobs = async () => {
       if (!isValid || !userID) {
         console.warn("Invalid session. Redirecting to login.");
-        navigate("/SignIn");
+        //navigate("/SignIn");
         return;
       }
   
@@ -43,7 +43,7 @@ function Saved() {
         console.log(`Fetching saved jobs for userID: ${userID}`);
         const response = await axios.get(`${API_URL_SAVED}?userID=${userID}`);
         if (response.status === 200) {
-          setSavedJobs(response.data); // Ensure API returns detailed job data
+          setSavedJobs(response.data);
         } else {
           console.warn("Unexpected API response:", response);
         }

@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../LandingPage/NavBar";
 import { useNavigate } from "react-router-dom";
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 import './Style_Sign.css'; 
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;

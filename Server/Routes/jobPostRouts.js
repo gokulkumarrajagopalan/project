@@ -76,6 +76,7 @@ router.post('/saveJob', async (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 router.get('/savedJobs', async (req, res) => {
   const { userID } = req.query; // Extract userID from query params
 

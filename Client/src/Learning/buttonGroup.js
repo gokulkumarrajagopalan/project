@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism.css";
-import "prismjs/components/prism-c"; // Import the 'c' component for C language support
+import "prismjs/components/prism-c"; 
 import "./buttongroup.css";
 
 function ButtonGroup({ handleLanguageChange, cLangElements, javaLangElements }) {
