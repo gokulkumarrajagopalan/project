@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext } from "react";
 import axios from "axios";
-import API_URLS from "../config";
+import { API_URLS, API_UI_URLS } from "../config";
 import { useNavigate } from "react-router-dom";
 import saveIcon from "../Asset/save.png";
 import savedIcon from "../Asset/saved.png";
 import share from "../Asset/share.png";
+import { MyContext } from "../context"; 
+
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL_SAVE = API_URLS[ENV] + "/addJobPost/saveJob";
 
-function JobPostScreenSub({ job, onClose, onShare }) {
+function JobPostScreenSub({ job, onClose }) {
   const navigate = useNavigate();
   const [isSaved, setIsSaved] = useState(false);
-  const [hovered, setHovered] = useState(false);
-
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const { userType, isValid, userId } = useContext(MyContext);   
   useEffect(() => {
     const handleBackNavigation = (event) => {
       event.preventDefault();
@@ -31,7 +33,8 @@ function JobPostScreenSub({ job, onClose, onShare }) {
     return <div>Select a job to view details.</div>;
   }
 
-  const userId = 1;
+  
+
   const handleSaveJob = async () => {
     try {
       const response = await axios.post(API_URL_SAVE, {
@@ -45,6 +48,14 @@ function JobPostScreenSub({ job, onClose, onShare }) {
     }
   };
 
+  const handleShare = () => {
+    const link = `${window.location.origin}/viewjobs/${job.jobID}`;
+    navigator.clipboard.writeText(link).then(() => {
+      setShowCopiedMessage(true); 
+      setTimeout(() => setShowCopiedMessage(false), 3000); 
+    });
+  };
+
   const {
     jobID,
     role,
@@ -55,29 +66,28 @@ function JobPostScreenSub({ job, onClose, onShare }) {
     employmentType,
     skills,
     description,
-    expireon,
-    externalLink,
-    jobLink,
     Posted_Date,
   } = job;
 
   const handleApplyJob = () => {
-    let link = jobLink;
-    if (externalLink && jobLink) {
-      if (!jobLink.startsWith("http://") && !jobLink.startsWith("https://")) {
-        link = "http://" + jobLink;
-      }
-      window.open(link, "_blank");
-    } else {
-      console.log("Applying for the job...");
+    let link = job.jobLink;
+    if (!link.startsWith("http://") && !link.startsWith("https://")) {
+      link = "http://" + link;
     }
+    window.open(link, "_blank");
+  };
+
+  const handleEditJob = () => {
+    navigate(`/JobPostDetail/${jobID}`);
   };
 
   return (
-    <div>
+    <div className="headerJobpostsreensub">
       <div className="header-section">
         <h2>Role criteria</h2>
-        <button onClick={onClose} className="crossbutton">x</button>
+        <button onClick={onClose} className="crossbutton">
+          x
+        </button>
       </div>
       <p>Role: {role}</p>
       <p>Company: {companyName}</p>
@@ -85,18 +95,20 @@ function JobPostScreenSub({ job, onClose, onShare }) {
       <p>Experience: {experience}</p>
       <p>Skills: {skills}</p>
       <div className="btn-ssa">
-        <button onClick={handleApplyJob} className="btn-apply">Apply Job</button>
-        <button onClick={() => onShare(jobID)} className="btn-save">
-        <img src={share} alt="Share Icon" />
+        <button onClick={handleApplyJob} className="btn-apply">
+          Apply Job
         </button>
-        <button
-          onClick={handleSaveJob}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          className="btn-save"
-        >
+
+        
+        <button onClick={handleShare} className="btn-save tooltip">
+          <img src={share} alt="Share Icon" />
+          <span className="tooltip-text">Share</span>
+        </button>
+
+        
+        <button onClick={handleSaveJob} className="btn-save tooltip">
           <img src={isSaved ? savedIcon : saveIcon} alt="Save Icon" />
-          {hovered && (isSaved ? "Saved" : "Save")}
+          <span className="tooltip-text">{isSaved ? "Saved" : "Save"}</span>
         </button>
       </div>
       <div className="Jobdescription">
@@ -105,6 +117,21 @@ function JobPostScreenSub({ job, onClose, onShare }) {
         <p>Employment Type: {employmentType}</p>
         <p>{description}</p>
       </div>
+
+      
+      {showCopiedMessage && (
+        <div className="copied-message">
+          Link has been copied!
+        </div>
+      )}
+
+{/* {userType === 'A' && isValid  && ( */}
+  <div className="Editbtn">
+    <button onClick={handleEditJob}>Edit</button>
+  </div>
+{/* )} */}
+
+
     </div>
   );
 }
