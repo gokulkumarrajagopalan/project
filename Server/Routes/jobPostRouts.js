@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
@@ -106,3 +107,6 @@ router.get('/savedJobs', async (req, res) => {
 
 
 module.exports = router;
+=======
+res.json(jobPosts);
+>>>>>>> a78ed70c (commit)
