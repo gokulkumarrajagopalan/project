@@ -129,8 +129,9 @@ router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profil
 // Get user profile
 router.get("/getProfile/:userId", async (req, res) => {
   try {
+    const { userId } = req.params; 
 
-    const profile = await UserProfile.findOne({ userid: userId });
+    const profile = await UserProfile.findOne({ userid: userId }); 
 
     if (!profile) {
       return res.status(404).json({ error: "Profile not found" });
