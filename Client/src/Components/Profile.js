@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext } from "react";
 import Textbox from "./Textbox"; 
-import API_URLS from "../config";
-
+import { MyContext } from '../context';
+import { API_URLS, API_UI_URLS } from "../config";
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL_GET_PROFILE = API_URLS[ENV] + "/addProfile/getProfile/";
 const API_URL_CREATE_PROFILE = API_URLS[ENV] + "/addProfile/createProfile/";
 
 function Profile() {
+  const { isValid ,userId } = useContext(MyContext);
+
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -31,7 +33,7 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(API_URL_GET_PROFILE);
+        const response = await fetch(API_URL_GET_PROFILE/`${userId}`);
         const data = await response.json();
         if (data.profile) {
           

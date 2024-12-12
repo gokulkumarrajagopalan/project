@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import API_URLS from "./config";
+import { API_URLS, API_UI_URLS } from "./config";
 
 const MyContext = createContext({});
 const ENV = process.env.REACT_APP_ENV || "production";
@@ -46,7 +46,7 @@ const StateContext = ({ children }) => {
   }
 
   return (
-    <MyContext.Provider value={{ userType, isValid }}>
+    <MyContext.Provider value={{ userType, isValid ,userId }}>
       {children}
     </MyContext.Provider>
   );

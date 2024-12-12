@@ -7,7 +7,6 @@ const signOutRoutes = require("./Routes/signOutRoutes");
 const documentRoutes = require("./Routes/documentRoutes");
 const addProfile = require("./Routes/ProfileRoutes");
 const wordtopdf = require("./Routes/wordtopdf");
-const pdftoword = require("./Routes/pdftoword");
 const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const session = require("express-session");
@@ -15,16 +14,19 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const MasterAddJobRoles = require("./Routes/MasterAddJobRoles");
 const PaymentRoutes = require("./Routes/PaymentRoutes");
+const telegramAPIRoutes = require("./Routes/TelegramAPIRoutes");
 
 const app = express();
 
+// Database connection
 connectToDatabase();
 
+// Middleware setup
 app.use(cookieParser());
-
 app.use(express.json());
 app.use(bodyParser.json());
 
+// Session configuration
 app.use(
   session({
     name: "GdestCookies",
@@ -32,32 +34,35 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
-      ttl: 14 * 24 * 60 * 60,
+      mongoUrl: "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+      ttl: 14 * 24 * 60 * 60, // 14 days
       autoRemove: "native",
     }),
     cookie: {
       secure: false,
       httpOnly: false,
-      maxAge: 30 * 24 * 60 * 60 * 1000,
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       sameSite: "lax",
     },
-  }),
+  })
 );
 
-const corsConfig = {
-     origin: ["https://gdest.in"],
-  // origin: ["https://ty376c-3000.csb.app"],
-  // origin: ["https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev"],
-  methods: ["POST", "GET", "PUT", "DELETE"],
-  credentials: true,
-};
 
-app.use(cors(corsConfig));
+const allowedOrigins = ['https://ty376c-3000.csb.app'];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true, 
+}));
 
-app.options("*", cors(corsConfig));
-
+// Routes
 app.use("/users", userRoutes);
 app.use("/signIn", signInRoutes);
 app.use("/addJobPost", jobPostRoutes);
@@ -65,15 +70,18 @@ app.use("/signOut", signOutRoutes);
 app.use("/documents", documentRoutes);
 app.use("/addProfile", addProfile);
 app.use("/wordtopdf", wordtopdf);
-// app.use("/pdftoword", pdftoword);
 app.use("/masterAddJobRoles", MasterAddJobRoles);
-app.use("/PaymentRoutes" , PaymentRoutes)
-app.use(function (err, req, res, next) {
+app.use("/PaymentRoutes", PaymentRoutes);
+app.use("/", telegramAPIRoutes);
+
+// Error handling
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
 
-const PORT = process.env.PORT || 3700;
+// Server setup
+const PORT = process.env.PORT || 3710;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
