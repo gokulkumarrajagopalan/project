@@ -52,19 +52,19 @@ router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profil
     skills
   } = req.body;
 
-  const userId = 3; // Assuming you are hardcoding this for now
+  const userId = 3; 
 
   try {
     let resumeUrl = null;
     let profilePictureUrl = null;
 
-    // Upload resume to S3 if provided
+  
     if (req.files.resume) {
       const resumeFile = req.files.resume[0];
       resumeUrl = await uploadFileToS3(resumeFile.buffer, resumeFile.originalname, 'resumes');
     }
 
-    // Upload profile picture to S3 if provided
+  
     if (req.files.profilePicture) {
       const profilePicFile = req.files.profilePicture[0];
       profilePictureUrl = await uploadFileToS3(profilePicFile.buffer, profilePicFile.originalname, 'profile-pictures');
@@ -127,9 +127,8 @@ router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profil
 });
 
 // Get user profile
-router.get("/getProfile", async (req, res) => {
+router.get("/getProfile/:userId", async (req, res) => {
   try {
-    const userId = 3;
 
     const profile = await UserProfile.findOne({ userid: userId });
 

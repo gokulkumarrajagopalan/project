@@ -4,10 +4,14 @@ import axios from 'axios';
 import html2canvas from 'html2canvas';
 import { MyContext } from '../context';
 import { API_URLS } from '../config';
+ import Logo from "../Asset/Logo.png";
+ import Logotext from "../Asset/LOgoGdest.png";
+
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/savejobpost";
 const API_LIST_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
+const API_UPDATE_URL = API_URLS[ENV]  +"/addJobPost/updateJobPost"
 
 const JobPostDetail = () => {
   const { userType, isValid } = useContext(MyContext);
@@ -28,35 +32,25 @@ const JobPostDetail = () => {
   const [expireon, setExpireon] = useState('');
   const [externalLink, setExternalLink] = useState(false);
   const [jobLink, setJobLink] = useState('');
+  const [isUpdateEnabled, setIsUpdateEnabled] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [generatedMessage, setGeneratedMessage] = useState('');
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = ("0" + date.getDate()).slice(-2);
     const month = ("0" + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
   };
 
-  const generateMessage = () => {
-    const jobMessage = `
-  Role: ${jobRole}
-  Company: ${companyName}
-  Salary: ${salary}
-  Experience: ${experience}
-  
-  🔗 Apply Here: ${jobLink}
-  📲 Telegram: [Your Telegram Group Link]
-  
-  📢 Share this opportunity with friends!
-    `;
-  
-    return encodeURIComponent(jobMessage.trim());
-  };
   
   useEffect(() => {
     if (jobid) {
+      setIsUpdateEnabled(true);
       const fetchJobDetails = async () => {
         try {
+          
           const response = await axios.get(API_LIST_URL);
           const job = response.data.find((job) => job.jobID.toString() === jobid);
           if (job) {
@@ -133,6 +127,7 @@ const JobPostDetail = () => {
     }
 
     try {
+      if(!isUpdateEnabled){
       const response = await axios.post(API_URL, {
         role: jobRole,
         companyName: companyName,
@@ -149,66 +144,223 @@ const JobPostDetail = () => {
         externalLink: externalLink,
         jobLink: externalLink ? jobLink : ""
       });
-
+      
       if (response.status === 201) {
         alert("Data Saved Successfully");
 
-        // Generate job card image
-        const jobCardImage = await generateJobCard();
-
-        // Create a temporary anchor element
-        const link = document.createElement('a');
-        link.href = jobCardImage;
-        link.download = `job_card_${jobRole.replace(/\s+/g, '_')}.png`;
-
-        // Programmatically click the link to trigger the download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        console.log("Job card image generated and download initiated");
+        
+       
       } else {
         throw new Error("Failed to save data");
       }
+    }
+    if (isUpdateEnabled) {
+      const response = await axios.put(`${API_UPDATE_URL}/${jobid}`, {
+        role: jobRole,
+        companyName: companyName,
+        skills: skills,
+        qualification: qualification,
+        location: location,
+        salary: salary,
+        workMode: workMode,
+        employmentType: employmentType,
+        experience: experience,
+        companyImage: companyImage,
+        description: description,
+        expireon: expireon,
+        externalLink: externalLink,
+        jobLink: externalLink ? jobLink : ""
+      });
+    
+      if (response.status === 200) {
+        alert("Job post updated successfully!");
+      } else {
+        throw new Error("Failed to update the job post.");
+      }
+    }
+    
     } catch (error) {
       console.error("Error saving data:", error);
       alert("Failed to save data");
     }
   };
-
+  
   const generateJobCard = async () => {
     const jobCard = document.createElement('div');
     jobCard.innerHTML = `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Job Card</title>
-      </head>
-      <body style="margin: 0; font-family: Arial, sans-serif; background-color: #0d1b48; display: flex; justify-content: center; align-items: center; height: 720px; width: 300px;">
-        <div style="background-color: #fff; width: 900px; height: 900px; padding: 40px; border-radius: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-          <h2 style="margin-top: 0; color: #4b4b4b; font-size: 36px; font-weight: bold;">
-            <span style="font-weight: normal; color: #0d1b48;">G</span><span style="color: #b83378;">dest</span><span style="color: #0d1b48;">.in</span>
-          </h2>
-          <p style="margin: 20px 0; font-weight: bold; color: #333; font-size: 28px;">
-            Role: ${jobRole}
-          </p>
-          <p style="margin: 20px 0; color: #333; font-size: 24px;">
-            <strong>LOCATION:</strong> ${location.toUpperCase()}
-          </p>
-          <p style="margin: 20px 0; color: #333; font-size: 24px;">
-            <strong>Salary:</strong> ${salary}
-          </p>
-          <p style="margin: 20px 0; color: #333; font-size: 24px;">
-            <strong>Experience:</strong> ${experience}
-          </p>
-          <a href="https://gdest.in" style="display: inline-block; padding: 15px 30px; background-color: #2749ff; color: white; text-decoration: none; border-radius: 30px; font-size: 24px; margin-top: 30px;">
-            Visit our website
-          </a>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tata Communications Job Post</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1e2875;
+            min-height: 100vh;
+            width : 500px
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        .instagram-post {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1 / 1;
+            background-color: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+    position: relative; /* Ensures child elements are positioned relative to this container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5)); /* Fade effect */
+    padding: 20px;
+    border-radius: 8px; /* Optional: adds rounded corners */
+    overflow: hidden;
+}
+.logo-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2); /* Semi-transparent dark overlay */
+    z-index: 0; /* Ensure the overlay stays behind content */
+}
+       .logo-icon,
+.logo-text {
+    position: relative; /* Ensure the elements are above the background overlay */
+    z-index: 1;
+}
+
+.logo-icon img,
+.logo-text img {
+    max-width: 100%;
+    height: auto;
+}
+
+        .company-name {
+            color: #4052e4;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .hiring-text {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: #1e2875;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: #e8eaf6;
+            color: #4052e4;
+        }
+
+        .btn-primary {
+            background-color: #4052e4;
+            color: white;
+        }
+
+        .visit-website {
+            text-align: right;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="instagram-post">
+        <div class="post-content">
+            <div class="logo-container">
+                <div class="logo-icon" aria-hidden="true">
+                <img src="${Logo}" alt="Logo" class="logo-icon">
+                </div>
+                <div class="logo-text">
+                <img src="${Logotext}" alt="Logotext" class="logo-text">
+                </div>
+            </div>
+
+            <div class="job-info">
+                <h1 class="company-name">${companyName}</h1>
+                <p class="hiring-text">is hiring</p>
+            </div>
+
+            <div>
+                <div class="button-group">
+                    <button class="btn btn-secondary">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                        </svg>
+                        save for later
+                    </button>
+                    <button class="btn btn-secondary">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                        </svg>
+                        share now
+                    </button>
+                </div>
+
+                <div class="visit-website">
+                    <a href="#" class="btn btn-primary">visit our website</a>
+                </div>
+            </div>
         </div>
-      </body>
-      </html>
+    </div>
+</body>
+</html>
+
     `;
 
     document.body.appendChild(jobCard);
@@ -216,6 +368,37 @@ const JobPostDetail = () => {
     document.body.removeChild(jobCard);
 
     return canvas.toDataURL('image/png');
+  };
+
+  const handleGenerateJobCard = async () => {
+    const jobCardImage = await generateJobCard();
+    setPreviewImage(jobCardImage);
+  };
+
+  const handleDownloadJobCard = () => {
+    if (previewImage) {
+      const link = document.createElement('a');
+      link.href = previewImage;
+      link.download = `job_card_${jobRole.replace(/\s+/g, '_')}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  const handleGenerateMessage = () => {
+    const message = `
+    Role: ${jobRole}
+    Company: ${companyName}
+    Salary: ${salary}
+    Experience: ${experience}
+    
+    🔗 Apply Here: ${jobLink}
+📲 Telegram: [Your Telegram Group Link]
+
+📢 Share this opportunity with friends!
+    `;
+    setGeneratedMessage(message.trim());
   };
 
   return (
@@ -432,9 +615,29 @@ const JobPostDetail = () => {
               )}
             </tbody>
           </table>
-          <button type="submit">Save</button>
-          <button type="button" onClick={generateJobCard}>Generate Job Card Image</button>
-        </form>
+          { isUpdateEnabled &&
+           <button type="update">Update</button>
+
+          }
+          { !isUpdateEnabled && <button type="submit">Save</button> }
+          <button type="button" onClick={handleGenerateJobCard}>Generate Job Card Image</button>
+          <button type="button" onClick={handleGenerateMessage}>Generate Message</button>      
+            </form>
+
+            {previewImage && (
+          <div className="preview-container">
+            <h3>Preview</h3>
+            <img src={previewImage} alt="Job Card Preview" style={{ maxWidth: '100%', height: 'auto' }} />
+            <button onClick={handleDownloadJobCard}>Download Job Card</button>
+          </div>
+        )}
+
+        {generatedMessage && (
+          <div className="message-container">
+            <h3>Generated Message</h3>
+            <pre>{generatedMessage}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
