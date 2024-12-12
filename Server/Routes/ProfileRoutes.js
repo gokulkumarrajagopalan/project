@@ -52,7 +52,7 @@ router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profil
     skills
   } = req.body;
 
-  const userId = 3; // Assuming you are hardcoding this for now
+  const userId = 3; 
 
   try {
     let resumeUrl = null;
@@ -129,9 +129,11 @@ router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profil
 // Get user profile
 router.get("/getProfile", async (req, res) => {
   try {
-    const userId = 3;
 
-    const profile = await UserProfile.findOne({ userid: userId });
+    const { userId } = req.params; 
+
+
+    const profile = await UserProfile.findOne({ userid: userId }); 
 
     if (!profile) {
       return res.status(404).json({ error: "Profile not found" });
