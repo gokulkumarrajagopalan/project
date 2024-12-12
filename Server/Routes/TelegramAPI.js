@@ -1,44 +1,63 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { Api, TelegramClient } = require('telegram');
-const { StringSession } = require('telegram/sessions');
-const input = require('input'); // For CLI prompts
-require('dotenv').config();
-router.post("/list_userdetail", async (req, res) => {
-    
-const apiId = process.env.TELEGRAM_API_ID; // Replace with your API ID
-const apiHash = process.env.TELEGRAM_API_HASH; // Replace with your API Hash
-const serverAddress = '149.154.167.40'; // MTProto server address
-const publicKey = `
------BEGIN RSA PUBLIC KEY-----
-MIIBCKCAQEAYMEdY1aR SCR3ZSJrtztKTKqigv0/vBfqACJLZtS7QMgCGXJ6XIR 
-yy7mx66W0/sOFa7/1mAZtEoIokDP3ShoqF4fVNb6XeqgQfaUHd8wJpDWHcR20Fwv 
-plUUI1PLTktZ9uw2WE23b+ixNwJjJGWBDJPQEQFBE-vfmH0JP503wr5INS1poWg/ 
-j25sIWeYPHYe0rFp/eXaqhISP6G+q2IeTawTXpwZj4LzXq5Y0pk4bYEQ6mvRq7D1 
-aHWfYmlEGepfaYR8Q0YqvvhYtMte3ITnuSJs171+GDqpdKcSwHnd6FudwG04pcCO 
-j4WcDuXc2CTHgH8gFTNhp/Y8/SpD0hvn9QIDAQAB
------END RSA PUBLIC KEY-----
-`;
+const fetch = require('node-fetch'); // Alternatively, you can use Axios
 
-const client = new TelegramClient(
-  new StringSession(''),
-  apiId,
-  apiHash,
-  { connectionRetries: 5 }
-);
+// Bot credentials
+const botToken = 'YOUR_BOT_TOKEN_FROM_BOTFATHER'; // Replace with your bot's token
+const chatId = '@YourChannelOrGroupUsername'; // Replace with your Telegram group/channel username or chat ID
 
-(async () => {
-  console.log('Loading MTProto client...');
-  await client.start({
-    phoneNumber: async () => await input.text('Enter your phone number: '),
-    password: async () => await input.text('Enter your password (if enabled): '),
-    phoneCode: async () => await input.text('Enter the code you received: '),
-    onError: (err) => console.log(err),
-  });
+// Static job details
+const jobRole = 'Software Developer';
+const companyName = 'Tech Corp';
+const salary = '$80,000 - $100,000';
+const experience = '2-3 years';
+const jobLink = 'https://example.com/job-post';
 
-  console.log('Connected successfully!');
-  console.log('Session String:', client.session.save()); 
-})();
+// Generate message content
+const generateMessage = (jobRole, companyName, salary, experience, jobLink) => {
+  return `
+📢 **New Job Opportunity!**
 
+**Role:** ${jobRole}  
+**Company:** ${companyName}  
+**Salary:** ${salary}  
+**Experience Required:** ${experience}  
+
+🔗 [Apply Here](${jobLink})
+
+📲 Share this opportunity with your friends!
+  `;
+};
+
+// Route to send Telegram message
+router.post('/sendTelegramMessage', async (req, res) => {
+  const message = generateMessage(jobRole, companyName, salary, experience, jobLink);
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId, // Telegram group or channel username
+        text: message, // The message content
+        parse_mode: 'Markdown', // To format the message
+      }),
+    });
+
+    const result = await response.json();
+
+    if (result.ok) {
+      console.log('Message sent successfully!');
+      res.status(200).send('Message sent successfully!');
+    } else {
+      console.error('Failed to send message:', result);
+      res.status(500).send('Failed to send message');
+    }
+  } catch (err) {
+    console.error('Error occurred while sending message:', err);
+    res.status(500).send('Failed to send message');
+  }
 });
+
 module.exports = router;
