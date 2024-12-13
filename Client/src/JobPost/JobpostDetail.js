@@ -3,13 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import html2canvas from 'html2canvas';
 import { MyContext } from '../context';
-import { API_URLS } from '../config';
+import { API_URLS ,API_UI_URLS } from '../config';
  import Logo from "../Asset/Logo.png";
  import Logotext from "../Asset/LOgoGdest.png";
 
 
 const ENV = process.env.REACT_APP_ENV || "production";
-const API_SHARE_URL = API_URLS[ENV] +"/viewjobs/";
+const API_SHARE_URL = API_UI_URLS[ENV] +"/viewjobs/";
 const API_URL = API_URLS[ENV] + "/addJobPost/savejobpost";
 const API_LIST_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
 const API_UPDATE_URL = API_URLS[ENV]  +"/addJobPost/updateJobPost"
@@ -190,176 +190,202 @@ const JobPostDetail = () => {
     const jobCard = document.createElement('div');
     jobCard.innerHTML = `
     <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tata Communications Job Post</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #1e2875;
-            min-height: 100vh;
-            width : 500px
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        }
-
-        .instagram-post {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 1 / 1;
-            background-color: #ffffff;
-            border-radius: 32px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .post-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .logo-container {
-    position: relative; /* Ensures child elements are positioned relative to this container */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-radius: 8px; /* Optional: adds rounded corners */
-    overflow: hidden;
-}
-.logo-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0; /* Ensure the overlay stays behind content */
-}
-       .logo-icon,
-.logo-text {
-    position: relative; /* Ensure the elements are above the background overlay */
-    z-index: 1;
-}
-
-.logo-icon img,
-.logo-text img {
-    max-width: 100%;
-    height: auto;
-}
-
-        .company-name {
-            color: #4052e4;
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-        }
-
-        .hiring-text {
-            font-family: Georgia, serif;
-            font-size: 2rem;
-            color: #1e2875;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 100px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-        }
-
-        .btn-secondary {
-            background-color: #e8eaf6;
-            color: #4052e4;
-        }
-
-        .btn-primary {
-            background-color: #4052e4;
-            color: white;
-        }
-
-        .visit-website {
-            text-align: right;
-        }
-
-        .icon {
-            width: 20px;
-            height: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="instagram-post">
-        <div class="post-content">
-            <div class="logo-container">
-                <div class="logo-icon" aria-hidden="true">
-                <img src="${Logo}" alt="Logo" class="logo-icon">
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tata Communications Job Post</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                background-color: #1e2875;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+                min-height: 100vh;
+                margin: 0; /* Remove default margin */
+                padding: 0; /* Remove default padding */
+                width: 100%;
+            }
+    
+            .instagram-post {
+                width: 100%;
+                max-width: 500px;
+                aspect-ratio: 1 / 1;
+                background-color: #ffffff;
+                border-radius: 32px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+                position: relative;
+                overflow: hidden;
+                margin-top: 0; /* Add this line to reduce gap */
+            }
+    
+            .post-content {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+    
+            .logo-container {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px; /* Smaller padding for logos */
+                border-radius: 8px;
+                overflow: hidden;
+            }
+    
+            .logo-container::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 0;
+            }
+    
+            .logo-icon img,
+            .logo-text img {
+                max-width: 80px; /* Reduced size for both logos */
+                height: auto;
+            }
+    
+            .company-name {
+                color: #4052e4;
+                font-size: 2rem; /* Reduced font size */
+                font-weight: 700;
+                line-height: 1.2;
+                margin-bottom: 0.5rem;
+            }
+    
+            .hiring-text {
+                font-family: Georgia, serif;
+                font-size: 1.5rem; /* Reduced font size */
+                color: #1e2875;
+            }
+    
+            .button-group {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+            }
+    
+            .btn_save {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem; /* Reduced padding */
+                border-radius: 100px;
+                font-size: 0.875rem; /* Reduced font size */
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border: none;
+            }
+             .btn_share {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem; /* Reduced padding */
+                border-radius: 100px;
+                font-size: 0.875rem; /* Reduced font size */
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border: none;
+                    right: 160px;
+        position: relative;
+            }
+        
+            .btn_visit {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem; /* Reduced padding */
+                border-radius: 100px;
+                font-size: 0.875rem; /* Reduced font size */
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border: none;
+                width: 160px; /* Fixed width for button */
+            }
+    
+            .btn-secondary {
+                background-color: #e8eaf6;
+                color: #4052e4;
+            }
+    
+            .btn-primary {
+                background-color: #4052e4;
+                color: white;
+            }
+    
+            .visit-website {
+                text-align: right;
+            }
+    
+            .icon {
+                width: 16px; /* Reduced icon size */
+                height: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="instagram-post">
+            <div class="post-content">
+                <div class="logo-container">
+                    <div class="logo-icon" aria-hidden="true">
+                        <img src="${Logo}" alt="Logo" class="logo-icon">
+                    </div>
+                    <div class="logo-text">
+                        <img src="${Logotext}" alt="Logotext" class="logo-text">
+                    </div>
                 </div>
-                <div class="logo-text">
-                <img src="${Logotext}" alt="Logotext" class="logo-text">
+    
+                <div class="job-info">
+                    <h1 class="company-name">${companyName}</h1>
+                    <p class="hiring-text">is hiring</p>
                 </div>
-            </div>
-
-            <div class="job-info">
-                <h1 class="company-name">${companyName}</h1>
-                <p class="hiring-text">is hiring</p>
-            </div>
-
-            <div>
-                <div class="button-group">
-                    <button class="btn btn-secondary">
-                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
-                        </svg>
-                        save for later
-                    </button>
-                    <button class="btn btn-secondary">
-                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
-                        </svg>
-                        share now
-                    </button>
-                </div>
-
-                <div class="visit-website">
-                    <a href="#" class="btn btn-primary">visit our website</a>
+    
+                <div>
+                    <div class="button-group">
+                        <button class="btn_save btn-secondary">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                            save for later
+                        </button>
+                        <button class="btn_share btn-secondary">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                            </svg>
+                            share now
+                        </button>
+                    </div>
+    
+                    <div class="visit-website">
+                        <a href="#" class="btn_visit btn-primary">visit our website</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
-</html>
-
+    </body>
+    </html>
     `;
 
     document.body.appendChild(jobCard);
