@@ -48,11 +48,8 @@ app.use(
 );
 
 
-<<<<<<< HEAD
+
 const allowedOrigins = ['https://gdest.in'];
-=======
-const allowedOrigins = ['https://3000-idx-project-1720162691714.cluster-3g4scxt2njdd6uovkqyfcabgo6.cloudworkstations.dev'];
->>>>>>> 92111bf8 (merge)
 app.use(cors({
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
