@@ -1,26 +1,25 @@
-/* Main container for both SignIn and Register pages */
 .Register_container,
 .section_card {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Full viewport height */
-  padding: 20px; /* Padding around the container */
-  background-color: #001f3f; /* Dark blue background */
-  overflow: hidden; /* Prevents layout shifting */
+  height: 100vh; 
+  padding: 20px; 
+  background-color: #f3f3f1; 
+  overflow: hidden; 
 }
 
 /* Card styling for both pages */
 .register-card,
 .section_card {
-  background-color: white; /* White background for the card */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  padding: 30px; /* Inner padding */
-  width: 400px; /* Fixed width for the card */
-  position: relative; /* Positioning context */
+  background-color: white; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  padding: 30px; 
+  width: 400px; 
+  position: relative; 
   top: 30px;
-  flex-shrink: 0; /* Prevents shrinking */
+  flex-shrink: 0; 
 }
 
 /* Header styling for both SignIn and Register */

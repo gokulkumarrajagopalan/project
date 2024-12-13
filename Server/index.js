@@ -64,7 +64,7 @@ app.use("/addJobPost", jobPostRoutes);
 app.use("/signOut", signOutRoutes);
 app.use("/documents", documentRoutes);
 app.use("/addProfile", addProfile);
-app.use("/wordtopdf", wordtopdf);
+//app.use("/wordtopdf", wordtopdf);
 // app.use("/pdftoword", pdftoword);
 app.use("/masterAddJobRoles", MasterAddJobRoles);
 app.use("/PaymentRoutes" , PaymentRoutes)
