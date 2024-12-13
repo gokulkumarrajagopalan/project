@@ -616,7 +616,6 @@ const JobPostDetail = () => {
           </table>
           { isUpdateEnabled &&
            <button type="update">Update</button>
-
           }
           { !isUpdateEnabled && <button type="submit">Save</button> }
           <button type="button" onClick={handleGenerateJobCard}>Generate Job Card Image</button>
