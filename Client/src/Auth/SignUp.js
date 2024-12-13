@@ -1,9 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../LandingPage/NavBar";
-import { API_URLS, API_UI_URLS } from "../config";
-import './Style_Sign.css'; 
-import { Cursor } from "react-simple-typewriter";
+import { API_URLS } from "../config";
+import './Style_Sign.css';
+import { Cursor, useTypewriter } from 'react-simple-typewriter';
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -13,7 +13,7 @@ const API_URL = API_URLS[ENV] + "/users/save_usersData";
 const API_URL_UserValidate = API_URLS[ENV] + "/users/list_userdetail";
 
 const Register = () => {
-  const userRef = useRef();
+  const userRef = useRef(null);
   const [EmailID, setEmailID] = useState("");
   const [EmailIDFocus, setEmailIDFocus] = useState(false);
   const [Pwd, setPwd] = useState("");
@@ -25,8 +25,6 @@ const Register = () => {
   const [ErrMsg, setErrMsg] = useState("");
   const [Success, setSuccess] = useState(false);
   const [ExistingEmails, setExistingEmails] = useState([]);
-  const [text, setText] = useState("");
-  const [index, setIndex] = useState(0);
 
   const [hasUpper, setHasUpper] = useState(false);
   const [hasLower, setHasLower] = useState(false);
@@ -34,7 +32,13 @@ const Register = () => {
   const [hasSpecial, setHasSpecial] = useState(false);
   const [hasMinLength, setHasMinLength] = useState(false);
 
-  const words = ["Join Us", "Create Your Account"];
+  const [typewriterText] = useTypewriter({
+    words: ['Join Us', 'Create Your Account', 'Start Your Journey'],
+    loop: 0,
+    typeSpeed: 70,
+    deleteSpeed: 50,
+    delaySpeed: 1000,
+  });
 
   useEffect(() => {
     setHasUpper(/[A-Z]/.test(Pwd));
@@ -56,20 +60,6 @@ const Register = () => {
         console.error("Error fetching existing emails:", error);
       });
   }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (text.length === words[index].length) {
-        setTimeout(() => {
-          setIndex((index + 1) % words.length);
-          setText("");
-        }, 3000);
-      } else {
-        setText((prevText) => prevText + words[index][prevText.length]);
-      }
-    }, 280);
-    return () => clearTimeout(timer);
-  }, [text, index]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,9 +93,10 @@ const Register = () => {
           <div className="left-side">
             <div className="typewriter-text-wrapper">
               <h2 className="typewriter-text">
-                {text}
-                <Cursor />
+                {typewriterText}
+                <Cursor cursorStyle='_' />
               </h2>
+              <p className="sub-text">Your journey begins here. Sign up to unlock a world of possibilities.</p>
             </div>
           </div>
           <div className="register-card">
@@ -165,7 +156,7 @@ const Register = () => {
                 Must match the password
               </p>
 
-              <button>Sign Up</button>
+              <button className="btn_signup">Sign Up</button>
             </form>
             <p className="instructions">
               Already registered?
@@ -182,3 +173,4 @@ const Register = () => {
 };
 
 export default Register;
+

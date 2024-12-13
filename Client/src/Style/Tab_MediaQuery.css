@@ -347,7 +347,8 @@
   }
 
   .headerJobpostsreensub{
-     padding: 0 10px;
+    position: relative;
+    bottom: 50px;
   }
 
   .button-group {

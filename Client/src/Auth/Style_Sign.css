@@ -3,157 +3,123 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh; 
-  padding: 20px; 
-  background-color: #f3f3f1; 
-  overflow: hidden; 
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f3f3f1;
+  overflow: hidden;
 }
 
-/* Card styling for both pages */
 .register-card,
 .section_card {
-  background-color: white; 
-  border-radius: 10px; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-  padding: 30px; 
-  width: 400px; 
-  position: relative; 
-  top: 30px;
-  flex-shrink: 0; 
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  width: 400px;
+  max-width: 100%;
+  position: relative;
+  flex-shrink: 0;
 }
 
-/* Header styling for both SignIn and Register */
 .Header_signup {
-  color: #001f3f; /* Dark blue text color */
-  text-align: center; /* Centered text */
-  margin-bottom: 20px; /* Spacing below the header */
-  font-size: 28px; /* Larger font size */
-  font-weight: bold; /* Bold font */
+  color: #001f3f;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-/* Label styling for both forms */
 .register_label,
 label {
-  margin: 10px 0 5px; /* Spacing for labels */
-  color: #001f3f; /* Dark blue text color */
+  display: block;
+  margin: 10px 0 5px;
+  color: #001f3f;
 }
 
-/* Input styling for both forms */
 .register-input,
 .inputtxt {
-  width: 100%; /* Full width inputs */
-  padding: 10px; /* Inner padding */
-  border: 1px solid #ccc; /* Light border */
-  border-radius: 5px; /* Rounded corners */
-  margin-bottom: 15px; /* Spacing below inputs */
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
   font-size: 16px;
   color: #001f3f;
 }
 
-/* Button styling for both forms */
 .btn_signup,
 .submitbutton {
-  width: 100%; /* Full width button */
-  padding: 10px; /* Inner padding */
-  background-color: #001f3f; /* Dark blue background */
-  color: white; /* White text */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s; /* Smooth transition */
+  width: 100%;
+  padding: 10px;
+  background-color: #001f3f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
 }
 
-/* Button hover effect */
 .btn_signup:hover,
 .submitbutton:hover {
-  background-color: #0056b3; /* Lighter blue on hover */
+  background-color: #0056b3;
 }
 
-/* Instruction text styling */
 .instructions {
-  font-size: 0.9em; /* Slightly smaller text */
-  color: #666; /* Grey color */
-  margin-top: 5px; /* Spacing above instructions */
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 5px;
 }
 
-/* Error message styling */
 .errmsg {
-  color: red; /* Red text for errors */
-  margin-bottom: 10px; /* Spacing below error message */
+  color: red;
+  margin-bottom: 10px;
 }
 
-/* Offscreen text (for accessibility) */
 .offscreen {
   position: absolute;
-  left: -9999px; /* Move offscreen */
+  left: -9999px;
 }
 
-/* Success message styling */
 .success-message {
-  text-align: center; /* Centered text */
-  color: green; /* Green text */
+  text-align: center;
+  color: green;
 }
 
-/* Line styling */
 .line {
-  color: #001f3f; /* Dark blue text */
-  font-weight: bold; /* Bold text */
+  color: #001f3f;
+  font-weight: bold;
 }
 
-/* Left side styling for images */
 .left-side {
-  flex: 1; /* Take up remaining space */
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
-/* Typewriter text wrapper with fixed width to prevent shrinking */
 .typewriter-text-wrapper {
-  width: 100%; /* Full width */
+  width: 100%;
   text-align: center;
-  overflow: hidden; /* Avoids text overflow */
-  white-space: nowrap;
-  border-right: 0.15em solid #ffffff;
-  animation: blink-caret 0.75s step-end infinite;
 }
 
 .typewriter-text {
   display: inline-block;
-  font-size: 2rem;
-  color: #ffffff;
+  font-size: 2.5rem;
+  color: #001f3f;
   font-weight: bold;
-  animation: typing 3.5s steps(40, end) infinite;
+  margin-bottom: 20px;
 }
 
 .sub-text {
-  margin-top: 20px;
   font-size: 1.2rem;
   color: #555;
   text-align: center;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
-/* Keyframes for typing animation */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #333;
-  }
-}
-
-/* Conditions for valid/invalid states */
 .valid-condition {
   color: green;
 }
@@ -162,15 +128,28 @@ label {
   color: red;
 }
 
-/* Hide the left side part (typewriter effect) on smaller screens */
 @media (max-width: 768px) {
+  .Register_container {
+    flex-direction: column;
+  }
+
   .left-side {
-    display: none;
+    width: 100%;
+    padding: 20px 0;
   }
 
   .register-card,
   .section_card {
-    width: 80%; /* Full width for the card on mobile */
+    width: 90%;
+    margin-top: 20px;
+  }
+
+  .typewriter-text {
+    font-size: 2rem;
+  }
+
+  .sub-text {
+    font-size: 1rem;
   }
 }
 

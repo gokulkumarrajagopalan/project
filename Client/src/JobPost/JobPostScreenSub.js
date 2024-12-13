@@ -130,10 +130,10 @@ function JobPostScreenSub({ job, onClose }) {
       </div>
       {showCopiedMessage && <div className="copied-message">Link has been copied!</div>}
 
-      <div className="Editbtn">
+     { userType === "A" && isValid && <div className="Editbtn">
         <button onClick={handleEditJob}>Edit</button>
         <button onClick={handleDeleteJob}>Delete</button>
-      </div>
+      </div> }
 
       <PopupMessage
         open={isPopupOpen}
@@ -141,7 +141,7 @@ function JobPostScreenSub({ job, onClose }) {
         message={popupMessage}
         onClose={() => {
           setIsPopupOpen(false);
-          onClose(); // Trigger the onClose function after closing the popup
+          onClose(); 
         }}
       />
     </div>

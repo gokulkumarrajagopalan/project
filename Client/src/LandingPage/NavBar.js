@@ -4,6 +4,8 @@ import Logo from "../Asset/Logo.png";
 import Logotext from "../Asset/LOgoGdest.png";
 import Button from "../Components/button";
 import Job from "../Asset/job.png";
+import Jobpost from "../Asset/jobpost.png";
+
 
 function NavBar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -126,6 +128,14 @@ function NavBar() {
                     alt="Job"
                     className="labellearn"
                     onClick={handleJobspostcreen}
+                  />
+                </div>
+                <div>
+                <img
+                    src={Jobpost}
+                    alt="Job"
+                    className="labellearn"
+                    onClick={handleJobspost}
                   />
                 </div>
                 {/* <div>
