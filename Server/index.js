@@ -48,7 +48,7 @@ app.use(
 );
 
 
-const allowedOrigins = ['https://ty376c-3000.csb.app'];
+const allowedOrigins = ['https://gdest.in'];
 app.use(cors({
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
