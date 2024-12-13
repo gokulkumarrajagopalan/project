@@ -9,6 +9,7 @@ import { API_URLS } from '../config';
 
 
 const ENV = process.env.REACT_APP_ENV || "production";
+const API_SHARE_URL = API_URLS[ENV] +"/viewjobs/";
 const API_URL = API_URLS[ENV] + "/addJobPost/savejobpost";
 const API_LIST_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
 const API_UPDATE_URL = API_URLS[ENV]  +"/addJobPost/updateJobPost"
@@ -239,7 +240,6 @@ const JobPostDetail = () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    // background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5)); /* Fade effect */
     padding: 20px;
     border-radius: 8px; /* Optional: adds rounded corners */
     overflow: hidden;
@@ -251,7 +251,6 @@ const JobPostDetail = () => {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.2); /* Semi-transparent dark overlay */
     z-index: 0; /* Ensure the overlay stays behind content */
 }
        .logo-icon,
@@ -393,8 +392,8 @@ const JobPostDetail = () => {
     Salary: ${salary}
     Experience: ${experience}
     
-    🔗 Apply Here: ${jobLink}
-📲 Telegram: [Your Telegram Group Link]
+    🔗 Apply Here: ${API_SHARE_URL}${jobid}
+📲 Telegram: https://t.me/gdestin
 
 📢 Share this opportunity with friends!
     `;
@@ -617,7 +616,6 @@ const JobPostDetail = () => {
           </table>
           { isUpdateEnabled &&
            <button type="update">Update</button>
-
           }
           { !isUpdateEnabled && <button type="submit">Save</button> }
           <button type="button" onClick={handleGenerateJobCard}>Generate Job Card Image</button>
