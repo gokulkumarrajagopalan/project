@@ -73,7 +73,7 @@ app.use("/addProfile", addProfile);
 app.use("/wordtopdf", wordtopdf);
 app.use("/masterAddJobRoles", MasterAddJobRoles);
 app.use("/PaymentRoutes", PaymentRoutes);
-app.use("/", telegramAPIRoutes);
+// app.use("/", telegramAPIRoutes);
 
 // Error handling
 app.use((err, req, res, next) => {
