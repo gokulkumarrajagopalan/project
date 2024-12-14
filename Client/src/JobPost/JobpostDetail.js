@@ -84,10 +84,10 @@ const JobPostDetail = () => {
     const fetchSessionData = async () => {
       try {
         if (!isValid) {
-          // navigate("/NotAuthorize");
+           navigate("/NotAuthorize");
         } else {
           if (userType !== "A" && userType !== "R") {
-            // navigate("/NotAuthorize");
+             navigate("/NotAuthorize");
           }
         }
       } catch (e) {
