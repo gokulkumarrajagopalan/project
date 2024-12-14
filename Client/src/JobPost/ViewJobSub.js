@@ -80,7 +80,7 @@ function ViewJobSub({ job, onClose }) {
     <div className="headerJobpostsreensub">
       <div className="header-section">
         <h2>Role criteria</h2>
-        <button onClick={onClose} className="crossbutton">
+        <button onClick={onClose} className="cross_button">
           x
         </button>
       </div>

@@ -1,14 +1,14 @@
-import React, { useState, useEffect ,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Textbox from "./Textbox"; 
 import { MyContext } from '../context';
-import { API_URLS, API_UI_URLS } from "../config";
+import { API_URLS } from "../config";
+
 const ENV = process.env.REACT_APP_ENV || "production";
-const API_URL_GET_PROFILE = API_URLS[ENV] + "/addProfile/getProfile/";
-const API_URL_CREATE_PROFILE = API_URLS[ENV] + "/addProfile/createProfile/";
+const API_URL_GET_PROFILE = `${API_URLS[ENV]}/addProfile/getProfile`;
+const API_URL_CREATE_PROFILE = `${API_URLS[ENV]}/addProfile/createProfile/`;
 
 function Profile() {
-  const { isValid ,userId } = useContext(MyContext);
-
+  const { isValid, userId } = useContext(MyContext);
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -26,26 +26,27 @@ function Profile() {
     resume: null,
     profilePicture: null,
   });
-
   const [isEditing, setIsEditing] = useState(true);
 
-  
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(API_URL_GET_PROFILE/`${userId}`);
+        const response = await fetch(API_URL_GET_PROFILE/3);
         const data = await response.json();
+        console.log(data);
         if (data.profile) {
-          
           setProfile(data.profile);
+         
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
       }
     };
 
-    fetchProfile();
-  }, []);
+    if (isValid && userId) {
+      fetchProfile();
+    }
+  }, [isValid, userId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

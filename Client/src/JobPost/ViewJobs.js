@@ -13,7 +13,7 @@ import Notification from "../Components/notification";
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL = API_URLS[ENV] + "/addJobPost/listJobPosts";
 const API_URL_SIGNOUT = API_URLS[ENV] + "/signOut";
-const API_URL_SESSION = API_URLS[ENV] + "/signIn/sessioncheck";
+
 
 function ViewJobs() {
   const [jobData, setJobData] = useState([]);
@@ -43,6 +43,24 @@ function ViewJobs() {
   const jobIdparam = jobid;
 
   useEffect(() => {
+  const handleBackNavigation = () => {
+    if (showSelectedJob) {
+      setShowSelectedJob(false);
+      navigate("/jobPostScreen");  
+    }
+  };
+
+  if (showSelectedJob) {
+    window.addEventListener("popstate", handleBackNavigation);
+  }
+
+  return () => {
+    window.removeEventListener("popstate", handleBackNavigation);
+  };
+}, [showSelectedJob, navigate]);
+
+
+  useEffect(() => {
     const fetchJobData = async () => {
       setLoading(true);
       try {
@@ -58,28 +76,6 @@ function ViewJobs() {
     fetchJobData();
   }, []);
 
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-
-    const fetchSessionData = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(API_URL_SESSION, {});
-        const valid = res.data.valid;
-        const userEmail = res.data.email;
-
-        if (valid) {
-          setEmail(userEmail);
-        }
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-      }
-    };
-
-    fetchSessionData();
-  }, [navigate]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -107,6 +103,7 @@ function ViewJobs() {
           if (job) {
             setSelectedJob(job);
             setShowSelectedJob(true);
+            //  document.body.classList.add("no-scroll");
           } else {
             console.log("No job found with the given ID");
             setSelectedJob(null);
@@ -124,7 +121,8 @@ function ViewJobs() {
     setSelectedJob(job);
     setShowSelectedJob(true);
     navigate(`/viewjobs/${job.jobID}`);
-  };
+ document.body.classList.add("no-scroll");
+   };
 
   const handleSearch = (searchValue) => {
     setSearchQuery(searchValue);
@@ -138,7 +136,7 @@ function ViewJobs() {
     workMode,
     experience,
     employmentType,
-    salary
+    salary,
   ) => {
     setSearchLocation(location);
     setSkills(skills);
@@ -155,12 +153,15 @@ function ViewJobs() {
     setShowUserDetails(!showUserDetails);
     setShowFilter(false);
     setShowNotification(false);
+    
   };
 
   const toggleFilterDetails = () => {
     setShowFilter(!showFilter);
     setShowUserDetails(false);
     setShowNotification(false);
+    setShowSelectedJob(!showSelectedJob);
+    setSelectedJob(!selectedJob);
   };
 
   const handleLogout = async () => {
@@ -174,15 +175,32 @@ function ViewJobs() {
 
   const toggleNotification = () => {
     setShowNotification(!showNotification);
+    setShowSelectedJob(!showSelectedJob);
+    setSelectedJob(!selectedJob);
     setShowUserDetails(false);
     setShowFilter(false);
+
   };
 
-  const handleSettings = () => {};
+  const handleSettings = () => {
+    navigate("/Setting");
+  };
 
+  const handleProfile = () => {
+    navigate("/Profile");
+  };
+
+  const handleOnSaved = () => {
+    navigate("/Saved");
+  };
+
+  const handleJobPost = () =>{
+    navigate("/JobpostDetail");
+  }
   const handleShareJob = (jobID) => {
     const shareLink = `${window.location.origin}/viewjobs/${jobID}`;
-    navigator.clipboard.writeText(shareLink)
+    navigator.clipboard
+      .writeText(shareLink)
       .then(() => alert("Job link copied to clipboard!"))
       .catch((err) => console.error("Error copying job link:", err));
   };
@@ -196,20 +214,23 @@ function ViewJobs() {
         toggleNotification={toggleNotification}
         showSearch={showSearch}
       />
-
+<div className={`notificationContainer ${showNotification ? "active" : "hidden"}`}>
       {showNotification && (
         <Notification
           showNotification={showNotification}
           ontoggleNotification={toggleNotification}
         />
       )}
-
+</div>
       {showUserDetails && (
         <UserDetails
           showUserDetails={showUserDetails}
           onToggleUserDetails={toggleUserDetails}
           onLogout={handleLogout}
           onSettings={handleSettings}
+          onProfile={handleProfile}
+          onSaved={handleOnSaved}
+          onJobPost ={handleJobPost}
         />
       )}
       {showFilter && (
@@ -226,22 +247,18 @@ function ViewJobs() {
         setShowSearch={setShowSearch}
       />
 
-      {showSelectedJob && selectedJob ? (
+      {showSelectedJob && selectedJob &&
         <div className="viewjobs_section">
           <ViewJobSub
             job={selectedJob}
             onClose={() => {
               setShowSelectedJob(false);
-              navigate("/viewjobs");
+              navigate("/jobpostscreen");
             }}
             onShare={handleShareJob}
           />
         </div>
-      ) : (
-        <div className="Selectedjob">
-          <p>No job found with the given ID.</p>
-        </div>
-      )}
+      }
     </>
   );
 }

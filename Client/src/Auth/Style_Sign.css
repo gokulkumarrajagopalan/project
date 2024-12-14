@@ -12,13 +12,14 @@
 .register-card,
 .section_card {
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   padding: 30px;
   width: 400px;
   max-width: 100%;
   position: relative;
   flex-shrink: 0;
+  top: 30px;
 }
 
 .Header_signup {

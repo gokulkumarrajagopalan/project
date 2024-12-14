@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Asset/Logo.png";
 import Logotext from "../Asset/LOgoGdest.png";
 import Button from "../Components/button";
 import Job from "../Asset/job.png";
 import Jobpost from "../Asset/jobpost.png";
-
+import { MyContext } from "../context";
 
 function NavBar() {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { userType, isValid, userId } = useContext(MyContext);
 
   const handleSignIn = () => {
     window.location.href = "/SignIn";
@@ -130,6 +131,7 @@ function NavBar() {
                     onClick={handleJobspostcreen}
                   />
                 </div>
+                { userType == "A" && isValid &&
                 <div>
                 <img
                     src={Jobpost}
@@ -137,7 +139,7 @@ function NavBar() {
                     className="labellearn"
                     onClick={handleJobspost}
                   />
-                </div>
+                </div> }
                 {/* <div>
                   <Link
                     to="/LearningDefault"

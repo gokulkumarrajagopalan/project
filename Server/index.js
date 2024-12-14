@@ -35,21 +35,21 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
-      ttl: 14 * 24 * 60 * 60, // 14 days
+      ttl: 14 * 24 * 60 * 60, 
       autoRemove: "native",
     }),
     cookie: {
       secure: false,
-      httpOnly: false,
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      httpOnly: false, 
+      maxAge: 30 * 24 * 60 * 60 * 1000, 
       sameSite: "lax",
     },
   })
 );
 
-
-
+// CORS configuration
 const allowedOrigins = ['https://gdest.in'];
+
 app.use(cors({
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -59,8 +59,8 @@ app.use(cors({
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true, 
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
 
 // Routes

@@ -95,7 +95,7 @@ useEffect(() => {
       setSearchLocation(location.state.location);
     }
 
-    console.log("location", location);
+    // console.log("location", location);
   }, [location.search, location.state]);
 
 

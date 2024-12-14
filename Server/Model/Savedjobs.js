@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const SavedJobSchema = new mongoose.Schema({
     userId: {
-        type: String,
+        type: Number,
         required: true,
     },
     jobId: {

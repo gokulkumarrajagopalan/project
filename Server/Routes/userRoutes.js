@@ -15,6 +15,18 @@ router.get("/list_userdetail", async (req, res) => {
   }
 });
 
+router.get("/getProfile/:userid", async (req, res) => {
+  try {
+    const { userid } = req.params;
+
+    const users = await User.findOne({userid});
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
 // Create a new user
 router.post("/save_usersData", async (req, res) => {
   try {

@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const JobPost = require('../Model/JobPost');
 const SavedJob = require('../Model/Savedjobs');
+const authenticateToken = require("../Utils/authmiddleware");
 
 router.get("/listJobPosts", async (req, res) => {
   try {
@@ -16,7 +17,7 @@ router.get("/listJobPosts", async (req, res) => {
   }
 });
 
-router.get("/listJobPosts/:jobID", async (req, res) => {
+router.get("/listJobPosts/:jobID" , async (req, res) => {
   try {
     const { jobID } = req.params;
     const jobPost = await JobPost.findOne({ jobID });
@@ -149,22 +150,26 @@ router.post('/saveJob', async (req, res) => {
   }
 });
 
-router.get('/savedJobs', async (req, res) => {
-  const { userID } = req.query; 
+
+
+router.get('/savedJobs/:userID', async (req, res) => {
+  const { userID } = req.params;
 
   if (!userID) {
     return res.status(400).json({ message: "User ID is required" });
   }
 
   try {
-
-    const savedJob = await SavedJob.findOne({ userID });
+    // Ensure userID is treated as a string since it is stored as a string in the DB
+    const savedJob = await SavedJob.findOne({ userId: userID });
     if (!savedJob) {
       return res.status(404).json({ message: "No saved jobs found" });
     }
 
-    const jobIds = savedJob.jobId.split(',').map(id => parseInt(id.trim()));
+    // Split the `jobId` string into an array of job IDs
+    const jobIds = savedJob.jobId.split(',').map(id => id.trim());
 
+    // Fetch the corresponding job posts
     const jobPosts = await JobPost.find({ jobID: { $in: jobIds } }).sort({ Posted_Date: -1 });
 
     res.json(jobPosts);
@@ -173,6 +178,7 @@ router.get('/savedJobs', async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 
 module.exports = router;
