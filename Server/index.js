@@ -14,7 +14,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const MasterAddJobRoles = require("./Routes/MasterAddJobRoles");
 const PaymentRoutes = require("./Routes/PaymentRoutes");
-const telegramAPIRoutes = require("./Routes/TelegramAPIRoutes");
+// const telegramAPIRoutes = require("./Routes/TelegramAPIRoutes");
 
 const app = express();
 

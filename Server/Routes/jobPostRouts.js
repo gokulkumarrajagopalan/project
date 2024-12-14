@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const JobPost = require('../Model/JobPost');
 const SavedJob = require('../Model/Savedjobs');
-const authenticateToken = require("../Utils/authmiddleware");
+// const authenticateToken = require("../Utils/authmiddleware");
 
 router.get("/listJobPosts", async (req, res) => {
   try {
