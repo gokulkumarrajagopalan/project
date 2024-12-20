@@ -23,7 +23,22 @@ const userProfileSchema = new mongoose.Schema({
   jobTitle: String,
   company: String,
   experienceYears: Number,
-  education: String,
+  education: [
+    {
+      degree: String,
+      institution: String,
+      year: String,
+    }
+  ],
+  experience: [
+    {
+      jobTitle: String,
+      company: String,
+      startDate: String,
+      endDate: String,
+      description: String,
+    }
+  ],
   skills: [String],
   resume: String,
   profilePicture: String,

@@ -1663,3 +1663,8 @@ pre {
   position: relative;
   /* right: 20px; */
 }
+
+
+.center {
+  text-align: center;
+}

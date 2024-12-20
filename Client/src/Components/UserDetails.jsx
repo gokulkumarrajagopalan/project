@@ -5,7 +5,7 @@ import { API_URLS } from "../config";
 import { MyContext } from "../context";
 
 const ENV = process.env.REACT_APP_ENV || "production";
-const API_URL_GET_PROFILE = API_URLS[ENV] + "/addProfile/getProfile/";
+const API_URL_GET_PROFILE = API_URLS[ENV] + "/addProfile/getProfile";
 
 const UserDetails = ({
   showUserDetails,
@@ -26,8 +26,11 @@ const UserDetails = ({
 
       try {
         const response = await axios.get(`${API_URL_GET_PROFILE}${userId}`);
+        // const response = await axios.get(`${API_URL_GET_PROFILE}/3`);
+
         if (response.data.profile) {
-          setProfile(response.data.profile);
+          setProfile(response.profile);
+          console.log(response);
         } else {
           console.warn("Profile not found");
         }

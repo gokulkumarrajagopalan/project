@@ -17,21 +17,21 @@ router.get("/listJobPosts", async (req, res) => {
   }
 });
 
-router.get("/listJobPosts/:jobID" , async (req, res) => {
-  try {
-    const { jobID } = req.params;
-    const jobPost = await JobPost.findOne({ jobID });
+// router.get("/listJobPosts/:jobID" , async (req, res) => {
+//   try {
+//     const { jobID } = req.params;
+//     const jobPost = await JobPost.findOne({ jobID });
 
-    if (!jobPost) {
-      return res.status(404).json({ error: "Job not found" });
-    }
+//     if (!jobPost) {
+//       return res.status(404).json({ error: "Job not found" });
+//     }
 
-    res.json(jobPost);
-  } catch (error) {
-    console.error('Error fetching job post:', error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+//     res.json(jobPost);
+//   } catch (error) {
+//     console.error('Error fetching job post:', error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
 
 
 router.post('/savejobpost', async (req, res) => {

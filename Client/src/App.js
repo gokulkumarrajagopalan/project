@@ -32,7 +32,7 @@ const NotAuthorize = lazy(() => import("./Components/NotAuthorize"));
 const ViewJobs = lazy(() => import("./JobPost/ViewJobs"));
 const Profile = lazy(() => import("./Components/Profile"));
 const Setting = lazy(() => import("./Components/setting"));
-const Saved = lazy(() => import("./Components/Saved"));
+ const Saved = lazy(() => import("./Components/Saved"));
 const Wordtopdf = lazy(() => import("./Converter/Wordtopdf"));
 const AddJobRoles = lazy(() => import("./JobPost/Masters/AddJobRoles"));
 const MasterAddSkills = lazy(() => import("./JobPost/Masters/MasterAddSkills"));
