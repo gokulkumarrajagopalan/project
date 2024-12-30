@@ -33,17 +33,32 @@ async function uploadFileToS3(fileBuffer, fileName, folder) {
     throw err;
   }
 }
+router.post("/createProfile/:userId", async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    phone,
+    address,
+    city,
+    state,
+    country,
+    zipCode,
+    jobTitle,
+    company,
+    experienceYears,
+    education,
+    skills,
+  } = req.body;
 
-router.post("/createProfile", async (req, res) => {
-  const { userid, firstName, lastName, phone, address, city, state, country, zipCode, jobTitle, company, experienceYears, education, skills } = req.body;
+  const { userId } = req.params;
 
   try {
-    let profile = await UserProfile.findOne({ userid });
+    let profile = await UserProfile.findOne({ userId }); // Corrected to use `userId`
 
     if (profile) {
       // Update existing profile
       profile = await UserProfile.findOneAndUpdate(
-        { userid },
+        { userId },
         {
           firstName,
           lastName,
@@ -61,11 +76,13 @@ router.post("/createProfile", async (req, res) => {
         },
         { new: true }
       );
-      return res.status(200).json({ message: "Profile updated successfully", profile });
+      return res
+        .status(200)
+        .json({ message: "Profile updated successfully", profile });
     } else {
-      // Create a new profile
+      // Create new profile
       profile = new UserProfile({
-        userid,
+        userId, // Corrected to include `userId`
         firstName,
         lastName,
         phone,
@@ -82,20 +99,22 @@ router.post("/createProfile", async (req, res) => {
       });
 
       await profile.save();
-      return res.status(201).json({ message: "Profile created successfully", profile });
+      return res
+        .status(201)
+        .json({ message: "Profile created successfully", profile });
     }
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error creating/updating profile:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// Get user profile
+// Get User Profile
 router.get("/getProfile/:userId", async (req, res) => {
   try {
-    const { userId } = req.params; 
+    const { userId } = req.params;
 
-    const profile = await UserProfile.findOne({ userid: userId }); 
+    const profile = await UserProfile.findOne({ userId }); // Corrected to use `userId`
 
     if (!profile) {
       return res.status(404).json({ error: "Profile not found" });
@@ -103,9 +122,10 @@ router.get("/getProfile/:userId", async (req, res) => {
 
     res.status(200).json({ profile });
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error fetching profile:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 module.exports = router;
