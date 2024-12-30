@@ -101,10 +101,10 @@ function Profile() {
     e.preventDefault();
     try {
       const response = await axios.post(`${API_URL_CREATE_PROFILE}/${userId}`, profile);
-      alert(response.data.message);
+      // alert(response.data.message);
     } catch (error) {
       console.error("Error saving profile:", error);
-      alert("Failed to save profile.");
+      // alert("Failed to save profile.");
     }
   };
 

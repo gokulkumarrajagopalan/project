@@ -26,24 +26,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
 
-// CORS configuration
-const allowedOrigins = ['https://gdest.in', 'https://server.gdest.in'];
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow the request
-      } else {
-        callback(new Error("Not allowed by CORS")); // Block the request
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allow specific HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
-    credentials: true, // Allow credentials (cookies, headers)
-  })
-);
-
 // Session configuration
 app.use(
   session({
@@ -52,19 +34,35 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
-      ttl: 14 * 24 * 60 * 60, // 14 days
+      mongoUrl: "mongodb+srv://codegarbages:2nj6YXZ2WcuRmYWW@cluster-name.qmmazxc.mongodb.net/CodeGarbagesServer",
+      ttl: 14 * 24 * 60 * 60, 
       autoRemove: "native",
     }),
     cookie: {
-      secure: true, // Ensures cookies are sent over HTTPS only
-      httpOnly: true, // Prevents JavaScript access to cookies
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-      sameSite: "none", // Supports cross-site requests
+      secure: false,
+      httpOnly: false, 
+      maxAge: 30 * 24 * 60 * 60 * 1000, 
+      sameSite: "lax",
     },
   })
 );
+
+// CORS configuration
+const allowedOrigins = ["https://gdest.in"];
+
+// CORS middleware
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); 
+    } else {
+      callback(new Error('Not allowed by CORS')); 
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+  credentials: true, 
+}));
 
 // Routes
 app.use("/users", userRoutes);
@@ -78,10 +76,10 @@ app.use("/masterAddJobRoles", MasterAddJobRoles);
 app.use("/PaymentRoutes", PaymentRoutes);
 // app.use("/", telegramAPIRoutes);
 
-// Error handling middleware
+// Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: "Something went wrong!" });
+  res.status(500).send("Something broke!");
 });
 
 // Server setup
