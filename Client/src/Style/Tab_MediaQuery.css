@@ -209,6 +209,9 @@
     .filter-row {
         flex-direction: column;
     }
+    .filter-container {
+      margin-bottom: 75px !important;
+  }
   }
   
   @media (min-width: 769px) {

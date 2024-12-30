@@ -34,48 +34,16 @@ async function uploadFileToS3(fileBuffer, fileName, folder) {
   }
 }
 
-// Save or update user profile
-router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profilePicture' }]), async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    phone,
-    address,
-    city,
-    state,
-    country,
-    zipCode,
-    jobTitle,
-    company,
-    experienceYears,
-    education,
-    skills
-  } = req.body;
-
-  const userId = 3; 
+router.post("/createProfile", async (req, res) => {
+  const { userid, firstName, lastName, phone, address, city, state, country, zipCode, jobTitle, company, experienceYears, education, skills } = req.body;
 
   try {
-    let resumeUrl = null;
-    let profilePictureUrl = null;
-
-  
-    if (req.files.resume) {
-      const resumeFile = req.files.resume[0];
-      resumeUrl = await uploadFileToS3(resumeFile.buffer, resumeFile.originalname, 'resumes');
-    }
-
-  
-    if (req.files.profilePicture) {
-      const profilePicFile = req.files.profilePicture[0];
-      profilePictureUrl = await uploadFileToS3(profilePicFile.buffer, profilePicFile.originalname, 'profile-pictures');
-    }
-
-    let profile = await UserProfile.findOne({ userid: userId });
+    let profile = await UserProfile.findOne({ userid });
 
     if (profile) {
       // Update existing profile
       profile = await UserProfile.findOneAndUpdate(
-        { userid: userId },
+        { userid },
         {
           firstName,
           lastName,
@@ -90,16 +58,14 @@ router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profil
           experienceYears,
           education,
           skills,
-          resume: resumeUrl || profile.resume, // Update if new resume uploaded
-          profilePicture: profilePictureUrl || profile.profilePicture // Update if new profile picture uploaded
         },
-        { new: true } // Returns the updated document
+        { new: true }
       );
       return res.status(200).json({ message: "Profile updated successfully", profile });
     } else {
       // Create a new profile
       profile = new UserProfile({
-        userid: userId,
+        userid,
         firstName,
         lastName,
         phone,
@@ -113,8 +79,6 @@ router.post("/createProfile", upload.fields([{ name: 'resume' }, { name: 'profil
         experienceYears,
         education,
         skills,
-        resume: resumeUrl,
-        profilePicture: profilePictureUrl
       });
 
       await profile.save();

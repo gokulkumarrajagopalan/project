@@ -300,6 +300,9 @@
       .filter-container {
         margin-bottom: 75px !important ;
       }
+      .submit-button {
+        left: 65%; 
+      }
 
   }
   

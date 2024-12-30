@@ -63,8 +63,8 @@ function Saved() {
     const fetchSavedJobs = async () => {
       if (!isValid || !userID) {
         console.warn("Invalid session. Redirecting to login.");
-        // navigate("/SignIn");
-        // return;
+        navigate("/SignIn");
+        return;
       }
 
       setLoading(true);

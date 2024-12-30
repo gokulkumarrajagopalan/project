@@ -14,6 +14,11 @@ const JobScreenNav = ({
   toggleNotification,
   showSearch,
   setShowSearch,
+  showFilters,
+  setShowFilters,
+  showNotifications,
+  setShowNotifications,
+
 }) => {
   const [searchValue, setSearchValue] = useState("");
 
@@ -63,10 +68,10 @@ const JobScreenNav = ({
             </button>
           </>
         )}
-        <button className="Filterbutton" onClick={toggleFilterPanel}>
+        { showFilters && <button className="Filterbutton" onClick={toggleFilterPanel}>
           <img src={Filtericon} alt="Filtericon" className="iconStyle" />
-        </button>
-        <button
+        </button>}
+       {showNotifications && <button
           className="Notificationbutton"
           onClick={toggleNotificationPanel}
         >
@@ -75,7 +80,7 @@ const JobScreenNav = ({
             alt="Notificationicon"
             className="iconStyle"
           />
-        </button>
+        </button> }
       </div>
       <img
         src={userImage}

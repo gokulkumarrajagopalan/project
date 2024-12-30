@@ -34,6 +34,9 @@ function JobPostScreen() {
   const [email, setEmail] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showSearch, setShowSearch] = useState(false);
+  const [showFilters, setShowFilters] = useState(true);
+  const [showNotifications, setShowNotifications] = useState(true);
+
   const jobPostContainerRef = useRef(null);
   const [loading, setLoading] = useState(true);
 
@@ -278,6 +281,9 @@ useEffect(() => {
         toggleUserDetails={toggleUserDetails}
         toggleNotification={toggleNotification}
         showSearch={showSearch}
+        showFilters={showFilters}
+        showNotifications={showNotifications}
+
       />
 <div className={`notificationContainer ${showNotification ? "active" : "hidden"}`}>
       {showNotification && (

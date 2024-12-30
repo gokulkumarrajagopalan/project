@@ -1,7 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import Textbox from "./Textbox"; 
-import { MyContext } from '../context';
+import React, { useState, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import Textbox from "./Textbox";
+import { MyContext } from "../context";
 import { API_URLS } from "../config";
+import NavBar from "../JobPost/Navigation/JobScreenNav";
+import Calendar from "./Calendar";
+import UserDetails from "./UserDetails";
+
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL_GET_PROFILE = `${API_URLS[ENV]}/addProfile/getProfile`;
@@ -9,6 +15,7 @@ const API_URL_CREATE_PROFILE = `${API_URLS[ENV]}/addProfile/createProfile/`;
 
 function Profile() {
   const { isValid, userId } = useContext(MyContext);
+  const [showUserDetails ,setShowUserDetails] = useState(false);
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -18,236 +25,316 @@ function Profile() {
     state: "",
     country: "",
     zipCode: "",
-    jobTitle: "",
-    company: "",
-    experienceYears: "",
-    education: "",
     skills: [],
-    resume: null,
-    profilePicture: null,
+    qualifications: [
+      {
+        degree: "",
+        institution: "",
+        speciation:"",
+        startDate: "",
+        endDate: "",
+      },
+    ],
+    experiences: [
+      {
+        title: "",
+        company: "",
+        startDate: "",
+        endDate: "",
+      },
+    ],
   });
-  const [isEditing, setIsEditing] = useState(true);
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch(API_URL_GET_PROFILE/3);
-        const data = await response.json();
-        console.log(data);
-        if (data.profile) {
-          setProfile(data.profile);
-         
-        }
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-      }
-    };
+  const navigate = useNavigate();
 
-    if (isValid && userId) {
-      fetchProfile();
-    }
-  }, [isValid, userId]);
+  const handleChange = (field, value) => {
+    setProfile({ ...profile, [field]: value });
+  };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleQualificationChange = (index, field, value) => {
+    const updatedQualifications = [...profile.qualifications];
+    updatedQualifications[index][field] = value;
+    setProfile((prevProfile) => ({ ...prevProfile, qualifications: updatedQualifications }));
+  };
+
+  const addQualification = () => {
     setProfile({
       ...profile,
-      [name]: value,
+      qualifications: [
+        ...profile.qualifications,
+        { degree: "", institution: "", startDate: "", endDate: "" },
+      ],
     });
   };
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
+  const removeQualification = (index) => {
+    const updatedQualifications = profile.qualifications.filter((_, i) => i !== index);
+    setProfile({ ...profile, qualifications: updatedQualifications });
+  };
+
+  const handleExperienceChange = (index, field, value) => {
+    const updatedExperiences = [...profile.experiences];
+    updatedExperiences[index][field] = value;
+    setProfile((prevProfile) => ({ ...prevProfile, experiences: updatedExperiences }));
+  };
+
+  const addExperience = () => {
     setProfile({
       ...profile,
-      [name]: files[0], 
+      experiences: [
+        ...profile.experiences,
+        { title: "", company: "", startDate: "", endDate: "" },
+      ],
     });
+  };
+
+  const removeExperience = (index) => {
+    const updatedExperiences = profile.experiences.filter((_, i) => i !== index);
+    setProfile({ ...profile, experiences: updatedExperiences });
   };
 
   const handleSkillsChange = (skills) => {
-    setProfile({
-      ...profile,
-      skills,
-    });
+    setProfile({ ...profile, skills });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsEditing(false);
-    await saveProfile(profile); 
-  };
-
-  const handleEditClick = () => {
-    setIsEditing(true); 
-  };
-
-  const saveProfile = async (profileData) => {
     try {
-      const formData = new FormData();
-      Object.keys(profileData).forEach((key) => {
-        if (profileData[key] !== null) {
-          formData.append(key, profileData[key]);
-        }
-      });
-
-      const response = await fetch(API_URL_CREATE_PROFILE, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save profile");
-      }
-
-      const result = await response.json();
-      console.log("Profile saved successfully:", result);
+      const response = await axios.post(API_URL_CREATE_PROFILE, profile);
+      alert(response.data.message);
     } catch (error) {
       console.error("Error saving profile:", error);
+      alert("Failed to save profile.");
     }
   };
 
-  const renderButton = (field) => {
-    return (
-      <button
-        type="button"
-        onClick={handleEditClick}
-        className="profile-button edit-button"
-      >
-        {profile[field] ? "Edit" : "Add"}
-      </button>
-    );
+  const toggleUserDetails = () => {
+    setShowUserDetails(!showUserDetails);
   };
 
+  const handleSettings = () => {
+    navigate("/Setting");
+  };
+
+  const handleProfile = () => {
+    navigate("/Profile");
+  };
+
+  const handleOnSaved = () => {
+    navigate("/Saved");
+  };
+  const handleLogout = () => {
+    navigate("/SignIn");
+  }
+
+  const handleJobPost = () =>{
+    navigate("/JobpostDetail");
+  }
   return (
-    <div className="profile-container">
-      <div className="profile-picture-container">
-        {profile.profilePicture ? (
-          <img
-            src={URL.createObjectURL(profile.profilePicture)}
-            alt="Profile"
-            className="profile-picture"
-          />
-        ) : (
-          <div className="empty-profile-picture" />
-        )}
-      </div>
-      {!isEditing ? (
-        <button
-          onClick={handleEditClick}
-          className="profile-button edit-button"
-        >
-          Edit Profile
-        </button>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <h2>Your Profile</h2>
+    <>
+      <NavBar
+      toggleUserDetails={toggleUserDetails}
+       />
+      {showUserDetails && (
+        <UserDetails
+          showUserDetails={showUserDetails}
+          onToggleUserDetails={toggleUserDetails}
+          onLogout={handleLogout}
+          onSettings={handleSettings}
+          onProfile={handleProfile}
+          onSaved={handleOnSaved}
+          onJobPost ={handleJobPost}
+        />
+      )}
+      <div className="profile-container">
+        <form onSubmit={handleSubmit} className="profile-form">
+          <h2 className="form-title">Your Profile</h2>
 
-          <div className="profile-section">
-            <h3>Personal Information</h3>
-            {renderButton("firstName")}
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={profile.firstName || ""}
-              onChange={handleChange}
-              className="profile-input"
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={profile.lastName || ""}
-              onChange={handleChange}
-              className="profile-input"
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone"
-              value={profile.phone || ""}
-              onChange={handleChange}
-              className="profile-input"
-            />
+          <div className="section">
+            <h3 className="section-title">Personal Details</h3>
+            <div className="grid-container">
+              <input
+                type="text"
+                placeholder="First Name"
+                value={profile.firstName}
+                onChange={(e) => handleChange("firstName", e.target.value)}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={profile.lastName}
+                onChange={(e) => handleChange("lastName", e.target.value)}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="Phone"
+                value={profile.phone}
+                onChange={(e) => handleChange("phone", e.target.value)}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="Address"
+                value={profile.address}
+                onChange={(e) => handleChange("address", e.target.value)}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="City"
+                value={profile.city}
+                onChange={(e) => handleChange("city", e.target.value)}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="State"
+                value={profile.state}
+                onChange={(e) => handleChange("state", e.target.value)}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="Country"
+                value={profile.country}
+                onChange={(e) => handleChange("country", e.target.value)}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="Zip Code"
+                value={profile.zipCode}
+                onChange={(e) => handleChange("zipCode", e.target.value)}
+                className="form-input"
+              />
+            </div>
           </div>
 
-          <div className="profile-section">
-            <h3>Professional Information</h3>
-            {renderButton("jobTitle")}
-            <input
-              type="text"
-              name="jobTitle"
-              placeholder="Job Title"
-              value={profile.jobTitle || ""}
-              onChange={handleChange}
-              className="profile-input"
-            />
-            <input
-              type="text"
-              name="company"
-              placeholder="Company"
-              value={profile.company || ""}
-              onChange={handleChange}
-              className="profile-input"
-            />
-            <input
-              type="number"
-              name="experienceYears"
-              placeholder="Years of Experience"
-              value={profile.experienceYears || ""}
-              onChange={handleChange}
-              className="profile-input"
-            />
-          </div>
-
-          <div className="profile-section">
-            <h3>Education</h3>
-            {renderButton("education")}
-            <input
-              type="text"
-              name="education"
-              placeholder="Highest Degree"
-              value={profile.education || ""}
-              onChange={handleChange}
-              className="profile-input"
-            />
-          </div>
-
-          <div className="profile-section">
-            <h3>Skills</h3>
-            {renderButton("skills")}
+          <div className="section">
+            <h3 className="section-title">Skills</h3>
             <Textbox
               label="Add Your Skills"
               placeholder="Type and select skills"
               value={profile.skills || []}
               onChange={handleSkillsChange}
             />
+            <div className="skill-list">
+              {profile.skills.map((skill, index) => (
+                <span key={index} className="skill-tag">{skill}</span>
+              ))}
+            </div>
           </div>
 
-          <div className="profile-section">
-            <h3>Upload Documents</h3>
-            <input
-              type="file"
-              name="resume"
-              onChange={handleFileChange}
-              accept=".pdf,.doc,.docx"
-              className="profile-input-file"
-            />
-            <input
-              type="file"
-              name="profilePicture"
-              onChange={handleFileChange}
-              accept=".jpg,.jpeg,.png"
-              className="profile-input-file"
-            />
+          <div className="section">
+            <h3 className="section-title">Qualifications</h3>
+            {profile.qualifications.map((qualification, index) => (
+              <div key={index} className="qualification-item">
+                <input
+                  type="text"
+                  placeholder="Degree"
+                  value={qualification.degree}
+                  onChange={(e) => handleQualificationChange(index, "degree", e.target.value)}
+                  className="form-inputs"
+                />
+                <input
+                  type="text"
+                  placeholder="Institution"
+                  value={qualification.institution}
+                  onChange={(e) => handleQualificationChange(index, "institution", e.target.value)}
+                  className="form-inputs"
+                />
+                <input
+                  type="text"
+                  placeholder="speciation"
+                  value={qualification.speciation}
+                  onChange={(e) => handleQualificationChange(index, "institution", e.target.value)}
+                  className="form-inputs"
+                />
+                <Calendar
+                  value={qualification.startDate}
+                  onChange={(date) => handleQualificationChange(index, "startDate", date)}
+                  placeholder="Start Date"
+                />
+                <Calendar
+                  value={qualification.endDate}
+                  onChange={(date) => handleQualificationChange(index, "endDate", date)}
+                  placeholder="End Date"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeQualification(index)}
+                  className="remove-button"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addQualification}
+              className="add-button"
+            >
+              Add Qualification
+            </button>
           </div>
 
-          <button type="submit" className="profile-button save-button">
+          <div className="section">
+            <h3 className="section-title">Work Experience</h3>
+            {profile.experiences.map((experience, index) => (
+              <div key={index} className="experience-item">
+                <input
+                  type="text"
+                  placeholder="Job Title"
+                  value={experience.title}
+                  onChange={(e) => handleExperienceChange(index, "title", e.target.value)}
+                  className="form-inputs"
+                />
+                <input
+                  type="text"
+                  placeholder="Company"
+                  value={experience.company}
+                  onChange={(e) => handleExperienceChange(index, "company", e.target.value)}
+                  className="form-inputs"
+                />
+                <Calendar
+                  value={experience.startDate}
+                  onChange={(date) => handleExperienceChange(index, "startDate", date)}
+                  placeholder="Start Date"
+                />
+                <Calendar
+                  value={experience.endDate}
+                  onChange={(date) => handleExperienceChange(index, "endDate", date)}
+                  placeholder="End Date"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeExperience(index)}
+                  className="remove-button"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addExperience}
+              className="add-button"
+            >
+              Add Experience
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            className="submit-button"
+          >
             Save Profile
           </button>
         </form>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
 

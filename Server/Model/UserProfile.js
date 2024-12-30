@@ -1,19 +1,9 @@
 const mongoose = require('mongoose');
 
 const userProfileSchema = new mongoose.Schema({
-  userid: {
-    type: Number,
-    unique: true,
-    required: true,
-  },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
+  userid: { type: Number, unique: true, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   phone: String,
   address: String,
   city: String,
@@ -25,23 +15,14 @@ const userProfileSchema = new mongoose.Schema({
   experienceYears: Number,
   education: [
     {
-      degree: String,
-      institution: String,
-      year: String,
-    }
-  ],
-  experience: [
-    {
-      jobTitle: String,
-      company: String,
+      degree: { type: String, required: true },
+      institution: { type: String, required: true },
+      specification: String,
       startDate: String,
       endDate: String,
-      description: String,
-    }
+    },
   ],
   skills: [String],
-  resume: String,
-  profilePicture: String,
 });
 
 const UserProfile = mongoose.model('UserProfile', userProfileSchema);

@@ -420,6 +420,7 @@ const JobPostDetail = () => {
                     <option value="20-40 Lakhs">20-40 Lakhs</option>
                     <option value="40-60 Lakhs">40-60 Lakhs</option>
                     <option value="60+ Lakhs">60+ Lakhs</option>
+                    <option value="null">Do not Disclose</option>
                   </select>
                 </td>
               </tr>
