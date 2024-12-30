@@ -11,7 +11,7 @@ import UserDetails from "./UserDetails";
 
 const ENV = process.env.REACT_APP_ENV || "production";
 const API_URL_GET_PROFILE = `${API_URLS[ENV]}/addProfile/getProfile`;
-const API_URL_CREATE_PROFILE = `${API_URLS[ENV]}/addProfile/createProfile/`;
+const API_URL_CREATE_PROFILE = `${API_URLS[ENV]}/addProfile/createProfile`;
 
 function Profile() {
   const { isValid, userId } = useContext(MyContext);
