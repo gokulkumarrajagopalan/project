@@ -5,13 +5,13 @@
    }
  
    .img_Logo {
-     width: 40px;
-     height: 40px;
+    width: 25px;
+    height: 25px;
      margin-left: 10px;
      top: 3px;
    }
    .logo-text {
-     width: 130px;
+     width: 90px;
      top: 3px;
    }
    .textgrade1 {
@@ -71,13 +71,13 @@
    }
   
    .img_Logo {
-     width: 40px;
-     height: 40px;
+     width: 25px;
+     height: 25px;
      margin-left: 10px;
      top: 3px;
    }
    .logo-text {
-     width: 130px;
+     width: 90px;
      top: 3px;
    }
    .textgrade1 {
@@ -193,13 +193,13 @@
    }
   
    .img_Logo {
-     width: 40px;
-     height: 40px;
+     width: 25px;
+     height: 25px;
      margin-left: 10px;
      top: 3px;
    }
    .logo-text {
-     width: 130px;
+     width: 90px;
      top: 3px;
    }
    .textgrade1 {
@@ -250,10 +250,10 @@
     }
 
     .logotexts {
-      left: 50px;
+      left: 34px;
       position: fixed;
-      width: 130px;
-      top: 15px;
+      width: 90px;
+      top: 19px;
   }
   }
   

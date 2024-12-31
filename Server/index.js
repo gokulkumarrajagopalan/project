@@ -18,15 +18,12 @@ const PaymentRoutes = require("./Routes/PaymentRoutes");
 
 const app = express();
 
-// Database connection
 connectToDatabase();
 
-// Middleware setup
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
 
-// Session configuration
 app.use(
   session({
     name: "GdestCookies",
@@ -47,10 +44,9 @@ app.use(
   })
 );
 
-// CORS configuration
+
 const allowedOrigins = ["https://gdest.in"];
 
-// CORS middleware
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -64,7 +60,7 @@ app.use(cors({
   credentials: true, 
 }));
 
-// Routes
+
 app.use("/users", userRoutes);
 app.use("/signIn", signInRoutes);
 app.use("/addJobPost", jobPostRoutes);
@@ -76,13 +72,11 @@ app.use("/masterAddJobRoles", MasterAddJobRoles);
 app.use("/PaymentRoutes", PaymentRoutes);
 // app.use("/", telegramAPIRoutes);
 
-// Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
 
-// Server setup
 const PORT = process.env.PORT || 3710;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
